@@ -1,0 +1,805 @@
+## Slide 1
+이지영 김나연 김범준 박신지 김가원
+신뢰할 수 있는 의료데이터 AI 모델
+수면 데이터를 중심으로
+BITAmin 2025-1 시계열 1조
+
+## Slide 2
+Contents
+1. Why XAI matters
+2. Modeling
+Sleep Stage Prediction - DL, ML
+Sleep Disorder Analysis - DL, ML
+Pattern Clustering
+3.  Conclusion
+
+## Slide 3
+2
+1
+생명과 직결된 의사결정
+신뢰와 투명성
+오류, 편향 검증 및 책임성
+규제와 법적 요구 충족
+의료에서 XAI 가 필요한 이유
+복잡한 생체 신호 해석
+임상 적용 및 전문가 협업 필수
+개인 맞춤형 치료 지원
+데이터 품질 및 센서 신뢰성 검증 필요
+기존에 Black Box 문제가 있던 딥러닝 모델의 개선
+해석가능성이 딥러닝보다 높은 머신러닝 모델을 이용
+Why XAI matters
+인과추론의 단초, 해석가능성(Interpretability) 탐구 
+ => 근거가 중요한 도메인 영역인 의료분야에서 특히나 주목
+블랙박스 문제
+신뢰성 저하
+책임성 부족
+공정성/윤리 문제
+규제 준수 한계
+수면 데이터에서 XAI 필요성
+
+## Slide 4
+신뢰 기반 확보
+ISRUC-Sleep-EDF
+Dataset 
+ Sleep-EDF Dataset
+1D CNN
+CrossAttention
+CatBoost
+RandomForest
+MiniRocket
+TimeLLM
+수면 단계 예측
+수면 이상 탐지
+AutoEncoder
+클러스터링
+MCL
+DL
+ML
+ML
+ML
+DL
+ML
+Flowchart
+Data
+Modeling
+Result
+
+## Slide 5
+Dataset
+197회의 다채널 수면 기록 데이터 (PSG)
+포함 신호
+EEG (Fpz-Cz, Pz-Oz)
+EOG (수평)
+Chin EMG
+Event marker
+일부 기록에 호흡(oro-nasal)·체온 신호 포함
+수면 단계 주석
+수면단계 W, R, 1, 2, 3, 4, M(움직임), ?(미채점)
+1968년 Rechtschaffen & Kales 기준
+숙련 기술자가 수동 채점
+Sleep-EDF Dataset
+피험자 구성
+그룹 I: 100명×1회 측정(수면무호흡증 등 환자군)
+그룹 II: 8명×2회 측정 (세션 간 변화 분석용)
+그룹 III:10명×1회 측정 (건강군)
+포함신호
+ EEG, EOG, EMG 등 전기생리학적 신호,  메타데이터
+주석
+ 숙련 기술자 2명의 채점 결과 포함
+ISRUC-Sleep-EDF Dataset
+
+## Slide 6
+Contents
+1. Why XAI matters
+2. Modeling
+Sleep Disorder Analysis - DL, ML
+Pattern Clustering
+3.  Conclusion
+Sleep Stage Prediction - DL, ML
+
+## Slide 7
+Model
+EEG, EOG 신호 1D Convolution 전처리
+5개의 CNN 블록, 총 13개 Conv1D 레이어
+각 CNN 블록별로 feature map의 채널별 중요도 
+학습을 통한 attention 메커니즘 추가 (SE block)
+Linear Classifier에 전달하여 5개 수면 단계 
+(Wake, N1, N2, N3, REM) 확률 예측
+01
+수면단계 예측 > 딥러닝 모델
+
+## Slide 8
+Outcome
+20 Epoch, 120명의 Sleep-EDF Cassette 데이터셋 
+(PSG, Hypnogram) 으로 학습
+01
+수면단계 예측 > 딥러닝 모델
+
+## Slide 9
+Analysis : Gradcam
+예측된 클래스의 출력에 대한 gradient 계산
+마지막 CNN layer의 activation map에 적용
+채널별 중요도(αᶜₖ)를 계산해 가중합 수행
+시간축 기반의 중요도 맵 생성
+어떤 시점이 예측에 기여했는지 시각적으로 확인 가능
+특정 예측 결과에 기여한 시간대(입력 특징) 를 시각적으로 보여주는 
+설명 가능한 AI(XAI) 기법
+예측 확률이 높은 수면 단계를 기준으로 분석
+해당 확률을 높이는 데 기여한 시간대를 강조
+Grad-CAM의 activation intensity가 높을수록
+→ 그 시간대가 예측의 핵심 근거로 작용
+딥러닝 기반 수면 단계 분류의 설명 가능성(XAI) 확보
+01
+수면단계 예측 > 딥러닝 모델
+GRAD-CAM
+ITS IMPORTANCE
+
+## Slide 10
+EEG + EOG + STFT
+Grad-CAM 가중치가 가장 높았던 시간 구간을 EEG, EOG 원 신호 위에 하이라이트
+하단에는 STFT를 적용하여 입력 신호의 시간-주파수 분포를 표현
+두 시각화를 결합해, 모델의 예측 근거와 실제 생리학적 특징의 일치 여부를 분석
+→ 수면 단계 예측에 대한 모델의 해석 가능성 향상!
+STFT : 신호를 짧은 구간으로 나누어 각 구간의 주파수 성분 분석
+01
+수면단계 예측 > 딥러닝 모델
+
+## Slide 11
+Time-Based Grad-CAM Insights
+N1
+N3
+N2
+REM
+01
+수면단계 예측 > 딥러닝 모델
+Wake
+
+## Slide 12
+Sleep Stage Interpretation with
+Grad-CAM & STFT
+01
+수면단계 예측 > 딥러닝 모델
+N3
+EEG : Delta 파 (0.5-4hz) 감지
+EOG : 단계 예측시 반영 거의 안됨
+REM
+EEG: 스파이크가 포함된 불규칙한 비동기 뇌파
+EOG: 빠른 안구 운동이 5hz 이하 저주파 대역에서 발견
+N1
+EEG : Sleep Vertex Wave
+정수리(Cz) 부위에서 관찰되는 뾰족한 양상성 파형
+EOG : 느린 Delta파 (0.5-4hz) 감지
+N2
+EEG : Sleep Spindle, K-complex
+Sleep Spindle : 수면 중 갑작스러운 음의 진폭 후 양의
+진폭으로 이어지는 큰 파형 
+K-complex :  짧은 시간 동안 발생하는 고주파 진동
+
+## Slide 13
+Preprocessing
+EEG 2채널
+Fpz-Cz
+Pz-Cz
+EOG 1채널
+EMG 1채널
+주파수 채널 선택
+EEG & EOG
+Band-pass filter (0.40–30 Hz)
+수면 파형의 의미 있는 주파수 범위를 캡처
+EMG
+Band-pass filter (0.50–10 Hz)
+근육 활동의 저주파 잡음을 제거
+모든 채널 → 모든 채널 100hZ로 리샘플링
+필터링(NOISE 제거) & 리샘플링
+Strided-window 방식을 사용하여 다
+양한 시간 범위에서 특징 추출:
+30초, 60초, 90초 윈도우 단위
+각 윈도우는 30초 단위로 슬라이딩
+이전/다음 2 에폭(epoch)도 포함하여 
+     총 1048개 feature 생성
+윈도우 분할 및 특성 추출
+시간 영역
+평균, 표준편차, 왜도, 첨도, zero-crossing 등
+주파수 영역:
+밴드 파워 (delta, theta, alpha, beta 등)
+Fourier 통계량
+Binned entropy
+도구: tsflex, tsfresh, YASA 활용
+특성 종류
+01
+수면단계 예측 > 머신러닝 모델
+
+## Slide 14
+feature vector (1048차원) 주성분 2개로 축소
+ 2차원 공간에 시각화
+수면 단계 간의 명확한 분포 차이를 시각적으로 확인 가능
+ feature vector가 분류에 매우 유의미함을 보여줌
+복잡한 모델 없이도 좋은 성능을 낼 수 있는 기반이 됨
+특성 벡터 PCA 기반 2차원 시각화
+REM, S2,S3, 잘 구분
+S1, 구분 불확실
+클러스터 간 가까움
+신호 특성이 유사
+REM ↔ Wake
+멀리 떨어져 있음
+가장 깊은 수면 단계
+N3 ↔ Wake
+REM과 N3 
+중간 위치
+N2
+01
+수면단계 예측 > 머신러닝 모델
+
+## Slide 15
+Catboost 기반 예측 성과지표
+다른 스테이지에 비해 Sleep stage1에 대한 성능 낮음
+불안하고 전이적 상태 유지됨을 성능지표에서도 확인 가능!
+01
+수면단계 예측 > 머신러닝 모델
+
+## Slide 16
+Sleep stage 1
+Sleep stage W
+SHAP 기반 수면 단계별 특징 분석
+Sleep stage 2
+특성
+값이 높을수록
+모델 해석
+EEG std 
+예측 ↓
+뇌파 변동이 작을수록 깨어있음
+EEG TotalAbsPow
+예측 ↓
+전체 뇌파 전력이 작을수록 깨어있음
+EMG iqr
+예측 ↑
+근육 움직임 변화가 클수록 깨어있음
+특성
+값이 높을수록
+모델 해석
+EEG std
+예측 ↓
+뇌파가 안정적일수록 Stage 1
+EOG std
+예측 ↓
+눈 움직임이 적을수록 Stage 1
+alpha/theta
+예측 ↑
+세타파 비율이 높을수록 Stage 1
+특성
+값이 높을수록
+모델 해석
+EEG TotalAbsPow
+예측 ↑
+전체 전력이 증가하면 Stage 2
+EEG theta
+예측 ↓
+세타파가 너무 많으면 Stage 1과 유사해짐
+alpha/theta
+예측 ↑
+적절한 세타 우세는 Stage 2에 기여
+깨어있을 때는 뇌파가 일정하고, 
+근육 활동은 존재하며, 전반적 전력이 낮은 상태
+뇌파가 조용하고 세타파가 증가하며,
+ 눈과 근육 활동은 제한적인 상태
+뇌파가 다양하게 활성화, 
+전력량이 증가하며,  세타파가 지배적이지 않은 상태
+01
+수면단계 예측 > 머신러닝 모델
+
+## Slide 17
+Sleep stage 3
+Sleep stage R
+SHAP 기반 수면 단계별 특징 분석
+특성
+값이 높을수록
+모델 해석
+EEG std
+예측 ↓
+뇌파 변동이 작을수록 Stage 3
+EMG skew
+예측 ↑
+근육 활동이 비대칭적일수록 Stage 3
+EOG kurtosis
+예측 ↓
+눈 움직임이 정적일수록 Stage 3
+특성
+값이 높을수록
+모델 해석
+EEG std
+예측 ↑
+뇌파 변동이 클수록 REM
+EMG skew
+예측 ↑
+근육이 불균형하게 반응하면 REM
+EOG TotalAbsPow
+예측 ↑
+눈이 활발히 움직일수록 REM
+뇌파가 조용하고 
+근육과 눈이 거의 움직이지 않는 깊은 휴식 상태
+REM은 뇌가 활성화되고 
+눈이 많이 움직이며 근육은 이완된 상태
+01
+수면단계 예측 > 머신러닝 모델
+
+## Slide 18
+Contents
+1. Why XAI matters
+2. Modeling
+Sleep Stage Prediction - DL, ML
+Pattern Clustering
+3.  Conclusion
+Sleep Disorder Analysis - DL, ML
+
+## Slide 19
+모델 성능
+해석 가능성
+경량화 
+1
+2
+3
+Objective:
+Sleep Anomaly Detection
+02
+수면 이상 탐지 > 머신러닝 모델
+
+## Slide 20
+Three Experimental Approaches
+02
+수면 이상 탐지 > 머신러닝 모델
+1.RandomForest 단독 사용
+2. MiniROCKET + RandomForest
+3. RandomForest + Feature 선택
+데이터셋
+비정상군 100개 + 정상군 10개 → 정상군 데이터 증강
+Hypnogram( 수면단계)
+특징
+모든 Feature를 그대로 사용하는 구조
+MiniROCKET을 활용해 feature를
+압축적으로 추출 
+→  RandomForest에 입력
+기본 RandomForest 구조를 유지+
+permutation importance를 활용해 
+중요한 feature만 선택적으로 사용
+장점
+뛰어난 성능
+MiniROCKET은 고정된 1D 커널을 통해
+시계열의 특징을 빠르게 벡터화
+→  경량화 측면에서는 훨씬 효율적 
+모델을 초경량화 하는 데 초점
+추론 시간이 ‘초 단위‘로 줄어드는 
+극적인 경량화 효과
+ 
+적은 특성 덕분의 높은 해석가능성
+단점
+학습 속도가 느리고 추론 시간이 길다
+성능은 단독 RandomForest보다는 
+약간 낮음
+성능은 다른 모델 대비 보다 떨어짐
+
+## Slide 21
+왜 Random Forest인가?
+02
+수면 이상 탐지 > 머신러닝 모델
+각 예측이 어떤 피쳐와 
+기준값에 따라 결정되었는지 
+분기 구조를 통해 확인 가능
+의료 도메인에서 요구되는 
+직관적 해석과 신뢰 확보에 유리
+트리 모델의 특징
+트리 모델의 특징
+다수의 트리를 독립적으로 학습
+과적합 줄이고 
+해석의 일관성 확보
+ XGBoost보다 
+개별 트리와 피쳐의 영향이 
+더 직관적으로 드러남
+트리 모델의 특징
+Random Forest
+Hypnogram
+라벨 정밀도& 데이터 양 제한적
+Random Forest
+적은 데이터 & 간단한 피쳐로
+ 강건한 성능 발휘
+트리 모델의 특징
+작은 데이터셋
+
+## Slide 22
+02
+수면 이상 탐지 > 머신러닝 모델 > 성능 중심 모델
+성능 중심 모델
+w/ALL Features
+
+## Slide 23
+MiniROCKET 
+길이 9의 고정 커널
+84개의 이진 커널 사용
+DILATION : 32개의 고정값
+(1) Kernel & Dilation 설정
+모든 커널은 미리 정의된 상태
+곱셈 없이 덧셈만으로 연산 수행
+W와 -W 동시 계산
+동일한 커널 출력 재사용해서 여러
+FEATURE 생성
+(2) Convolution 계산 최적화
+BIAS는 CONV 결과의 QUANTILE에서 추출
+PPV = PROPORTION(X * W > BIAS)
+(3) PPV (Proportion of Positive Values)
+커널 X DILATION X BIAS 조합
+총 10,000개 FEATURE 생성
+(4) Feature Vector 생성
+02
+수면 이상 탐지 > 머신러닝 모델 > 성능 중심 모델
+INPUT
+TIME SEIRES X
+
+## Slide 24
+REALLY GREAT
+COMPANY
+Permutation Importance
+어떤 feature가 중요한가
+각 feature(PPV)의 중요도 순위를 시각화
+→ 어떤 MiniROCKET 커널의 출력이 예측 결정에 영향을 미쳤는지 확인 
+02
+수면 이상 탐지 > 머신러닝 모델 > 성능 중심 모델
+
+## Slide 25
+Time Importance
+어떤 시점이 중요한가
+예측 결정에 영향을 준 입력 시점/채널을 강조하여 시각적으로 설명
+입력 시계열의 일정 구간을 마스킹해보며 예측 변화 확인
+예측 확률 변화량이 크면 → 해당 구간이 중요하다고 판단
+02
+수면 이상 탐지 > 머신러닝 모델 > 성능 중심 모델
+
+## Slide 26
+Time Importance
+Overlay Plot
+여러 샘플의 ΔProb 곡선을 하나의 plot에 투영
+특정 시간대(예: 2000, 2500, 3000, 4500 등)에서 여러 샘플이 동시에 높게 반응하는 패턴 발견
+02
+수면 이상 탐지 > 머신러닝 모델 > 성능 중심 모델
+
+## Slide 27
+Time Importance
+평균 및 표준편차 시각화
+상위 10개 샘플의 ΔProb을 평균 및 std로 요약
+예측 영향이 집중되는 평균적인 시점이 존재하며, STD가 작은 구간은 모든 샘플에서 일관된 반응을 나타냄
+02
+수면 이상 탐지 > 머신러닝 모델 > 성능 중심 모델
+
+## Slide 28
+02
+초경량화 모델
+w/Hypnograms & Selected Features
+수면 이상 탐지 > 머신러닝 모델 > 초경량화 모델
+
+## Slide 29
+Features
+TST_min  :  실제 수면 시간 (Total Sleep Time), 전체 수면 단계의 합
+SE_percent  :  수면 효율 (Sleep Efficiency), TST / TIB * 100, 수면 질의 핵심 지표
+W_min  :  깨어 있었던 시간 (Wake) 총량
+W_percent_TIB  :  전체 침대 시간 중 깨어 있었던 비율
+N{i}_min  :  N{i} 수면 단계 시간 
+N{i}_percent_TST  :  TST 중 N{i} 단계가 차지하는 비율
+R_min  :  REM 수면 시간 (꿈, 기억과 연관됨)
+R_percent_TST  :  TST 중 REM 단계가 차지하는 비율
+WASO_min  :  수면 도중 깨어 있었던 시간 (Wake After Sleep Onset)
+REML_min  :  수면 시작 후 첫 REM까지 걸린 시간 (REM Latency), 수면 구조 이상을 반영
+Num_Awakenings  :  수면 중 깨어난 횟수 (각성 빈도)
+Num_Stage_Shifts  :  수면 단계가 바뀐 횟수 (수면의 안정성 지표)
+Movement_min  :  ‘Movement’로 라벨링된 구간의 총 시간 (존재 시)
+Undefined_min  :  정의되지 않은 라벨(Undefined)의 총 시간 (존재 시)
+02
+수면 이상 탐지 > 머신러닝 모델 > 초경량화 모델
+
+## Slide 30
+The Model
+다양한 데이터 포맷을 일관되게 매핑
+SC데이터 앞뒤의 긴 Wake 제거
+Tamazepam/Placibo 중 노이즈 제거를 위해
+Placibo 밤만 선택
+1. 데이터 전처리
+2. 피쳐 추출
+기존 임상에서 자주 사용되는 특성들을 생성해냄.
+Precision: 1.0
+Recall: 0.83
+F1: 0.91
+Precision: 0.92
+Recall: 0.92
+F1: 0.92
+3. 모델 학습 및 평가
+전체 데이터셋을 8:2로 나누어 진행
+02
+수면 이상 탐지 > 머신러닝 모델 > 초경량화 모델
+
+## Slide 31
+GINI based Importances
+02
+수면 이상 탐지 > 머신러닝 모델 > 초경량화 모델
+
+## Slide 32
+The Best Tree & Surrogate Tree
+Precision : 0.967
+Recall : 0.806
+F1 Score : 0.879
+Confusion Matrix: [[43 1]
+ [ 7 29]] 
+Surrogate Tree 성능: 
+The Best Tree
+The Surrogate Tree
+02
+수면 이상 탐지 > 머신러닝 모델 > 초경량화 모델
+
+## Slide 33
+GINI & Permutation Importance
+핵심 문제: Multicollinearity (다중공선성)
+서로 다른 두 feature가 높은 상관관계를 가짐 
+→ 중복 정보 발생 → Permutation 중요도가 사라짐
+해결: 높은 상관관계를 가진 특성 중 하나 제거 
+0.9 이상의 높은 상관관계를 갖는 특성 중,
+target과 상관성이 더 낮은 특성을 제거
+02
+수면 이상 탐지 > 머신러닝 모델 > 초경량화 모델
+
+## Slide 34
+feature
+perm importance
+rf_importance
+hybrid_importance
+(perm x rf)
+R_percent_TST
+0.00497
+0.169744
+0.000844
+REML mim
+0.007293
+0.102742
+0.000749
+2_percent TIB
+0.005126
+0.104662
+0.000536
+2_min
+0.003865
+0.133681
+0.00517
+TST_min
+0.00405
+0.100597
+0.00407
+W_ min
+0.004714
+0.018906
+0.000089
+도합 전체 분기의 약 30%나 차지하지만,
+오히려 rf_importance가 음수였음.
+(permutation, 즉 특성을 없앴을 때 
+오히려 성능이 오름) 
+The Result of Feature Screening
+02
+제거된 피쳐: SE_percent, 3_min, 2_percent_TIB, 4_min, 2_min, 1_min,Num_Awakenings, TST_min
+12~15번 피쳐
+수면 이상 탐지 > 머신러닝 모델 > 초경량화 모델
+
+## Slide 35
+The Model Conclusion
+손쉽게 측정될 뿐 아니라 구동도 
+      가벼운 Hypnogram 이용. 
+최종 모델에서 사용한 특성은  6개. 
+       정도로 가벼움.
+Lightweighting
+Interpretability
+트리 기반 모델이므로 규칙 기반
+       알고리즘으로 전환 가능
+인간이 이해하기 쉬우면서도 임상에서
+중요한 특성들 활용.
+최종 모델에서는 오직 6개의 특성 
+       정도로 이해가능성 극대화
+Applicability
+Mobile Devices에서 수집 가능한
+       데이터를 활용
+충분히 On-Device 처리가 가능
+생체 정보라는 민감성을 고려할
+때, On-Device는 중요한 요소
+02
+수면 이상 탐지 > 머신러닝 모델 > 초경량화 모델
+
+## Slide 36
+Results Summary
+02
+수면 이상 탐지 > 머신러닝 모델
+Random
+Forest
+Accuracy: 0.9908
+AUC: 0.9953
+F1-Score: 0.9909
+Precision: 0.9827
+Recall: 0.9993
+Mini Rocket 
++ RF
+Accuracy: 0.9498
+AUC: 0.9917
+F1-Score: 0.9484
+Precision: 0.9847
+Recall: 0.9146
+Hypnogram
+w/Selected features
+Accuracy: 0.9166
+AUC: 0.9626
+F1-Score: 0.9166
+Precision: 0.9166
+Recall: 0.9166
+
+## Slide 37
+Contents
+1. Why XAI matters
+2. Modeling
+Sleep Stage Prediction - DL, ML
+Sleep Disorder Analysis - DL, ML
+3.  Conclusion
+Pattern Clustering
+
+## Slide 38
+수면지표
+정의
+total sleep time
+sleep latency
+wake count
+rem ratio
+deep sleep ratio
+transition entropy
+cycle count
+재구성 오차를 기반으로 중요한 feature를 파악하여 가중치로 활용
+Pattern Clustering
+Autoencoder 기반
+중요도 계산
+차원축소 & 
+클러스터링
+클러스터별
+해석
+0.356
+0.308
+0.251
+0.160
+0.153
+0.143
+0.051
+03
+클러스터링
+
+## Slide 39
+수면지표
+정의
+Pattern Clustering
+Autoencoder 기반
+중요도 계산
+차원축소 & 
+클러스터링
+클러스터별
+해석
+UMAP
+노드 간 거리관계와 유사도를 
+유지하면서 차원축소 진행, 
+뇌파를 그래프 형태로 변환
+Markov Clustering
+그래프 기반의
+ 클러스터링 알고리즘을 활용
++
+03
+클러스터링
+
+## Slide 40
+Pattern Clustering
+수면지표
+정의
+PCA 기반
+중요도 계산
+차원축소 & 
+클러스터링
+클러스터별
+해석
+score
+cycle_count
+rem_ratio
+wake_count
+deep_sleep_ratio total_sleep_time transition_entropy
+sleep_latency
+최상
+66
+4.89
+0.06
+1.3
+0.06
+2763.16
+1.29
+949.89
+상
+64
+4.83
+0.05
+1.5
+0.01
+2750.44
+1.17
+955.25
+중
+40
+10.61
+0.09
+4.56
+0.05
+2757.89
+1.4
+558.33
+하
+23
+4.75
+0.05
+2.1
+0.03
+2478.15
+1.45
+958.65
+최하
+16
+4.42
+0.05
+1.74
+0.01
+2718.84
+1.26
+341.89
+03
+클러스터링
+
+## Slide 41
+수면지표
+정의
+Pattern Clustering
+PCA 기반
+중요도 계산
+차원축소 &
+ 클러스터링
+클러스터별
+해석
+렘 수면 비율이 높음, 고른 수면 분포  → 전체적으로 안정적임
+점진적으로 수면에 진입하는 타입으로 깊은 수면과 렘 수면은 부족하지만
+대체적으로 구조는 안정적임.
+렘 수면비율은 높지만 자주 깨고 얕은 수면을 반복함
+잦은 전이와 각성으로 수면의 질이 낮음
+깊은 수면 및 렘 수면이 거의 없다시피 함, 자주 깨고 전이 복잡도가 높음
+수면 질
+최상
+- 클러스터별 대표 케이스 -
+03
+클러스터링
+
+## Slide 42
+Contents
+1. Why XAI matters
+2. Modeling
+Sleep Stage Prediction - DL, ML
+Sleep Disorder Analysis - DL, ML
+Pattern Clustering
+3.  Conclusion
+
+## Slide 43
+2
+3
+헬스케어의 신뢰도 이슈
+머신러닝& 딥러닝 통해
+ 해결 가능 
+→ 경제성 고려 가능함 
+Conclusion
+1
+블랙박스 딥러닝 기반으로도 
+수면 단계 예측 가능
+머신러닝으로 딥러닝 만능주의에서
+벗어나 좋은 성능 달성
+해석 가능성 + 경량화 가능
+
+## Slide 44
+The End
+들어주셔서 감사합니다
+

@@ -1,0 +1,682 @@
+## Slide 1
+김민열 | 김홍재 | 강인혁  | 김미리 | 이수인
+With Captone
+  Stable Hair RAGRec
+       : 개인맞춤형 AI 헤어컨설팅 
+  Stable Hair RAGRec
+       : 개인맞춤형 AI 헤어컨설팅 
+2025-1
+BITAmin
+생성 조
+
+## Slide 2
+1
+목차
+2
+4
+배경 및 목표
+프로젝트 플랜
+시연 및 결론
+프로젝트 배경
+프로젝트 목표
+파이프라인
+활용 데이터
+3
+Task 별 모델 설명
+얼굴 특징 추출(Mediapipe/MTCNN/ConvNeXt)
+헤어 스타일 추천(GraphRAG)
+미용실 추천(KOTE)
+헤어 시뮬레이터(Stable-Hair)
+헤어 염색(Grounded SAM)
+시연영상
+의의와 한계점
+
+## Slide 3
+인상을 결정하는 중요한 요소로 
+이미지에 변화를 주는 직관적인 요소 
+헤어가 어울리지 않을 경우, 
+매몰비용 발생 
+시술 비용 + 품위 손실
+현실 : 대한민국 육군 상병 5호봉
+이상 : 이태원클라스 박새로이
+프로젝트 배경
+헤어스타일
+배경
+KeyWord
+High Risk
+특성에 맞는 헤어스타일을 탐색하고
+가상으로 시뮬레이션하는 서비스 필요
+하이 리스크
+
+## Slide 4
+목표
+목표
+프로젝트 비전
+외형적 특성과 관리 성향에 따른 적합한 헤어스타일 추천
+본인의 이미지에 추천 받은 헤어스타일을 시뮬레이션 
+1
+2
+3
+세부 목표
+미용실 추천
+최신 합성 기술
+추천 근거 
+다양화
+추천 헤어
+시술에 능숙한
+미용실 추천
+2024년 공개된
+Stable-Hair를
+이용한 이미지 합성
+전문가 + 커뮤니티 의견을
+반영하여 다양한 관점과 
+최신 경향 반영
+KeyWord
+목표 정의
+
+## Slide 5
+1
+3
+2
+Stable-Hair
+Ref Image
+COT
+GraphRAG
+자연스러운
+Hair Transfer
+합성 이미지
+Web Crawling
+이름 / 성별 
+기장 / 모발 / 앞머리
+원하는 분위기
+손질 난이도
+염색 희망 여부
+이마 모양 / 광대
+이용자의 이미지
+헤어 관련 글
+개인 특징에 맞는 
+      헤어 스타일 추천
+MTCNN
+Stone Classifier
+MediaPipe
+ConvNeXt
+GPT
+미용실 리뷰
+추천 헤어
+미용실 정보
+헤어 선택
+LLM 맞춤형추천
+얼굴형/피부 톤/얼굴 비율
+이용자 정보
+파이프라인
+INPUT
+OUTPUT
+텍스트 전처리
+추천 헤어
+추천 이유
+손질 방법 
+헤어가 적합한 상황
+추천 미용실 
+미용실 추천 이유
+미용실과의 거리
+현재 머리스타일 제거
+Bald 이미지에 추천 헤어 합성
+얼굴 추출
+CV 얼굴 특징 추출
+헤어 및 미용실 추천 정보
+선택 헤어의 평이 
+      좋은 미용실 추천
+Bald Image
+(염색 포함)
+추천한 헤어의
+대표 이미지
+Grounded SAM
+
+## Slide 6
+Hair-Fusion 시뮬레이션 및
+헤어스타일별 이미지 수집
+염색 이미지 추가
+김미리
+SEAN 시뮬레이션 및
+헤어스타일별 이미지 수집
+염색 코드 자동화
+이수인
+Graph-RAG 헤어
+추천 알고리즘 개발
+미용실 추천 로직
+김민열
+아이디어 기획
+얼굴 특징 추출 모델 및
+Stable-Hair 시뮬레이션
+김홍재
+Role
+팀원소개
+KeyWord
+역할
+Team 추천
+Team 생성
+강인혁
+데이터 수집 및 전처리
+추천 프롬프트 엔지니어링
+염색 추천 로직
+
+## Slide 7
+Web Crawling
+헤어 관련 글
+활용데이터
+미용실 리뷰
+미용실 정보
+헤어스타일 추천을 위한 관련 텍스트 수집
+미용실 추천을 위한 관련 텍스트 크롤링
+SELENIUM
+
+## Slide 8
+MTCNN
+STONE
+dde6c6
+MediaPipe
+중안부
+비율
+이마 
+비율
+하관
+비율
+TF-IDF
+인상
+이마
+염색
+얼굴 이미지 추출
+MTCNN
+얼굴 부분의 이미지만 탐지하여 추출
+얼굴 비율 정보
+얼굴 특징 추출
+얼굴의 이마 비율 / 중안부 / 하관 비율 측정
+얼굴 피부 톤 추출
+SkinToneClassifier
+감지된 얼굴 사진을 입력으로 넣음 
+피부색을 감지하여 16진수로 표현
+얼굴 특징 추출
+수행방법 1
+: 외형 분석
+사용 분야
+비전
+추출할 요소 결정 및 특징 추출
+추출 요소 결정
+TF-IDF
+추천에 쓰는 문서의 명사 TF-IDF 상위 1% 중 선택
+
+## Slide 9
+HuggingFace
+하트
+달걀
+원형
+정사
+각형
+타원
+ConvNeXt
+ResNet50
+DenseNet
+Swin-T
+ConvNeXt
+Epoch 10
+80.30%
+82.80%
+81.90%
+87.50%
+Epoch 20
+86.90%
+82.90%
+82.40%
+86.00%
+Best
+86.90%
+88.80%
+86.10%
+89.00%
+FaceShape Dataset
+Kaggle 제공
+계란/타원/둥근/네모/하트 5개의 얼굴형 1000장씩
+얼굴형 분류 
+데이터 가공
+MTCNN으로 얼굴 이미지만 추출
+Train 80% / Val 10% / Test 10%
+실험 세팅
+4개 모델 비교 
+CNN 기반 : ResNet50/DenseNet/ConvNeXt
+Attention 기반 : Swin-T
+VIT도 시도했으나 가장 낮은 성능 (부족한 지역 정보)
+모델 간 비교
+얼굴 특징 추출
+ConvNeXt 얼굴형 예측
+Swin-T의 구조를 CNN으로 구현한 모델
+25 epoch / Batch_size = 32 / lr=1e-5
+얼굴형 예측 모델
+수행방법 1
+: 외형 분석
+사용 분야
+비전
+얼굴형 분류기
+facebook/convnext-base-224
+
+## Slide 10
+Naive RAG
+Text Chunk1
+Text Chunk2
+Text Chunk3
+Source DB
+JSON
+성별
+얼굴형
+기장
+...
+이마
+피부 톤
+분위기
+...
+이용자 정보
+Low-confidence
+response
+수행 방법
+사용 분야
+추천
+시스템
+Retreive
+Generate
+Data composition issue
+Too Much information 
+논문 (머리스타일과 얼굴 조합)
+네이버 블로그 (얼굴 특징에 적합한 헤어)
+Allure 블로그 (최신 트렌드 헤어스타일)
+Retrieve issue
+검색 방식 
+input query와 DB의 임베딩 간 비교
+코사인 유사도 비교 
+Top-k Chunk 반환하여 LLM에게 전달
+TOP-k의 다양성이 떨어짐
+적용 시 문제점
+RAG
+동일 헤어스타일에 대한 정보 중복
+
+## Slide 11
+GraphRAG
+Text Chunk1
+Text Chunk2
+Text Chunk3
+Community 1
+Community 2
+Community 3
+Source Text
+부드러움
+레이어드펌
+계란형
+시스루
+Recommend
+result
+...
+레이어드 C컬 펌 + 시스루뱅을 추천드립니다.
+계란형 얼굴과 굵고 직모인 모발에 어울리는 레이어드 C컬 펌과 시스루뱅 조합
+은 얼굴선을 살리고 부드러운 인상을 더해주며, 드라이만으로도 손쉽게 연출 가
+능한 쉬운 관리의 스타일입니다
+GraphRAG 활용
+Graph 구조와 VectorDB 구축
+크롤링한 논문, blog에서 entity, relation 추출
+추출 문서 기반 그래프 및 커뮤니티 구축 후 LLM 요약
+수행 방법
+사용 분야
+Input Query 받기
+Input 구성
+CV model로 감지된 얼굴형 + 얼굴색 
+입력으로 받은 기장, 이마, 광대, 분위기, 성별, 모발, 관리성향
+헤어스타일 사전 기반 최종 추천 조합
+사전에 정의한 추천 범위 중 Top-K개의 헤어 추천
+조합 추천 및 특징, 관리 팁 등의 상세 설명 제공
+헤어스타일 추천
+필요한 문서 Retriever
+답변에 필요한 문서 검색 
+input과 유사한 엔티티를 검색하고 커뮤니티 리포트 및 문맥 정리
+수집한 것을 바탕으로 LLM 전달 후 추천
+JSON
+성별
+얼굴형
+기장
+...
+이마
+피부 톤
+분위기
+...
+이용자 정보
+Retreive
+Generate
+Answer
+그래프 구조를 이용한 헤어스타일 추천
+추천
+시스템
+
+## Slide 12
+Prompt for GraphRAG
+Self- reflection gleaning
+Prompt Method
+Logit Bias Prompting : Yes/No 강제 응답 유도
+Self-Reflective Prompting: 모델이 스스로 부족한 점 평가 
+Multi-Step Iterative Prompting: 반복 탐색 구조
+[목표]  
+텍스트에서 주요 개체와 그들 간의 관계를 추출합니다.
+[엔티티 추출 형식]  
+("entity" <구분자> 개체명 <구분자> 개체유형 <구분자> 개체 설명)  
+[예]
+("entity"<|>"레이어드컷"<|>"STYLE"<|>"볼륨감을 주는 여성 커트 스타일")
+{
+  "title": "C컬펌 & 레이어드컷 커뮤니티",
+  "summary": "이 커뮤니티는 자연스러운 볼륨감을 중심으로 구
+성...",
+  "rating": 8.5,
+  "rating_explanation": "자주 추천되고 다양한 스타일에 
+어울려 높은 점수 부여",
+  "findings": [
+    {
+      "summary": "레이어드컷과 C컬펌의 볼륨 시너지",
+      "explanation": "두 스타일은 함께 시술 시 손질이 쉬우며..."
+Graph 구성
+수행 방법
+사용 분야
+Extract Entity and Relation from Chunk
+Prompt Method 
+Schema-Constrained Output : 정해진 형식 강제
+Few-Shot In-Context Learning : 예시 제공
+Tuple-Based Prompting : “entity”와 “relationship” 구조 구분
+Comminity report Generation
+Prompt Method
+Hierarchical Summarization : 커뮤니티 트리 구조 요약
+하위 커뮤니티 → 상위 커뮤니티 순으로 요약 생성
+Structured Output : JSON 형식 필드 강제
+빠진 개체가 더 있습니까? YES | NO 로 답하세요.
+Yes 일 경우 → 보완 추출 유도 
+      → 반복 최대 횟수까지 진행
+LLM을 이용한 추천
+추천
+시스템
+
+## Slide 13
+event_keywords = ['이벤트', '리뷰이벤트', '쿠폰', ... ,'이벤트 후기 작성하기']
+pattern = '|'.join(event_keywords)
+df_review_del = df_length[~df_length['review'].str.contains(pattern,
+case=False, na=False)] # 이벤트성 리뷰 제거
+score_summary_filtered = df_review_del[df_review_del['review_count'] >=
+6].reset_index(drop=True) # 리뷰 개수 5개 이하인 미용실은 제거
+{
+  "final_dic_style": "C컬펌",
+  "hairshop": "아이디헤어 아현뉴타운점",
+  "score": 0.83333, "review_count": 6,
+  "longitude": 126.9536258,
+  "latitude": 37.551, “price” : 120000
+}
+def calc_score(row): # 헤어스타일 별 미용실 scoring
+  if neg > 1:
+    score= (row['review_count']//100+1)*(-neg / (pos+amb+neg))
+  else:
+    score = pos / (pos+amb+neg) 
+  return score 
+헤어스타일별 추천 미용실 DB 구성
+Top 20 추천 미용실 Data 구축
+Service Method
+추천순 정렬 : score 기준으로 정렬된 미용실목록 제시
+거리순 정렬 : longitude와 latitude 기준으로 사용자 위치에 가까
+운 순으로 제시
+가격순 정렬 : price 기준으로 정렬된 미용실목록 제시
+미용실 추천 by KOTE
+헤어스타일 별 미용실 점수 매기기
+수행 방법
+사용 분야
+신뢰성있는 리뷰데이터만 사용하기
+Preprocessing Method 
+이벤트 관련 키워드 리뷰 제거 
+리뷰 개수가 5개 이하인 경우 제거 
+Scoring Method
+KOTE로 리뷰별 긍정,애매,부정키워드 추출 
+사용자정의된 cal_score함수로 리뷰별 score 산정 
+미용실 리뷰를 이용한 미용실 추천
+추천
+시스템
+
+## Slide 14
+Hair Transfer
+CLIP 모델의 텍스트-이미지 임베딩을 활용하여, 
+텍스트 명령어로 머리 색상과 스타일을 조절하는 모델
+방법 2 : HairCLIP 
+2022
+Diffusion 기반의 Bald Converter로 현재 헤어를 없앤 뒤,
+Stable-Diffusion의 reverse 과정으로 헤어를 합성하는 기술
+- 학습 데이터와 실제 이미지 간의 도메인 차이
+    : 대부분의 모델이 외국인 얼굴 이미지로 학습
+- 다양한 머리 형태, 조명, 각도, 질감으로 인해 일관된 전이 어려움
+- 고성능 모델 실행 및 정밀 마스크 생성에 필요한 자원이 부족함
+방법 4 : Hairfusion
+머리카락을 정밀하게 마스크로 분리한 뒤, 스타일 이미지의 
+머리카락 속성을 타겟 이미지에 정확히 전이하는 모델
+수행방법 3
+: 외형 생성
+사용 분야
+생성
+한 이미지의 머리 속성을 다른 이미지에 전이
+방법 3 : Stable-Hair 
+실시간으로 얼굴이 짓뭉개지는 비타민 부원들
+SEAN 적용
+HairCLIP 적용
+세그멘테이션 마스크 기반 스타일 합성
+방법 1 : SEAN
+2020
+2024
+2025
+WHY?
+(CNN)
+(GAN)
+(Diffusion)
+(Diffusion)
+실패
+실패
+실패?
+실패
+자원상
+후퇴
+실패
+실패
+
+## Slide 15
+Stable-Hair
+INPUT
+OUTPUT
+Stable-Hair를 통한 Hair Transfer
+인물 이미지에 헤어를 자연스럽게 합성
+사용자의 머리를 Bald로 만든 뒤, 추천 헤어를 적용
+수행방법 3
+: 외형 생성
+사용 분야
+생성
+Stable-Hair
+헤어 합성
+Bald Converter
+Bald 상태로 인물 이미지 표준화
+Diffusion을 사용하여 변환
+Latent Identity Net 
+VAE → Conv(1*1) → U-Net
+Hair Cross Attention에서 Query 
+Hair Extracter 
+Ref image(적용할 헤어스타일)에 Self-Attention
+Hair Corss Attention에서 Key와 Value
+
+## Slide 16
+Stable-Hair
+수행방법 3
+: 외형 생성
+사용 분야
+생성
+step size (t): 디퓨전 반복 횟수
+converter_scale : Bald Converter 적용 강도
+scale : 스타일 전이 강도
+guidance_scale : 텍스트/이미지 조건 반영 정도
+controlnet_conditioning_scale
+                                : ControlNet 조건의 반영 강도
+가용 파라미터
+헤어 합성
+그리드 서치
+Step_size : [30, 50, 100, 300, 500, 1000]
+converter_scale : [1, 2]
+scale : [1, 1.5, 2]
+guidance_scale : [1.5, 1.6, 1.7]
+controlnet_cond_scale : [1, 1.5, 2]
+실험 및 결과
+[100, 1, 1, 1.5, 1]이 제일 안정적
+간단한 파라미터 조정만으로 다양한 결과 실험
+
+## Slide 17
+여성: 총 32+20종 
+   (컷 14 / 펌 17 / 특수염색 1 / 조합형 별도 수집)
+남성: 총 28종
+   (Short 8 / Medium 15 / Long 5)
+수집 출처: 블로그, 인스타그램 등 
+     실제 스타일링 이미지 기반
+여성 :
+앞머리 여부 * 기장 조합당 최대 6장 수집
+스타일 조합이 현실에 적합하지 않은 경우 제외
+조합형(펌+컷)은 별도 확장판으로 진행
+남성 :
+Short/Medium은 곱슬 여부 * 얼굴형 조합당 4장
+일부 스타일(짧은 숏컷 등)은 얼굴형 기준으로 2장
+Long 스타일은 길이(단/중/장)에 따라 3
+2. 앞머리 여부
+2. 곱슬 여부
+수집 방식
+S
+M
+L
+1.기장
+Y
+N
+여성 : 총 32종+20
+S
+M
+L
+C
+S
+1.기장
+3. 얼굴형
+S
+R
+데이터 수집
+수집 개요
+데이터
+수집
+사용 분야
+생성
+남성 : 28종
+
+## Slide 18
+사용자 이미지
++ 원하는 분위기
+피부색 추출
+20개 염색 색상
+‘Rose Pink’
+컬러별 분위기 태그
+염색 추천
+피부색과 염색 색상이 어울리는지 검토
+피부색과 염색 색상을 색상 벡터로 변환
+피부색과 20개 염색 색상 간 거리 계산 
+거리가 작을수록 큰 점수 부여
+분위기 태그 점수와 합산해 최종 추천 
+사용자가 원하는 분위기 태그와 염색
+색상의 분위기 태그를 비교
+분위기 태그가 동일할 경우 점수 부여
+거리 점수와 태그 점수를 총합해 최종
+염색 컬러 추천
+사용자 피부색 추출
+인풋값으로 받은 이미지에서 추출
+색 간 거리 점수 산출
+최종 염색 컬러 추천
+수행 방법
+색 간 거리 점수 산출
+분위기 태그 점수 산출
+피부색에 맞는 염색 추천
+사용 분야
+추천
+시스템
+
+## Slide 19
+Grounding DINO
+‘Rose Pink’
+‘Ferry Violet’
+‘Sunset Orange’
+텍스트 기반 머리 위치 탐지 
+입력: 원본이미지 + 텍스트 입력(“hair”)
+출력: 머리 위치 Bounding Box
+이미지 데이터
+직접 수집한 정면 헤어스타일 이미지 데이터
+Ex)스타일_남성_색_모발_얼굴형.jpg
+프롬프트 기반 헤어 리컬러링
+입력: 원본 이미지 + 마스크 + 프롬프트
+출력: 염색된 결과 이미지
+사용 분야
+생성
+Input: 헤어스타일 이미지
+Stable Diffusion
+Segment Anything(SAM)
+박스 기반 정확한 픽셀 단위 마스크 생성
+입력: 원본이미지 + Bounding Box
+출력: 머리 영역 Binary Mask
+Grounded-SAM
+수행방법 3
+: 외형 생성
+세그멘테이션+디퓨전을 이용한 염색
+Grounding
+DINO
+PROMPT : “hair”
+SAM
+Ref
+Img
+
+## Slide 20
+시연
+시연 및
+결론
+소년미를 획득한 김민열 학우
+KeyWord
+Result
+
+## Slide 21
+기존 타 서비스와 다르게 신뢰성있는 헤어스타일 추천과 시뮬레이터의 속도를 개선함
+시뮬레이터에 그치지 않고 더 나아가 추천된 헤어스타일을 실제로 시도할 수 있게끔 미용실까지 추천해줌
+GAN기반의 모델과 Diffusion 기반의 모델을 실험해보며 가장 자연스러운 헤어 합성 모델로 시뮬레이터 구현
+의의
+의의 및 한계
+시연 및
+결론
+한계
+리소스의 제약으로 인해 태스크에 맞게 생성 모델을 튜닝하지는 못함 
+추가적인 스타일 보정(컬감 추가라거나 앞머리 제거 등) 시도했으나 부자연스러운 이미지 생성
+미용실 크롤링 시 헤어스타일명과 미용실에 표기된 메뉴명이 상이하여 미용실 추천 시 정확한 매칭에 한계가 있었음
+신뢰성있는 정보들을 기반으로 추천을 구현하긴 했으나 
+      실제 사용자가 만족할 수 있는 추천인지에 대한 평가가 이루어지지 않아 객관적인 모델 성능평가를 하기 어려움
+GPU
+나
+KeyWord
+Result
+
+## Slide 22
+Kaiming He et al. Deep Residual Learning for Image Recognition (CVPR2016)
+Joseph Redmon et al. You Only Look Once: Unified, Real-Time Object Detection (CVPR2016)
+Tero Karras et al. A Style-Based Generator Architecture for Generative Adversarial Networks (CVPR2019)
+SEAN: Image Synthesis with Semantic Region-Adaptive Normalization (CVPR 2020 Oral)
+Alexey Dosovitskiy et al. An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale (ICLR2021) 
+Swin Transformer: Hierarchical Vision Transformer using Shifted Windows (ICCV 2021)
+High-Resolution Image Synthesis with Latent Diffusion Models(CVPR 2021)
+A ConvNet for the 2020s (CVPR2022)
+Yiqian Wu,Xiaogang Jin et al. HairMapper: Removing Hair from Portraits Using GANs (CVPR 2022)
+Darren Edge et al. From Local to Global: A Graph RAG Approach to Query-Focused Summarization (2024)
+Yuxuan Zhang et al. Stable-Hair : Real-World Hair Transfer via Diffusion Model (2024)
+Grounded SAM: Assembling Open-World Models for Diverse Visual Tasks (2024)
+What to Preserve and What to Transfer: Faithful, Identity-Preserving Diffusion-based Hairstyle Transfer(2025)
+참고문헌
+참고 논문
+
+## Slide 23
+감사합니다
+
