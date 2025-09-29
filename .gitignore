@@ -1,0 +1,6 @@
+## DB
+./member_db/*.xlsx
+./member_db/info1516.json
+
+## env
+./.env
