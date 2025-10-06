@@ -1,10 +1,14 @@
-import json
+import os, json
 from langchain.schema import Document
 
 # === 3. 비타민 정보 ===
-with open("./member_db/docs.json", encoding="utf-8") as f:
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
+BITAMIN_DB_PATH = os.path.join(BASE_DIR, "member_db", "docs.json")
+
+with open(BITAMIN_DB_PATH, encoding="utf-8") as f:
     bitamin_data = json.load(f)
 bita_docs = []
+
 # 모집 일정
 for role, schedule in bitamin_data["bitamin"]["모집 일정"].items():
     for key, value in schedule.items():

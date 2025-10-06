@@ -1,9 +1,11 @@
-import json
+import os, json
 from langchain.schema import Document
 
 # === 1. 커리큘럼 ===
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
+CURRICULUM_DB_PATH = os.path.join(BASE_DIR, "member_db", "curriculum.json")
 
-with open("./member_db/curriculum.json", encoding="utf-8") as f:
+with open(CURRICULUM_DB_PATH, encoding="utf-8") as f:
     data = json.load(f)
 curri_docs = []
 
@@ -25,7 +27,10 @@ __all__ = ["curri_docs"]
 
 
 # === 2. 멤버 DB ===
-with open("./member_db/info1516.json", "r", encoding="utf-8") as f:
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
+MEMBER_DB_PATH = os.path.join(BASE_DIR, "member_db", "info1516.json")
+
+with open(MEMBER_DB_PATH, "r", encoding="utf-8") as f:
     members = json.load(f)
 memb_docs = []
 for m in members:

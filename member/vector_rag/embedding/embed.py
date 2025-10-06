@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
-from member.preprocess.pre1 import curri_docs, memb_docs
-from member.preprocess.pre2 import bita_docs
+from ..preprocess.pre1 import curri_docs, memb_docs
+from ..preprocess.pre2 import bita_docs
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
