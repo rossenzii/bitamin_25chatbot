@@ -1,0 +1,146 @@
+[
+    {
+        "slide": 1,
+        "text": "BITAMIN 2025 순차적 트렌드 기반 개인 맞춤형 영화 추천 시스템 Personalized Movie-Recommendation System with Sequential Trend"
+    },
+    {
+        "slide": 2,
+        "text": "BITAFLIX Members 김주환 노승수 박신지 배한준 전지인"
+    },
+    {
+        "slide": 3,
+        "text": "주제 탐색- 주제 선정 배경 넓은 의미의 추천 시스템 데이터 분석과 예측에 기반해 추천을 제공하는 모든 시스템 통계적 기법을 활용한 전반적 패턴 도출"
+    },
+    {
+        "slide": 4,
+        "text": "주제 탐색- 주제 선정 배경 좁은 의미의 추천 시스템 개별 사용자의 취향과 선호, 행동 패턴을 분석하여 개인 맞춤형 추천을 제공 시간 경과에 따라 추천의 품질이 향상되며 새로운 관심사에 대한 예측 가능"
+    },
+    {
+        "slide": 5,
+        "text": "주제 탐색- 주제 선정 순차적 트렌드 기반 개인 맞춤형 영화 추천 시스템"
+    },
+    {
+        "slide": 6,
+        "text": "주제 탐색- 주제 선정 순차적 트렌드 기반 개인 맞춤형 영화 추천 시스템 추천 결과 개인화 모든 사용자에 대해 개인화된 추천 제공 평가의 주관성 사용자의 주관적 기준에 따른 평가 데이터 활용 취향의 가변성 시간의 흐름에 따른 사용자 취향 변화 반영"
+    },
+    {
+        "slide": 7,
+        "text": "순차적 트렌드 기반 개인 맞춤형 영화 추천 시스템 발표 구성 프로젝트 준비 프로젝트 파이프라인 데이터 수집 및 전처리 모델링 주요 모델 소개 S3-Rec 모델링 사전학습 미세 조정 성능 평가 추천 결과 확인 성능 지표 확인 의의 및 개선 방안 프로젝트 의의 향후 개선 방안"
+    },
+    {
+        "slide": 8,
+        "text": "순차적 트렌드 기반 개인 맞춤형 영화 추천 시스템 발표 구성 프로젝트 준비 프로젝트 파이프라인 데이터 수집 및 전처리 모델링 주요 모델 소개 S3-Rec 모델링 사전학습 미세 조정 성능 평가 추천 결과 확인 성능 지표 확인 의의 및 개선 방안 프로젝트 의의 향후 개선 방안"
+    },
+    {
+        "slide": 9,
+        "text": "순차적 트렌드 기반 개인 맞춤형 영화 추천 시스템 발표 구성 프로젝트 준비 프로젝트 파이프라인 데이터 수집 및 전처리 모델링 주요 모델 소개 S3-Rec 모델링 사전학습 미세 조정 성능 평가 추천 결과 확인 성능 지표 확인 의의 및 개선 방안 프로젝트 의의 향후 개선 방안"
+    },
+    {
+        "slide": 10,
+        "text": "순차적 트렌드 기반 개인 맞춤형 영화 추천 시스템 발표 구성 프로젝트 준비 프로젝트 파이프라인 데이터 수집 및 전처리 모델링 주요 모델 소개 S3-Rec 모델링 사전학습 미세 조정 성능 평가 추천 결과 확인 성능 지표 확인 의의 및 개선 방안 프로젝트 의의 향후 개선 방안"
+    },
+    {
+        "slide": 11,
+        "text": "프로젝트 준비- 프로젝트 파이프라인 데이터셋 구축 Kaggle + WATCHA 단일 데이터셋 (순차적 경향 반영) 모델링 및 영화 추천 S3-Rec 모델링 순차적 경향 기반 영화 추천 협업 필터링 기반 유사 영화 추천 평점 기반 고도화 deepFM 기반 추천영화 평점 예측 평점 오차 예측 오차 반영 재훈련"
+    },
+    {
+        "slide": 12,
+        "text": "프로젝트 준비- 데이터 수집 및 전처리 Kaggle Datasets WATCHA Crawling IMDB ID로 매핑 270,000+ Users 26,000,000+ Data (userId, movieId, title, ratings, timestamp..)"
+    },
+    {
+        "slide": 13,
+        "text": "모델링- 주요 모델 소개 순차적 트렌드를 통한 개인 맞춤형 영화 추천 시스템 Collaborative Filtering 사용자-아이템 상호작용 기반 간단하고 직관적 도메인 비의존적 데이터 희소성 문제 Cold-Start 문제"
+    },
+    {
+        "slide": 14,
+        "text": "모델링- 주요 모델 소개 순차적 트렌드를 통한 개인 맞춤형 영화 추천 시스템 Collaborative Filtering 사용자-아이템 상호작용 기반 간단하고 직관적 도메인 비의존적 데이터 희소성 문제 Cold-Start 문제 deepFM 특징 간 상호작용 효과적 모델링 사전학습이 필요 없음 복잡한 모델 구조 해석 가능성 부족"
+    },
+    {
+        "slide": 15,
+        "text": "모델링- 주요 모델 소개 순차적 트렌드를 통한 개인 맞춤형 영화 추천 시스템 Collaborative Filtering 사용자-아이템 상호작용 기반 간단하고 직관적 도메인 비의존적 데이터 희소성 문제 Cold-Start 문제 deepFM 특징 간 상호작용 효과적 모델링 사전학습이 필요 없음 복잡한 모델 구조 해석 가능성 부족 SASRec Self-Attention 기반 사용자 행동 패턴 학습 긴 시퀀스 학습 시 성능 저하 최신 정보 반영의 어려움 시간 정보 부족"
+    },
+    {
+        "slide": 16,
+        "text": "모델링- 주요 모델 소개 ARCHITECTURE 아이템 임베딩과 위치 정보를 결합 4가지 학습 목표 기반 자기 지도 학습 수행 양방향 문맥 표현 학습 CONTRIBUTION 상호 정보 최대화 기법을 활용해 데이터 희소성 문제 완화 데이터에 내재된 상호 연관성 기반 데이터 표현력 개선 문맥 데이터와 순차적 데이터 간 관계 탐색을 추천 시스템에 적용 S3-REC"
+    },
+    {
+        "slide": 17,
+        "text": "모델링- S3-Rec 모델링 데이터셋 구축 사전 학습 미세 조정 추천 사용자 상호작용 & 모델 업데이트"
+    },
+    {
+        "slide": 18,
+        "text": "모델링- S3-Rec 모델링 데이터셋 구축 사전 학습 미세 조정 추천 성능 평가"
+    },
+    {
+        "slide": 19,
+        "text": "모델링- 사전 학습 마스크를 포함한 시퀀스 아이템/속성 임베딩 Bidirectional Self-Attention 마스킹된 부분 아이템/속성 임베딩 Bidirectional Self-Attention  아이템/속성/시퀀스 MIM"
+    },
+    {
+        "slide": 20,
+        "text": "모델링- 사전 학습 AAP Loss 아이템-속성 간 상호 정보 최대화 속성 정보를 포함한 아이템 표현을 학습"
+    },
+    {
+        "slide": 21,
+        "text": "모델링- 사전 학습 MIP Loss 시퀀스 내의 양방향 문맥 정보 학습 마스킹된 아이템을 복원"
+    },
+    {
+        "slide": 22,
+        "text": "모델링- 사전 학습 MAP Loss 마스킹된 아이템의 속성을 복원 아이템-속성 및 시퀀스-속성 간 관계 학습"
+    },
+    {
+        "slide": 23,
+        "text": "모델링- 사전 학습 SP Loss 부분 시퀀스(segment)를 복원하며 관심의 흐름과 사용자 선호도를 학습"
+    },
+    {
+        "slide": 24,
+        "text": "모델링- 미세 조정 Fine-Tuning 단방향 transformer 기반 지도 학습으로 추천 성능 최적화"
+    },
+    {
+        "slide": 25,
+        "text": "성능 평가- 추천 결과 확인 사용자의 실제 시청기록과 S3-Rec, CF 기반 추천 결과를 분리"
+    },
+    {
+        "slide": 26,
+        "text": "성능 평가- 추천 결과 확인 BITAFLIX"
+    },
+    {
+        "slide": 27,
+        "text": "성능 평가- 성능 지표 확인 추천 알고리즘별 상대적 재현율 (recall@10)"
+    },
+    {
+        "slide": 28,
+        "text": "성능 평가- 성능 지표 확인 추천 알고리즘별 상대적 재현율 (recall@10)"
+    },
+    {
+        "slide": 29,
+        "text": "의의 및 개선 방안- 프로젝트 의의 다양한 방법론적 시도를 통한 독자적 추천 시스템 구축 비교적 희소한 데이터 환경에서 기존 대형 플랫폼의 추천 방식을 모방하는 대신 여러 모델을 비교하고 장점을 활용한 추천 시스템 구축 데이터 추가 확보 및 앙상블을 통한 성능 고도화 가능성 실제 서비스 적용 및 사용자 피드백 기반 모델 업데이트, 유저/영화 메타정보 추가 확보를 통한 성능 지표 향상 보다 다양한 추천 알고리즘을 결합하는 앙상블 기법 활용으로 모델 고도화 가능성"
+    },
+    {
+        "slide": 30,
+        "text": "의의 및 개선 방안- 향후 개선 방안 계절성 및 사회적 이슈 등 전체 집단의 경향 모델링 필요 액션/어드벤처 영화는 봄/여름, 코미디 영화는 겨울에 흥행하는 등 선호 장르의 계절성 존재 사회/문화적 이슈로 인한 역주행 사례 속성(장르) 간 관계 학습을 통한 제2, 제3의 취향 발굴 장르 간 관계를 학습 시 유사 장르의 영화 추천에 대한 당위성을 확보 새로운 자기 지도 학습 목표로 설정하거나, 개별 영화에 앞서 장르를 선행 추천하는 방법을 고려"
+    },
+    {
+        "slide": 31,
+        "text": "METHODOLOGICAL APPROACH JUHWAN KIM GENERAL SEUNGSU NOH CF, BUNDLE-REC, SASREC SHINJI PARK CF, DEEPFM, S3-REC HANJUN BAE RECVAE, S3-REC JIIN JUN SASREC, BSAREC, S3-REC"
+    },
+    {
+        "slide": 32,
+        "text": "PROJECT Team Lead JUHWAN KIM Data Collection HANJUN BAE Preprocessing 1 JUHWAN KIM Preprocessing 2 SEUNGSU NOH Modeling 1 JUHWAN KIM Modeling 2 SEUNGSU NOH Modeling 3 SHINJI PARK Modeling 4 HANJUN BAE Modeling 5 JIIN JUN"
+    },
+    {
+        "slide": 33,
+        "text": "Model Training JUHWAN KIM Performance Evaluation 1 SHINJI PARK Performance Evaluation 2 HANJUN BAE Performance Evaluation 3 JIIN JUN Demo & Presentation SEUNGSU NOH"
+    },
+    {
+        "slide": 34,
+        "text": "2025 WINTER RECSYS TEAM 1"
+    },
+    {
+        "slide": 35,
+        "text": "추천시스템 1조 김주환 노승수 박신지 배한준 전지인 thanks for LISTENING"
+    },
+    {
+        "slide": 36,
+        "text": "References SU, XIAOYUAN, AND TAGHI M. KHOSHGOFTAAR. \"A SURVEY OF COLLABORATIVE FILTERING TECHNIQUES.\" ADVANCES IN ARTIFICIAL INTELLIGENCE 2009.1 (2009): 421425. GUO, HUIFENG, ET AL. \"DEEPFM: A FACTORIZATION-MACHINE BASED NEURAL NETWORK FOR CTR PREDICTION.\" ARXIV PREPRINT ARXIV:1703.04247 (2017). KANG, WANG-CHENG, AND JULIAN MCAULEY. \"SELF-ATTENTIVE SEQUENTIAL RECOMMENDATION.\" 2018 IEEE INTERNATIONAL CONFERENCE ON DATA MINING (ICDM). IEEE, 2018. ZHOU, KUN, ET AL. \"S3-REC: SELF-SUPERVISED LEARNING FOR SEQUENTIAL RECOMMENDATION WITH MUTUAL INFORMATION MAXIMIZATION.\" PROCEEDINGS OF THE 29TH ACM INTERNATIONAL CONFERENCE ON INFORMATION & KNOWLEDGE MANAGEMENT. 2020. GOYANI, MAHESH, AND NEHA CHAURASIYA. \"A REVIEW OF MOVIE RECOMMENDATION SYSTEM: LIMITATIONS, SURVEY AND CHALLENGES.\" ELCVIA. ELECTRONIC LETTERS ON COMPUTER VISION AND IMAGE ANALYSIS 19.3 (2020): 0018-37. BELLOGIN, ALEJANDRO, PABLO CASTELLS, AND IVAN CANTADOR. \"PRECISION-ORIENTED EVALUATION OF RECOMMENDER SYSTEMS: AN ALGORITHMIC COMPARISON.\" PROCEEDINGS OF THE FIFTH ACM CONFERENCE ON RECOMMENDER SYSTEMS. 2011. LEE, DANIEL, AND H. SEBASTIAN SEUNG. \"ALGORITHMS FOR NON-NEGATIVE MATRIX FACTORIZATION.\" ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS 13 (2000). HTTPS://GITHUB.COM/BOOSTCAMPAITECH3/LEVEL2-MOVIE-RECOMMENDATION-LEVEL2-RECSYS-11"
+    }
+]
