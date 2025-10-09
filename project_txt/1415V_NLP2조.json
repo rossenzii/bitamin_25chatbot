@@ -1,0 +1,102 @@
+[
+    {
+        "slide": 1,
+        "text": "PROJECT 국회 회의록 기반 현안 질의 챗봇 NLP 2조 김나연 김범준 김수아 박준성 정예림 한승균"
+    },
+    {
+        "slide": 2,
+        "text": "CONTENT 프로젝트 배경 및 목적 데이터 수집 & 전처리 모델링 & 챗봇 구현 챗봇 시연 결론 및 개선점"
+    },
+    {
+        "slide": 3,
+        "text": "01. 프로젝트 배경 국민들의 정치 참여율 증가"
+    },
+    {
+        "slide": 4,
+        "text": "01. 프로젝트 배경 정치 관련 정보 습득의 어려움 국회 회의록 수 국회 회의중 발언 수 많은 양의 데이터 + 어려운 내용"
+    },
+    {
+        "slide": 5,
+        "text": "01. 프로젝트 목적 국민들의 정치 관심도 증가에 부응 지속적 정치참여 유도 회의록 접근성 높여 내용 쉽게 전달"
+    },
+    {
+        "slide": 6,
+        "text": "02. 데이터 수집 & 전처리 사용 데이터셋: from AI hub 원천 데이터 국회 회의록에서 발언을 질문과 답변으로 분리, 이를 활용하여 생성한 인공지능 학습용 데이터셋 데이터 확보 & 일관성 유지 위해 20대 국회 데이터만 사용"
+    },
+    {
+        "slide": 7,
+        "text": "02. 데이터 수집 & 전처리 json 특별 위원회 예산결산 특별위원회 국정감사 소위원회 본회의 하나의 통합된 CSV 데이터 최적화 필요한 컬럼 / 데이터만 남기고 제거 1) 원 데이터 34개 컬럼 중 13개 컬럼 활용 2) context_learn 컬럼의 문장길이 분석 →  2문장 이하 데이터 삭제 불용어 제거 한국어 + 국회 특화 불용어 키워드 추출 from context_learn"
+    },
+    {
+        "slide": 8,
+        "text": "불용어 제거 한국어 + 국회 특화 불용어 특수문자 제거 및 단어 토큰화 단어 빈도 계산해 상위 2000개 추출 한국어 불용어, 국회 회의록 특화 불용어 집합 생성 중요 용어가 불용어로 처리되는 것 방지   ex) ‘경제’ 상위 2000개 단어에서 [ 2 ]의 불용어가 제거된 것 확인 가능 [ 2 ] 를 제외한 불용어 집합 생성 ( 자주 등장하는 의미 없는 단어 제거 )"
+    },
+    {
+        "slide": 9,
+        "text": "문장 분리 함수(split_sentences) 정의 명사, 숫자(Noun, Number) 추출 함수 정의: Okt 형태소 분석 키워드 추출 함수(extract_keywords) 정의 KRWordRank 사용: 지정된 파라미터가 적용된  wordrank extractor 반환 context_learn의 각 행에 대해 extract_keywords 적용 상위 5개 키워드 반환해 새로운 컬럼(context_learn_keywords) 생성 min_count: 단어 최소 출현 빈도수 max_length: 단어의 최대 길이 beta: 현재 노드와 연결된 다른 노드들의 PageRank 값 고려도 ( 0~1) → beta가 작을수록 키워드 추출 결과 분산 max_iter: 최대 iteration 횟수 키워드 추출 from context_learn"
+    },
+    {
+        "slide": 10,
+        "text": "03. 모델링 & 챗봇 구현 : Pipeline Input 유사도 비교 context_learn 유사도 비교 Input context_learn_summary Output"
+    },
+    {
+        "slide": 11,
+        "text": "03. 모델링 & 챗봇 구현 SBERT : Sentence-BERT BERT에서 문장 임베딩 성능이 개선된 형태 문장 간 의미적 유사도를 효율적으로 계산하도록 최적화 KR-SBERT : 서울대 연구실에서 발표한 KR -SBERT 모델 (snunlp/KR-SBERT-V40K-klueNLI-augSTS) 사전 학습 KR-BERT-V40K 기반으로 문장을 WordPiece 토큰으로 분할 각 토큰의 컨텍스트 임베딩을 평균 풀링 → 단일 문장 벡터 생성 파인 튜닝 KLUE-NLI와 증강된 KorSTS 데이터셋을 활용 → 문장 간 관계와 유사성을 더욱 정확히 반영 문장 유사도 측정 검색 시스템 챗봇 개발 문장 간 유사도 측정에 강점을 보임 !"
+    },
+    {
+        "slide": 12,
+        "text": "03. 모델링 & 챗봇 구현 : 유사도 계산 input 문장 - 국회 회의록 연결 국회 회의록 문장 임베딩 생성 키워드 중요도 계산 input 키워드 추출 키워드 기반 필터링 문장 임베딩 & 코사인 유사도 계산 최종 후보 선정"
+    },
+    {
+        "slide": 13,
+        "text": "03. 모델링 & 챗봇 구현 : 유사도 계산 input 문장 - 국회 회의록 연결 keyBERT : 키워드 추출 과정 Step 1: 국회 회의록 문장 임베딩 생성 SentenceTransformer 사용 context_learn 문장 임베딩 생성 및 저장 Step 2: 키워드 중요도 계산 (keyword_importance) 문서 빈도 기반(IDF) 가중치 적용 중요도(keyword_iimportance) = IDF * 전체 빈도 Step 3: input 문장의 키워드 추출 Okt.nouns() 를 사용해 입력 문장에서 명사만 추출 KeyBERT.extract_keywords() 로 top_n 개의 키워드 추출 step 3 - 키워드 추출 예시 keyBERT: 키워드 추출을 위해 BERT를 적용한 오픈소스 파이썬 모델 텍스트 임베딩 단계에서 BERT를 사용/코사인 유사도 사용"
+    },
+    {
+        "slide": 14,
+        "text": "03. 모델링 & 챗봇 구현 : 유사도 계산 input 문장 - 국회 회의록 연결  SBERT 기존 BERT 문장의 모든 pair 연산 시간이 오래 걸림 Cosine Similarity 적용 불가 STS Task에서 BERT는 적합 X transformer base SBERT 의미있는 문장 임베딩 도출 위해 Siamese & Triplet Network 사용 Cosine Similarity 적용 가능 계산량 대폭 감소(65시간 → 5초) fine-tuning 된 BERT *STS Task(Semantic Texual Similarity): 텍스트의 의미적 유사도 측정하는 Task *Siamese: 샴, 두 개의 닮은 / Triplet: 세 개의 닮은 step 4 - 최종 top 3 선정 예시 Step 4: 키워드 기반 필터링 입력 문장의 키워드를 추출하여 문서 키워드와 비교 중요도 및 빈도를 활용해 keyword_score 계산 Step 5:  SBERT 문장 임베딩 & 유사도 계산 입력 문장의 SentenceTransformer 임베딩 생성 필터링된 문서와 입력 문장의 코사인 유사도 계산 Step 6: 최종 후보 선정 키워드 점수와 BERT 유사도를 가중 평균 최종 점수 = 0.4 * keyword_score + 0.6 * SBERT 유사도 유사도가 가장 높은 top_n개 문서 반환(n=3)"
+    },
+    {
+        "slide": 15,
+        "text": "03. 모델링 & 챗봇 구현 : BART(Bidirectional Auto-Regressive Transformer) Bidirectional BERT (Bidirectional Encoder Representation from Transformer) Auto-Regressive GPT or Generative Decoder →  이때까지의 입력을 바탕으로 새로운 출력을 만들어내는 생성 모델 BART는 BERT와 GPT를 하나로 합친 형태 1.기존 Sequence to Sequence 트랜스포머 모델을 2.새로운 Pre-training objective를 통해 학습하여 3.하나로 합친 모델"
+    },
+    {
+        "slide": 16,
+        "text": "03. 모델링 & 챗봇 구현 : BART(Bidirectional Auto-Regressive Transformer) BART는 손상된 문서를 기존 문서로 되돌리는 denoising autoencoder Seq2seq 모델로 구현되어 있음 손상된 텍스트를 BERT가  enoding 하고 →  left-to-right autoregressive decoder(GPT)가 받음 요약 태스크(Abstractive Task)에 강점을 보임 !"
+    },
+    {
+        "slide": 17,
+        "text": "Architecture 표준 Seq2seq Transformer 구조 사용 디코더에서 GPT의 ReLU 활성화 함수를 GeLU로 변경 디코더의 각 레이어가 encoder의 최종 hidden layer와 cross-attention을 수행 Pretraining BART 문서를 오염시킨 후 크로스 엔트로피 손실 최적화 모든 정보가 없는 극단적인 상황에서도 동작 기존 denoising autoencoder보다 다양한 문서 오염 방식 적용 Fine-tuning BART BART의 Seuqence Generation Task는 Autoregressive 디코더를 활용하여 문장을 생성 Abstractive question answering과 Summarization과 같은 sequence generation Task에서 적용 가능 입력 시퀀스가 복사되고 조절되는 특징"
+    },
+    {
+        "slide": 18,
+        "text": "03. 모델링 & 챗봇 구현 : KoBART (digit82/kobart-summarization) KoBART SKT - AI 팀에서 발표한 KoBART 모델 입력 텍스트 일부에 노이즈를 추가하여 다시 원문으로 복구하는 autoencoder의 형태로 학습 max_length: 100 min_length: 30 num_beams(Beam Search의 빔 개수): 5개 repetition_penalty(페널티 계수): 2.0 top_k (상위 k개 단어 중 샘플링): 50 top_p(누적 확률): 0.9 do_sampling(확률 기반 샘플링): True length_penalty: 1.5 early_stopping: True"
+    },
+    {
+        "slide": 19,
+        "text": "03. 모델링 & 챗봇 구현 KoBART - 키워드별 요약 회의록의  내용을 파악하기 위해 같은 date와 meeting_name별로 합친 후 하나의 context_learn 만들기 문맥을 잘 파악하기 위해 context_learn_keywords 포함 문장을 그룹화 한 후 키워드별 요약 생성 키워드 기반 요약 결과 산업 관련 요약 거래 관련 요약 규제 관련 요약 투자 관련 요약 조치 관련 요약 일반 요약"
+    },
+    {
+        "slide": 20,
+        "text": "03. 모델링 & 챗봇 구현 KoBART - 키워드별 요약 예시 [예산 관련 요약] 한국 정부의 다문화가정 지원 정책과 예산에 대한 논의가 활발히 이루어지고 있는 가운데 여성가족부는 지방자치단체로의 예산 배분 비율이 변경됨 에 따라 부족해진 예산으로 인해 이들 전문 인력의 처우 개선과 사업의 질적 심화에 어려움을 겪고 있다. [지원 관련 요약] 교육부는 여성안심 귀갓길 사업의 효과성을 높이고 여성이 안전하게 생활 할 수 있는 환경을 조성하기 위해 학교 밖 청소년들의 무상급식 지원과 관련 하여 추가된 예산이 충분하지 않다는 우려가 제기되어, 여성안심 귀갓길 사 업의 효과성을 높이고 여성이 안전하게 생활할 수 있는 환경을 조성하는 데 에 기여할 것이라 기대된다. [정부 관련 요약] GSOMIA 종료 결정이 한일 양국 간의 외교적 문제를 고려하여 내린 결정이 며 한미동맹과는 별개로 이해되어야 한다는 정부의 공식적인 입장과 함께, 북한의 핵 문제와 관련한 안보 문제에 대한 한미 간의 공조가 GSOMIA 종료 와 무관하게 지속된다는 입장이고, 대비태세도 계속 유지되고 있다고 강조 했다. [경제 관련 요약] 남북한 관계, 국내 산업 및 경제 정책, 정부의 우선순위 설정에 대한 국내 정 치적 논쟁을 반영하고 있는 '패스트트랙' 수사와 '타다' 모빌리티 서비스에 대한 검찰 기소 결정이 주요 논의 대상인 지방의회의 역할은 지방자치제가 발전함에 따라 점차 중요성이 커지고 있다. [지방 관련 요약] 현재 지방의회 의원들에 대한 교육은 체계화되지 않은 상황으로 이에 대한 문제 인식이 공유되고 있으며 지방공무원들처럼 의원들 역시 전문적인 교 육을 받을 필요성이 제기되고 있다. [일반 요약] 통일부는 북한이 제기한 문제를 포함한 금강산 관광 문제에 대한 당국 간 실 무회담 개최를 제의했으나, 북한은 아직 응하지 않고 있어 추가로 남북 간 비 공식 접촉이나 협의를 추진하고 있는 상황이다."
+    },
+    {
+        "slide": 21,
+        "text": "03. 모델링 & 챗봇 구현 최종 요약 선택 구분 키워드 Summary 유사도 최종 요약 OUTPUT"
+    },
+    {
+        "slide": 22,
+        "text": "04. 챗봇 시연 https://youtu.be/pJjwK_lBU84"
+    },
+    {
+        "slide": 23,
+        "text": "05. 결론 및 개선점 딱딱하게 느껴졌던 ‘국회 회의’ → 쉽게 접근 본인의 관심사에 맞는 빠른 탐색 → 정치에 대한 적극적 관심 및 참여 유도 데이터셋의 다양화 → 더 많은 의사록 데이터를 통한 향상 가능성 O"
+    },
+    {
+        "slide": 24,
+        "text": "<참고 문헌> https://chloelab.tistory.com/34 https://lemon27.tistory.com/69 https://velog.io/@jochedda/KeyBERT- %ED%82%A4%EC%9B%8C%EB%93%9C- %EC%B6%94%EC%B6%9CKeyword-extraction https://arxiv.org/pdf/1908.10084 https://github.com/snunlp/KR-SBERT https://www.youtube.com/watch?v=fj1trYPTMA8 https://velog.io/@chaujin00/SBERT- %EB%85%BC%EB%AC%B8%EB%A6%AC%EB%B7%B0"
+    },
+    {
+        "slide": 25,
+        "text": "감사합니다"
+    }
+]
