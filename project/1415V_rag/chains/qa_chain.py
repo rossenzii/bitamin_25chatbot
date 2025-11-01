@@ -14,7 +14,7 @@ def create_hybrid_chain(query=None):
         openai_api_key=OPEN_API_KEY  
         ),
         chain_type="stuff",
-        retriever=get_vector_retriever(query),
+        retriever=get_vector_retriever(),
         chain_type_kwargs={"prompt": prompt}
     )
     
