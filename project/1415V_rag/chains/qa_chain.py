@@ -11,7 +11,7 @@ def create_hybrid_chain(query=None):
         llm=ChatOpenAI(
         model="gpt-3.5-turbo",
         temperature=0,
-        openad_api_key=OPEN_API_KEY  
+        openai_api_key=OPEN_API_KEY  
         ),
         chain_type="stuff",
         retriever=get_vector_retriever(query),
