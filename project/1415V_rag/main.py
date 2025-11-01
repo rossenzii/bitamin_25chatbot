@@ -1,5 +1,5 @@
 import sys, os
-sys.path.qppend(os.path.dirname(__file__))
+sys.path.append(os.path.dirname(__file__))
 from chains.qa_chain import create_hybrid_chain
 
 def main():
