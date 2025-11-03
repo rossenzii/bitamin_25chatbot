@@ -9,8 +9,8 @@ def create_hybrid_chain(query=None):
 
     chain = RetrievalQA.from_chain_type(
         llm=ChatOpenAI(
-        model="gpt-3.5-turbo",
-        temperature=0,
+        model="gpt-4o-mini",
+        temperature=0.5,
         openai_api_key=OPEN_API_KEY  
         ),
         chain_type="stuff",
