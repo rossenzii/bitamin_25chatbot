@@ -9,9 +9,9 @@ def get_vector_retriever():
         embeddings,
         allow_dangerous_deserialization=True
     )
+    # mmr: 질문과 유사하면서 서로 다른 문서 반환 k: 최종 반환 문서, fetch_k: 후보 문서 수, lambda_mult: 유사도 가중치
     retriever = vectorstore.as_retriever(
         search_type="mmr",
-        search_kwargs={"k": 8, "fetch_k": 20, "lambda_mult": 0.7}
+        search_kwargs={"k": 5, "fetch_k": 10, "lambda_mult": 0.7}  # k:5로 증가 (MT 설명+사례 모두 포함)
     )
-    print("[Vector retriever] 로드 완료")
     return retriever, vectorstore

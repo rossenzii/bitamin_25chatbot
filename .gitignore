@@ -4,3 +4,7 @@ member_db/info1516.json
 
 ## env
 .env
+
+rag-env/
+__pycache__/
+.DS_Store
