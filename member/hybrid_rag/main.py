@@ -1,16 +1,29 @@
 import sys, os
 sys.path.append(os.path.dirname(__file__))
-from chains.hybrid_qa_chain import create_hybrid_qa_chain
+try:
+    from chains.hybrid_qa_chain_openai import create_hybrid_qa_chain
+except Exception as e:
+    from chains.hybrid_qa_chain import create_hybrid_qa_chain
+import traceback
+
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+os.environ["OMP_NUM_THREADS"] = "1"
 
 def main():
-    query = "비타민 동아리의 정규 세션 과정에 대해 설명해주세요"
+    query = "비타민의 스터디에 대해 알려줘"
     print(f"질문: {query}\n")
-
-    qa_chain = create_hybrid_qa_chain(query=query)
-    answer = qa_chain.invoke({"query": query})
-
-    print("=== 최종 답변 ===")
-    print(answer["result"])
+    
+    try:
+        qa_chain = create_hybrid_qa_chain(query=query)
+        result = qa_chain.invoke({"query": query})
+        
+        print("답변:")
+        answer = result.get("result", "")
+        print(answer)
+        
+    except Exception as e:
+        print(f"\n오류 발생: {str(e)}")
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()
