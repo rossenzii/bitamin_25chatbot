@@ -1,0 +1,70 @@
+[
+    {
+        "slide": 1,
+        "text": "고용노동부 데이터 기반 MBTI 및 직무 성향을 고려한 커리어 추천 시스템 추천시스템 1조 문예림 박준성 이수민 장민지"
+    },
+    {
+        "slide": 2,
+        "text": "CONTENTS 성격 테스트 기반 프로젝트 배경 목적 데이터 크롤링 직업 만족도 예측 통합 추천 결과 도출 Streamlit 구현 향후 개선 계획"
+    },
+    {
+        "slide": 3,
+        "text": "프로젝트 배경 입 이직자 입이직자수 및 증감률 추이 기준 직장인 내 일 평생직업 아니야 직장인 205명 대상 설문결과 자료제공 잡코리아 입직 이직 159천명 169천명 그렇다 121천명 144천명 NEED 싱용 임시일용 JOB 지금 하는 일 커피 632천명 열매 528천명 평생직업인가 94천명 27천명 아니다 이미 612천명 이러 557천명 118천명 25천명 JOBKOREA 전체 이직률 로 전년 동월 대비 상승 자발적 이직자는 33만 8천명으로 증가"
+    },
+    {
+        "slide": 4,
+        "text": "프로젝트 목적 JOB 개인 맞춤형 직업 추천 개인의 특성 직무의 특성 MBTI 유형 입력과 간단한 설문을 통해 구직자의 성향파악 해당 성향과 높은 직무 만족도를 보이는 직업군 선별 실제 채용공고를 바탕으로사용자에게 직무 추천"
+    },
+    {
+        "slide": 5,
+        "text": "데이터 크롤링 A B C idx MBTI 특징 ESFP 자유로운영혼의 연예인 코미디언 의상 디자이너 일러스트레이터 애니메이터 여행 상품 기획자 ENFP 재기발랄한활동가 크리에이티브 디렉터 디자이너 고용24 채용정보 취업지원 실업급여 직업 능력 개발 출산휴가 육아휴직 Q 검색 전체메뉴 ENFJ 정의로운사회운동가 아나운서 리포터 방송 MC 언어 INFP 열정적인 중재자 예술가 소설가 시인 음악가 미를 INFJ 선의의 용호자 직업상담사 특수 교사 노인 복지 일자리 찾기 ENTP 논쟁을 즐기는 변론가 발명가 벤처 사업가 에이전트 비 채용정보 상세검색 검색어 범위 전체 제목 회사명 직무내용 역세권명 ENTJ 대담한 통솔자 경영 컨설턴트 공인 중개사 관리 직종별 INTP 논리적인사색가 경제학자 심리학자 경찰 프로그 지역별 검색어 여러단어를 입력하실 때는 띄어쓰기 AND I OR 연산자를 이용하여 더욱 세밀하게 검색 가능합니다 X INTJ 용의주도한전략가 분석가 회계사 인류학자 파일럿 테마별 ESTJ 엄격한 관리자 감독관 예산 분석가 은행장 정책 채용 캘린더 제외 검색어 검색결과에서 제외할 의료법인 영덕의료재단 9월급 만원 만원 ESFJ 사교적인 외교관 홍보 책임자 호텔 지배인 마케팅 4차산업혁명 채용관 ISTJ 청렴결백한논리주의자 통계학자 바이어 기상학자 법률 경력5년 학력무관 직종 e 채용마당 직종선택 간호사 모집합니다 ISFJ 용감한수호자 행정 보조원 인사 관리자 신용신 r 주5일 주 40시간 근로 통합기업정보 ESTP 모험을 즐기는 사업가 경찰관 소방관 군 장교 펀드 매L 지역 고용24 고용24 입사지원 가능 Q 지역별 역세권 해외취업 경상북도 영덕군 영덕읍 ISTP 만능 재주끼 파일럿 카레이서 범죄학자 사진 내 주변 채용정보 ISFP 호기심 많은 예술가 보석 세공사 음향 디자이너 만화 경력 전체 신입 구직신청 노인요양원 율 급급 만원 만원 고용24 입사지원 고용24 입사지원 가 경 경력무관 학력무관 채용행사 MBTI 별추천 직업 노인요양원 율 노인요양시설 간호사 추가 구인 주5일 주 40시간 근로 강소기업 검색조건 1건 상용직 x 고용24 고용24 입사지원 가능 잡코리아 사이트참고 insight global 강원특별자치도 강릉시 유산골길 G 초기화 금 맞춤정보 저장 맞춤정보 불 효산재활주간보호센터 월급 만원 만원 고용24 채용 공고크롤링 진행 경 력력1년 학력무관 주간보호센터 간호사 및 간호조무사 모집합니다 r 주5일 주 40시간 근로 직업 명 검색 고용24 고용24 입사지원 가능 인천광역시 서구 건지로"
+    },
+    {
+        "slide": 6,
+        "text": "데이터 크롤링 page while True print f job 페이지 page 수집 중 공고 목록 추출 selenium 사용 posts driver find elements By CSS SELECTOR a t3 sb underl ine hover if not posts 직업 별공고제목 사이트크롤링 print 더 이상 게시물이 없습니다 break for post in posts MBTI 특징 직업 공고제목 title post text strip ESFP 자유로운 영혼의 연예인 인테리어 디자이너 한샘대리점 소속 인테리어 디자이너 모집합니다 https www work24 g0 kr M href post get attribute href ESFP 자유로운 영혼의 연예인 인테리어 디자이너 경력직 실내 인테리어 디자이너 모집 채용 광명고용센터 채용 대행 https www work24 go kr M if href and empDetailAuthView in href ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어 디자이너 모집합니다 https www work24go kr M results append ESFP 자유로운 영혼의 연예인 인테리어 디자이너 미술전공 스케치업 포토샵 인테리어디자이너 https www work24go kr M 직업 job ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어 디자이너 모집 경력직 https www work24go kr M 제목 title ESFP 자유로운 영혼의 연예인 인테리어 디자이너 일자리매칭플랫폼 3D 디자이너 신입 경력 모집 인테리어디자인 https www work24 g0 kr m 상세링크 href ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어 디자이너 모집 5년이상 https www work24go kr M ESFP 자유로운 영혼의 연예인 인테리어디자이너 건축설계 및 인테리어 디자이너 https www work24 g0 kr m ESFP 자유로운 영혼의 연예인 인테리어 디자이너 주 비투디자인그룹 F B 상업공간 프렌차이즈 인테리어 디자이너 https www work24 g0 kr m print f title href ESFP 자유로운 영혼의 연예인 인테리어디자이너 인테리어디자이너 경력 정규직 채용 https www work24 g0 kr m 다음 페이지 버튼 찾기 ESFP 자유로운 영혼의 연예인 인테리어 디자이너 주 어울림디자인 가구 실내인테리어 디자이너 채용 https www work24go kr M try ESFP 자유로운 영혼의 연예인 인테리어 디자이너 실내 인테리어 시공 현장 공무및 감리 디자이너 https www work24 go kr m current page driver find element By CSS SELECTOR button class active text ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어 디자이너 채용 https www work24go kr w next page str int current page ESFP 자유로운 영혼의 연예인 인테리어 디자이너 실내인테리어 디자이너 경력3년 채용합니다 https www work24 go kT M ESFP 자유로운 영혼의 연예인 인테리어 디자이너 실내건축 인테리어 디자이너 모집 https www work24go kr M next btn WebDriverWait driver until ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어 디자이너 기술자 구합니다 https www work24 go kT M EC element to be clickable By XPATH f button text next page ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어디자이너 채용 https www work24go kr M ESFP 자유로운 영혼의 연예인 인테리어디자이너 인테리어 디자이너 채용 https www work24 go kT M ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어디자이너 https www work24 go kT M driver execute scrip t arguments cli ck next btn ESFP 자유로운 영혼의 연예인 인테리어 디자이너 한샘리하우스 제주 홈인테리어 디자이너 RD 채용 공고 https www work24 go kr M page ESFP 자유로운 영혼의 연예인 인테리어디자이너 유트랙플랜 인테리어 디자이너 경력직 및 현장관리직 신입 경력 https www work24 go kT M time sleep ESFP 자유로운 영혼의 연예인 인테리어 디자이너 강소기업 주식회사 삼마 실내건축 인테리어 3D설계 디자이너 경력 https www work24 go kr M except ESFP 자유로운 영혼의 연예인 인테리어디자이너 주거 인테리어 디자이너 RM https www work24 go kr M print 다음 페이지 없음 종료 ESFP 자유로운 영혼의 연예인 인테리어 디자이너 아비드디자인 실내인테리어 디자이너 채용 https www work24 go kr M break ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어디자이너 모집 서울본사 https www work24go kr M driver quit ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어 디자이너 및 시공 경력자 모집 https www work24 go kr m 저장 ESFP 자유로운 영혼의 연예인 인테리어 디자이너 인테리어 디자이너 설계 채용 https www work24go kr M ESFP 자유로운 영혼의 연예인 브랜드 매니저 뷰티브랜드 ROVE 상품기획 BM 매니저 https www work24 g0 kr m df pd DataFrame results ESFP 자유로운 영혼의 연예인 브랜드 매니저 ROVE 뷰티 브랜드 콘텐츠 마케팅 매니저 https www work24 go kr v print n저장 완료 직업별 공고 전체링크 xlsx ESFP 자유로운 영혼의 연예인 브랜드 매니저 틸아이다이 신세계강남 여성 디자이너 브랜드 부매니저 채용 https www work24go kr M ESFP 자유로운 영혼의 연예인 브랜드 매니저 Cote 반려동물 브랜드 매니저 리더급 https www work24 go kr v ESFP 자유로운 영혼의 연예인 브랜드 매니저 테누이 브랜드 매니저 BM https www work24 go kr v ESFP 자유로운 영혼의 연예인 브랜드 매니저 JKND 테누이 브랜드매니저 BM 채용 https www work24go kr M 일러스트레이터 검색 중 ESFP 자유로운 영혼의 연예인 브랜드 매니저 브랜드 운영 매니저 팀원급 https www work24go kr M 일러스트레이터 페이지 수집 중 경력 디자인 관련 총괄 업무 정수과제 수행 및 수출바우처 중소 https www work24 go kr wk a b empDetailAuthView do wantedAuthNo K1711125 콘텐츠제작팀 웹툰 채색 담당자 채용 경력 1년 이상 https www work24 gjo kr wk a b empDetailAuthView do7wantedAuthNo infoTypeCd 강남 연구소 우수인재 모집 기획 기구 전자 인증 지원 https www work24 go kr wk a b empDetailAuthView do waintedAuthNo info 번동보호작업장 직원 생산및판매기사 채용 재공고 https www work24 go kr wk a b empDetailAuthView do wantedAuthNo K120572505020008 infoTyp 디지털인쇄기계 조작원모집 https www work24 go kr wk a b empDetailAuthView do wantedAuthNo K151422505020021 infoTypeCd VALIDATION in"
+    },
+    {
+        "slide": 7,
+        "text": "성격 테스트기반직업 만족도 예측 성격유형과 직업 만족도 간의 상관관계 수치화 과정 직업명 만족도항목 성격요인 회귀계수 3D 프린팅모델러 bq12 sq1 3D 프린팅모델러 bq12 sq2 3D 프린팅모델러 bq12 sq3 3D 프린팅모델러 bq12 sq4 3D 프린팅모델러 bq12 sq5 성격유형 직무만족도회귀계수 직업별 성격유형 하이브리드값 직업명 만족도항목 성격요인 특성중요도 회귀계수 특성중요도 X 3D 프린팅모델러 bq12 sq1 3D 프린팅모델러 bq12 sq2 3D 프린팅모델러 bq12 sq3 3D 프린팅모델러 bq12 sq4 한국직업정보 재직자조사 3D 프린팅모델러 bq12 sq5 성격유형 직무만족도특성중요도"
+    },
+    {
+        "slide": 8,
+        "text": "성격 테스트기반직업 만족도 예측 성격유형 테스트 실시 Q1 프로젝트 마감까지 시간이 부족할 때 A 어떻게든 끝내기 위해 야근도 마다하지 않는다 B 적당히 선에서 마무리하고 다음 기회를 준비한다 예상 직업만족도 하이브리드 값1 x성격테스트 점수1 하이브리드값2x 성격테스트 점수2 Q2 업무 중 오류를 발견했을 때 하이브리드 값16 X 성격테스트 점수16 A 문제 해결을 위해 끝까지 수정하고 다시 제출한다 B 어느 정도 고치고 이후 피드백을 기다린다 최종적으로 직업별 예상 직업만족도 계산 후가장 만족도가 높을 것 으로 예상되는 직업 추천"
+    },
+    {
+        "slide": 9,
+        "text": "통합 추천 결과 도출 직업 후보 공고 문장 공고 문장 공고별 추천 결과 직무 설명 매핑 생성 임베딩 벡터화 유사도 계산 추출 생성 job list job desc job list job apply lambda X f x 직무는 어떤 업무를 수행하는가 unique roles job crawling 직업 unique role embeds sbert encode unique roles convert to tensor True job embeds sbert encode job list job deSC tolist convert to tensor True 후보 매핑 top k auto mapping auto mapping 간호사 간호조무사 의료보조원 임상코디네이터 보건교사 응급구조사"
+    },
+    {
+        "slide": 10,
+        "text": "통합 추천 결과 도출 직업 후보 공고 문장 공고 문장 공고별 추천 결과 직무 설명 생성 매핑 생성 임베딩 벡터화 유사도 계산 추출 job crawling text job crawling apply lambda f 채용공고는 row 직업 직무와 관련된 것으로 row 공고 제목은 row 공고제목 입니다 axis crawling texts job crawling text tolist crawling sbert embeds sbert encode crawling texts convert to tensor True crawling tfidf tfidf vectorizer fit transform crawling texts"
+    },
+    {
+        "slide": 11,
+        "text": "통합 추천 결과 도출 직업 후보 공고 문장 공고 문장 공고별 추천 결과 직무 설명 생성 매핑 생성 임베딩 벡터화 유사도 계산 추출 top1 list top2 list top3 list 후보 직무 임베딩 candidate sbert sbert encode candidate jobs convert to tensor True cpu candidate tfidf tfidf vectorizer transfor m candidate jobs for i row in enumerate jobcrawling itert uples index alse 공고 벡터 추출 유사도 계산 embed sbert crawling sbert embeds i unsqueeze cpu sbert sim cosine similarity embed sbert candidate sbert tfidf tfidf sim cosine similarity embed tfidf candidate tfidf embed crawling tfidf i final sim sbert sim tfidf sim 후보 직무 불러오기 상위 3개 직무 추출 candidate jobs auto mapping get row 직업 final sim argsort top idx if not candidate jobs top jobs candidate jobs j for j in top idx top1 list append None 결과 저장 top2 list appendl None top1 list append top jobs top3 list append None top2 list append top jobs top3 list append top jobs continue"
+    },
+    {
+        "slide": 12,
+        "text": "통합 추천 결과 도출 직업후보 공고 문장 공고 문장 공고별 추천 결과 직무 설명 생성 매핑 생성 임베딩 벡터화 유사도 계산 추출 list job crawling top1 top1 job crawling top2 top2 list list job crawling top3 top3 job crawling9 job crawling job crawling9 직업 공고제목 top1 top2 top3 직업 공고제목 top1 top2 top3 간호사 야간 응급실 간호사 모집 간호조무사 임상코디네이터 응급구조사 디자이너 UI UX 디자이너 채용 웹디자이너 UX기획자 제품디자이너"
+    },
+    {
+        "slide": 13,
+        "text": "통합 추천 결과 도출 직업 후보 공고 문장 공고 문장 공고별 추천 결과 직무 설명 생성 매핑 생성 임베딩 벡터화 유사도 계산 추출 공고제목 링크 top1 top2 top3 진주에서 20분 하동북천 암요양병원 주간간 https www work24 go kr wk a b empDetailAthView do wantedeuAthNo K13146250 간호사 간호조무사 내과의사 간호사 모집합니다 https www work24 go kr wk a b 1500empDetailAuthView do wantedAuthNo K15162250간호사 간호조무사 이비인후과의사 KB골든라이프케어 평창 카운티 간호사 채용 https www work24 go kr wk a b empDetailAithView do wanteclAuthNo K12012250 간호사 간호조무사 이비인후과의사 서울 은평구 방문 간호사 채용 유연근무가능https www work24 go kr wk a b empDetailAuthView do wantedAuthNo 505284478간호사 간호조무사 이비인후과의사 모아산부인과병원 분만실 신생아실 간호사 https www wcrk24 go kr wk a b empDetailAuthView do wantedAuthNo KF101 간호사 간호조무사 이비인후과의사 우리사랑요양원 간호사를 모집합니다 https www work24 go kr wk a b empDetailAuthView do wartedAuthNo K15158250 간호사 간호조무사 이비인후과의사 수액실 간호사 추가모집 월15 16일 근무 https www work24 go kr wk a b empDetailAthView do wantedAuthNo 간호사 간호조무사 이비인후과의사 정신건강의학과3교대 간호사 모집합니다 https www work24 go kr wk a b empDetailAithView do wantedAuthNo K16001250 간호사 이비인후과의간호조무사 수술실 간호사 모집합니다 https www work24 go kr wk a b empDetailAithView do wantedAuthNo K13141 간호사 간호조무사 이비인후과의사 간호사 2명 채용 https www work24 go kr wk a b empDetailAuithView do wantedAuthNo KF1086250 간호사 간호조무사 이비인후과의사 요양병원 간호사 D E 모집합니다 https www work24 go kr wk a b empDetailAuthView do wantedAuthNo K13121250 간호사 간호조무사 이비인후과의사 병동간호사 Ekeep 채용 https www work24 go kr wk a b empDetailAthView do wantedeuthNo 간호사 간호조무사 이비인후과의사 수술실어시스트 간호사 구인 https www work24 go kr wk a b empDetailAut hView do wantedAuthNo 간호사 간호조무사 이비인후과의사 간호사 모집합니다 https www work24 go kr wk a b empDetailAuthView do wantedAuthNo K16122250 간호사 간호조무사 이비인후과의사"
+    },
+    {
+        "slide": 14,
+        "text": "Streamlit 구현 MBTI 및 직무 성향을 고려한 커리어 제안 EXPLORER main py TEST EXPLORER main py import streamlit as st STREAMLIT from survey questions import questions cat pycache from scoring import calculate scores 만족도 추천모델 ipynb from mbti input import get user mbti 직업별 하이브리드3 xlsx from ui import get user answers XI 채용공고40 직종매칭 xxsx from job recom2 import calculate job satisf from job posting import search job postings 한국직업정보 KNOW 재 import pandas as pd bg4 jpg MBTI를 입력해주세요 job posting py 파일 구조 job recom2 py file path 직업별 하이브리드3 xlsx MBTI는 성격을 기반으로 직업을 추천하는 데 사용됩니다 mbti file mbti job xlsx main py 에너지 방향 인식 방식 판단 기준 생활 양식 mbti input py try S F mbti job xlsx MBTI를 입력해주세요 job df pd read excel file path engin requirements txt mbti df pd read excel mbti file engi 당신의 MBTI는 ISFJ 입니다 MBTI는 성격을 기반으로 직업을 추천하는 데 사용됩니다 scoring py except Exception S e 각 질문에 대해 본인의 성향에 가까운 답변을 선택하세요 st error f X 파일 로딩 실패 e survey questions py st stop ui py Q1 프로젝트 마감까지 시간이 부족할 때 A 어떻게든 끝내기 위해 야근도 마다하지 않는다 ui 환경 B 적당히 선에서 마무리하고 다음 기회를 준비한다 PROBLEMS OUTPUT DEBUG CONSOLE TERMINAL PORTS Q2 업무중 오류를 발견했을 때 A 문제 해결을 위해 끝까지 수정하고 다시 제출한다 base jangminji jangminjiui MacBookAir streamlit B 어느 정도 고치고 이후 피드백을 기다린다 Q3 어려운 과제에 계속 실패할 때 A 실패해도 계속 시도하며 포기하지 않는다 B 어느 정도 해보다가 다른 방법을 찾는다 Q4 팀 프로젝트에서 갈등이 생겨 힘들다면 A 목표를 위해 감정을 억누르고 끝까지 함께한다"
+    },
+    {
+        "slide": 15,
+        "text": "Streamlit 구현 Q31 복잡한 업무를 맡았을 때 산업 전기공 항공기 선박 철도기관차 전동차 전기공 관련 공고 보기 A 체계적으로 원인을 분석하고 접근한다 장애인만채용 부품재고 관리 제품 라벨링 및 소형빅스 포장 B 우선 처리하며 나중에 정리한다 Q32 업무 중 예상치 못한 문제가 발생했을 때 스타트업 신재생에너지 배터리 태양광 제조 및 설치 업무 적입자 A 문제의 원인을 구조적으로 접근한다 경기 남양주 경기동북권사업소 병역휴직 대체 기간제근로자 전기 B 직관이나 경험에 따라 빠르게 대응한다 3톤 트럭 운전기사직 모집 제출하기 현대삼호중공업 내 페인트 등 자재 운전기사 1t 모집 설문이 성공적으로 제출되었습니다 부산청 도로교통정보센터 전산팀 팀원 채용 상위 3개 직업 관련 채용 공고 플랜트기계공학기술자 관련 공고보기 관련 공고가 없습니다 금융자산운용가 관련 공고 보기 산업 전기공 항공기 선박 철도기관차 전동차 전기공 관련 공고 보기 주 카스 회계팀 원가 세무 재무회계 담당자 채용 장애인만채용 부품 재고 관리 제품 라벨링 및소형 박스 포장 재무회계 담당자 스타트업 신재생에너지 배터리 태양광 제조 및 설치 업무 적입자 재무 담당자 수익 담당 경기 남양주 경기동북권사업소 병역휴직 대체 기간제근로자 전기"
+    },
+    {
+        "slide": 16,
+        "text": "향후개선 계획 본인의 성격 및 업무 성향에 조직에 적합한 인재 선별 용이 맞는 직무 추천 업무 성향 기반 채용으로 채용공고와 실시간 연계 조기 퇴시율 감소 구직자 구인자 탐색 가능 채용 효율성 증대 실증 기반의 정책 설계 가능 워크넷 고용24등 플랫폼 연계로 정부 개선할점 채용공고데이터가 자주 바뀌는 만큼 실질적 활용가능 고용노동부 실시간 크롤링 처리 구조 구축 필요 고용복지 통합서비스의 신뢰성과 정합 고령층 비전공자 저학력 구직자 등 성향상 도 고려 다양한 정책성과 평가지표 확보가능"
+    },
+    {
+        "slide": 17,
+        "text": "감사합니다 추천시스템 1조 문예림 박준성 이수민 장민지"
+    }
+]
