@@ -55,7 +55,7 @@ def get_hybrid_retriever(query: str = None):
         elif topic == "curriculum":
             weights = [0.3, 0.7]
         elif topic == "activity":
-            weights = [0.1, 0.9]
+            weights = [0.4, 0.6]
         else:
             weights = [0.5, 0.5]
 
@@ -66,5 +66,5 @@ def get_hybrid_retriever(query: str = None):
     
     for r in hybrid_retriever.retrievers:
         if hasattr(r, "search_kwargs"):
-            r.search_kwargs["k"] = 5  # 문서 5개로 증가 (MT 설명+사례 모두 포함)
+            r.search_kwargs["k"] =50  # 문서 5개로 증가 (MT 설명+사례 모두 포함)
     return hybrid_retriever
