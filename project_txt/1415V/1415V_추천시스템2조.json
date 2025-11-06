@@ -1,150 +1,224 @@
 [
     {
         "slide": 1,
-        "text": "성분 기반 올인원 스킨케어 추천시스템 BEAUTYmin 추천시스템 2조 강인혁, 곽명수, 박시현, 박준영, 박지원 2025 Winter Conference"
+        "text": "성분 기반 올인원 스킨케어 추천시스템 BEAUTYmin 추천시스템 2조 강인혁, 곽명수, 박시현, 박준영, 박지원 2025 Winter Conference",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 2,
-        "text": "목차 프로젝트 배경 및 목적 데이터 수집 데이터 전처리 질문지 구성 및 속성정의 성분 효능 Mapping 성분 벡터 scailing 추천시스템 구현 시연 영상 결론&기대효과 및 한계"
+        "text": "목차 프로젝트 배경 및 목적 데이터 수집 데이터 전처리 질문지 구성 및 속성정의 성분 효능 Mapping 성분 벡터 scailing 추천시스템 구현 시연 영상 결론&기대효과 및 한계",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 3,
-        "text": "1. 프로젝트 배경 및 목적 자기 관리의 시대 최근 자기 관리에 대한 관심이 커지며 자연스레 피부 관리 또한 주목 받고 있다. 하지만 자기 자신과 딱 맞는 올바른 화장품을 선택하는 것은 매우 어렵다."
+        "text": "1. 프로젝트 배경 및 목적 자기 관리의 시대 최근 자기 관리에 대한 관심이 커지며 자연스레 피부 관리 또한 주목 받고 있다. 하지만 자기 자신과 딱 맞는 올바른 화장품을 선택하는 것은 매우 어렵다.",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 4,
-        "text": "1. 프로젝트 배경 및 목적 자기 관리의 시대 최근 자기 관리에 대한 관심이 커지며 자연스레 피부 관리 또한 주목 받고 있다. 하지만 자기 자신과 딱 맞는 올바른 화장품을 선택하는 것은 매우 어렵다. 2022년 기준 화장품 판매 업체만 28,015개 총 화장품 개수는 최소 10만개 이상"
+        "text": "1. 프로젝트 배경 및 목적 자기 관리의 시대 최근 자기 관리에 대한 관심이 커지며 자연스레 피부 관리 또한 주목 받고 있다. 하지만 자기 자신과 딱 맞는 올바른 화장품을 선택하는 것은 매우 어렵다. 2022년 기준 화장품 판매 업체만 28,015개 총 화장품 개수는 최소 10만개 이상",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 5,
-        "text": "1. 프로젝트 배경 및 목적 불확실한 자신의 피부 타입 복잡한 화장품 성분 헷갈리는 화장품의 역할 매우 다양한 화장품 브랜드 제품의 성분과 조합을 고려한 스킨케어 추천 시스템 구현 BEAUTYmin은 사용자 피부 정보와 스킨케어 제품의 화학 성분을 기반으로 개인화된 All-in-One 스킨케어 솔루션을 제공!!"
+        "text": "1. 프로젝트 배경 및 목적 불확실한 자신의 피부 타입 복잡한 화장품 성분 헷갈리는 화장품의 역할 매우 다양한 화장품 브랜드 제품의 성분과 조합을 고려한 스킨케어 추천 시스템 구현 BEAUTYmin은 사용자 피부 정보와 스킨케어 제품의 화학 성분을 기반으로 개인화된 All-in-One 스킨케어 솔루션을 제공!!",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 6,
-        "text": "2. 데이터 수집 화해 화장품 리뷰, 랭킹, 성분표를 제공해주는 어플 카테고리별 분류가 잘되어 있음 묶음 상품이 아닌 단품 데이터 수집 용이"
+        "text": "2. 데이터 수집 화해 화장품 리뷰, 랭킹, 성분표를 제공해주는 어플 카테고리별 분류가 잘되어 있음 묶음 상품이 아닌 단품 데이터 수집 용이",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 7,
-        "text": "2. 데이터 수집 크롤링할 화장품 종류 구체화 카테고리별 랭킹 기준 데이터 크롤링 추가 데이터 수집을 위한 동적 페이지 이동 존재하지 않는 상세성분 정보 삭제 부가적인 상품명 정보 삭제 제품별 고유한 링크를 기준으로 데이터 정리"
+        "text": "2. 데이터 수집 크롤링할 화장품 종류 구체화 카테고리별 랭킹 기준 데이터 크롤링 추가 데이터 수집을 위한 동적 페이지 이동 존재하지 않는 상세성분 정보 삭제 부가적인 상품명 정보 삭제 제품별 고유한 링크를 기준으로 데이터 정리",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 8,
-        "text": "2. 데이터 수집: 시연 영상"
+        "text": "2. 데이터 수집: 시연 영상",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 9,
-        "text": "3. 질문지 구성 및 속성정의 Leslie Baumann Baumann Skin Type  Indicator Why Baumann Skin Type Indicator? 1) Baumann Indicator는 다양하고 적절한 피부 타입에 대한 질문을 포함 2) 피부과학 교과서에서도 인용될 만큼 널리 받아들여져서 사용되고 있음 "
+        "text": "3. 질문지 구성 및 속성정의 Leslie Baumann Baumann Skin Type  Indicator Why Baumann Skin Type Indicator? 1) Baumann Indicator는 다양하고 적절한 피부 타입에 대한 질문을 포함 2) 피부과학 교과서에서도 인용될 만큼 널리 받아들여져서 사용되고 있음 ",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 10,
-        "text": "3. 질문지 구성 및 속성정의 논문에서 발췌한 바우만 피부 타입 설문지"
+        "text": "3. 질문지 구성 및 속성정의 논문에서 발췌한 바우만 피부 타입 설문지",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 11,
-        "text": "3. 질문지 구성 및 속성정의 모공 각질 브라이트닝 안티에이징 수분 보습 진정 트러블 모공 & 각질 수분 & 보습 진정 & 트러블 안티에이징 브라이트닝"
+        "text": "3. 질문지 구성 및 속성정의 모공 각질 브라이트닝 안티에이징 수분 보습 진정 트러블 모공 & 각질 수분 & 보습 진정 & 트러블 안티에이징 브라이트닝",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 12,
-        "text": "3. 질문지 구성 및 속성정의 건성 피부 지성 피부 민감성 피부 질문 만든 방법 화장품 전문가 정체성 부여 논문 속 바우먼 테스트 수정본 학습 5가지 카테고리 별 질문 2개씩 생성"
+        "text": "3. 질문지 구성 및 속성정의 건성 피부 지성 피부 민감성 피부 질문 만든 방법 화장품 전문가 정체성 부여 논문 속 바우먼 테스트 수정본 학습 5가지 카테고리 별 질문 2개씩 생성",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 13,
-        "text": "4. 성분 효능 Mapping Skin/Toner & Lotion/Cream Common(50%) Ingredients Category.1 Category.2 Category.3 글리세린, 나이아신아마이드, 정제수, 1,2-헥산다이올 등 40여가지 성분들"
+        "text": "4. 성분 효능 Mapping Skin/Toner & Lotion/Cream Common(50%) Ingredients Category.1 Category.2 Category.3 글리세린, 나이아신아마이드, 정제수, 1,2-헥산다이올 등 40여가지 성분들",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 14,
-        "text": "4. 성분 효능 Mapping INCIDecoder"
+        "text": "4. 성분 효능 Mapping INCIDecoder",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 15,
-        "text": "4. 성분 효능 Mapping 글리세린(Glycerin) It’s a so-called humectant type of moisturiser meaning that it helps our skin to cling onto water. A 2005 study has shown that glycerin levels correlate with skin hydration levels, “more Glycerin means better hydrated skin” 글리세린(Glycerin) 수분 / 보습 나이아신아마이드(Niacinamide) Great anti-aging, wrinkle smoothing ingredient used at 4-5% concentration. Anti-aging, wrinkle-smoothing properties, “ Skin-lightening properties ” 나이아신아마이드(Niacinamide) 브라이트닝"
+        "text": "4. 성분 효능 Mapping 글리세린(Glycerin) It’s a so-called humectant type of moisturiser meaning that it helps our skin to cling onto water. A 2005 study has shown that glycerin levels correlate with skin hydration levels, “more Glycerin means better hydrated skin” 글리세린(Glycerin) 수분 / 보습 나이아신아마이드(Niacinamide) Great anti-aging, wrinkle smoothing ingredient used at 4-5% concentration. Anti-aging, wrinkle-smoothing properties, “ Skin-lightening properties ” 나이아신아마이드(Niacinamide) 브라이트닝",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 16,
-        "text": "4. 성분 효능 Mapping 주성분 제외 나머지 부성분은 논문 & 학습자료로 학습 + 프롬프트 엔지니어링이 적용된 GPT을 통해 mapping"
+        "text": "4. 성분 효능 Mapping 주성분 제외 나머지 부성분은 논문 & 학습자료로 학습 + 프롬프트 엔지니어링이 적용된 GPT을 통해 mapping",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 17,
-        "text": "4. 성분 효능 Mapping 그 외 성분들 900여가지 맵핑 + 공통 성분 맵핑 참고자료"
+        "text": "4. 성분 효능 Mapping 그 외 성분들 900여가지 맵핑 + 공통 성분 맵핑 참고자료",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 18,
-        "text": "4. 성분 효능 Mapping Ingredients A {정제수, 1,2-헥산 다이올, 야생딸기 추출물,,,} B {정제수, 프룩토오스, 멘틀, 소듐시트레이트,,,} C {정제수, 판테놀, 프로판다이올, 글리세린,,,} D {1,2-헥산 다이올, 나이아신아마이드, 글리세린,,,} Skin/Toner와 Lotion/Cream에서 성분 추출 모공 & 각질 정제수 : a 1,2-헥산 다이올 : b 글리세린 : c 판테놀 : d 프로판다이올 : e 카보머 : f 수분 & 보습 정제수 : a’ 1,2-헥산 다이올 : b’ 글리세린 : c’ 아데노신 : d’ 나이아신아마이드 : e’ 알란토인 : f’ 각 카테고리별 성분 개수 파악"
+        "text": "4. 성분 효능 Mapping Ingredients A {정제수, 1,2-헥산 다이올, 야생딸기 추출물,,,} B {정제수, 프룩토오스, 멘틀, 소듐시트레이트,,,} C {정제수, 판테놀, 프로판다이올, 글리세린,,,} D {1,2-헥산 다이올, 나이아신아마이드, 글리세린,,,} Skin/Toner와 Lotion/Cream에서 성분 추출 모공 & 각질 정제수 : a 1,2-헥산 다이올 : b 글리세린 : c 판테놀 : d 프로판다이올 : e 카보머 : f 수분 & 보습 정제수 : a’ 1,2-헥산 다이올 : b’ 글리세린 : c’ 아데노신 : d’ 나이아신아마이드 : e’ 알란토인 : f’ 각 카테고리별 성분 개수 파악",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 19,
-        "text": "5. 성분 벡터 Scaling 효능별 상세 성분 매핑 정리된 5가지 효능에 따라 상세성분 매핑 Product A - {정제수, 옥시딘, ...} Product A - {수분/보습 : 15, 진정/트러블 : 8, ...} 특정 효능이 매우 높은 비율을 차지하는 문제 발생"
+        "text": "5. 성분 벡터 Scaling 효능별 상세 성분 매핑 정리된 5가지 효능에 따라 상세성분 매핑 Product A - {정제수, 옥시딘, ...} Product A - {수분/보습 : 15, 진정/트러블 : 8, ...} 특정 효능이 매우 높은 비율을 차지하는 문제 발생",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 20,
-        "text": "5. 성분 벡터 Scaling 일반적인 화장품 성분 비율 추정 화장품이 가지고 있는 전반적인 효능비 계산 성분 벡터에 효능비의 역수를 곱하여 비율 조정 vector General ratio"
+        "text": "5. 성분 벡터 Scaling 일반적인 화장품 성분 비율 추정 화장품이 가지고 있는 전반적인 효능비 계산 성분 벡터에 효능비의 역수를 곱하여 비율 조정 vector General ratio",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 21,
-        "text": "5. 성분 벡터 Scaling General Ratio 43.4% 수분/보습 26.8% 진정/트러블 16.6% 브라이트닝 2.9% 모공/각질 10.1% 안티에이징 최종 효능별 상세 성분 매핑 정리된 5가지 효능에 따라 상세성분 매핑 Product A - {정제수, 옥시딘, ...} Product A - {수분/보습 : 15, 진정/트러블 : 8, ...} Product A - {수분/보습 : 15/0.43, 진정/트러블 : 8/0.26, ...} 이후 벡터 합 1이 되도록 정규화 Product A {수분/보습 : 0.24, 진정/트러블 : 0.16, ...}"
+        "text": "5. 성분 벡터 Scaling General Ratio 43.4% 수분/보습 26.8% 진정/트러블 16.6% 브라이트닝 2.9% 모공/각질 10.1% 안티에이징 최종 효능별 상세 성분 매핑 정리된 5가지 효능에 따라 상세성분 매핑 Product A - {정제수, 옥시딘, ...} Product A - {수분/보습 : 15, 진정/트러블 : 8, ...} Product A - {수분/보습 : 15/0.43, 진정/트러블 : 8/0.26, ...} 이후 벡터 합 1이 되도록 정규화 Product A {수분/보습 : 0.24, 진정/트러블 : 0.16, ...}",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 22,
-        "text": "6. 추천시스템 구현 Recommendation Framework User Vector Hybrid Cosine Similarity Euclidean Distance Skin Ingredients vector CREATE!! Skin Recommendation UPDATE!! Skin Vector & Weight Vector Updated User Vector"
+        "text": "6. 추천시스템 구현 Recommendation Framework User Vector Hybrid Cosine Similarity Euclidean Distance Skin Ingredients vector CREATE!! Skin Recommendation UPDATE!! Skin Vector & Weight Vector Updated User Vector",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 23,
-        "text": "6. 추천시스템 구현 Recommendation Framework Updated User Vector Hybrid Cosine Similarity Euclidean Distance Lotion Recommendation CREATE!! Lotion Ingredients vector"
+        "text": "6. 추천시스템 구현 Recommendation Framework Updated User Vector Hybrid Cosine Similarity Euclidean Distance Lotion Recommendation CREATE!! Lotion Ingredients vector",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 24,
-        "text": "6. 추천시스템 구현 Step 0. Two Types of Vector for Recommendation User Vector 5가지 카테고리별 2가지 질문의 응답에 대한 벡터 전체 응답의 총점으로 나누어 최종 응답 벡터 생성 방향 정보 뿐만 아니라 응답의 강도까지 추천에 고려 수분/보습 진정/트러블 모공/각질 안티에이징 브라이트닝 Ingredients Vector Skin/Toner, Lotion/Cream 2가지 종류의 벡터 존재하는 성분 중 일반적인 성분은 제거 각각의 성분별 해당하는 효능과 매핑 매핑된 효능 벡터에 전체 배합 비율의 역수 곱 수분/보습 진정/트러블 모공/각질 안티에이징 브라이트닝"
+        "text": "6. 추천시스템 구현 Step 0. Two Types of Vector for Recommendation User Vector 5가지 카테고리별 2가지 질문의 응답에 대한 벡터 전체 응답의 총점으로 나누어 최종 응답 벡터 생성 방향 정보 뿐만 아니라 응답의 강도까지 추천에 고려 수분/보습 진정/트러블 모공/각질 안티에이징 브라이트닝 Ingredients Vector Skin/Toner, Lotion/Cream 2가지 종류의 벡터 존재하는 성분 중 일반적인 성분은 제거 각각의 성분별 해당하는 효능과 매핑 매핑된 효능 벡터에 전체 배합 비율의 역수 곱 수분/보습 진정/트러블 모공/각질 안티에이징 브라이트닝",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 25,
-        "text": "6. 추천시스템 구현 Step 1. Skin Recommendation based on User Vector User Vector Hybrid Cosine Similarity Euclidean Distance Skin Ingredients vector CREATE!! Skin Recommendation"
+        "text": "6. 추천시스템 구현 Step 1. Skin Recommendation based on User Vector User Vector Hybrid Cosine Similarity Euclidean Distance Skin Ingredients vector CREATE!! Skin Recommendation",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 26,
-        "text": "6. 추천시스템 구현 Step 1-1. User Vector Scaling User A - {수분/보습, 진정/트러블,브라이트닝,모공/각질, 안티에이징} 각 질문 답변점수 -1 후 산술평균 User A - {3,2,2,2,0}만점기준 총합 20으로 나누기 User A - {0.15, 0.1, 0.1, 0.1, 0}벡터 합 1이 되도록 정규화 User A - {0.3333,0.2222,0.2222,0.2222,0}"
+        "text": "6. 추천시스템 구현 Step 1-1. User Vector Scaling User A - {수분/보습, 진정/트러블,브라이트닝,모공/각질, 안티에이징} 각 질문 답변점수 -1 후 산술평균 User A - {3,2,2,2,0}만점기준 총합 20으로 나누기 User A - {0.15, 0.1, 0.1, 0.1, 0}벡터 합 1이 되도록 정규화 User A - {0.3333,0.2222,0.2222,0.2222,0}",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 27,
-        "text": "6. 추천시스템 구현 Step 1. Skin Recommendation based on User Vector User Vector Hybrid Cosine Similarity Euclidean Distance Skin Ingredients vector CREATE!! Skin Recommendation"
+        "text": "6. 추천시스템 구현 Step 1. Skin Recommendation based on User Vector User Vector Hybrid Cosine Similarity Euclidean Distance Skin Ingredients vector CREATE!! Skin Recommendation",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 28,
-        "text": "6. 추천시스템 구현 Step 1-2. User Vector & Skin Vector similarities calculating INPUT OUTPUT"
+        "text": "6. 추천시스템 구현 Step 1-2. User Vector & Skin Vector similarities calculating INPUT OUTPUT",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 29,
-        "text": "6. 추천시스템 구현 Recommendation Framework User Vector Hybrid Cosine Similarity Euclidean Distance Skin Ingredients vector CREATE!! Skin Recommendation UPDATE!! Updated User Vector Hybrid Cosine Similarity Euclidean Distance Lotion Ingredients vector"
+        "text": "6. 추천시스템 구현 Recommendation Framework User Vector Hybrid Cosine Similarity Euclidean Distance Skin Ingredients vector CREATE!! Skin Recommendation UPDATE!! Updated User Vector Hybrid Cosine Similarity Euclidean Distance Lotion Ingredients vector",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 30,
-        "text": "6. 추천시스템 구현 Step 2. Calculate Weight Vector & Update User Vector Calculate Weight Vector Updated User Vector ※ Lotion 추천 시 Skin 성분에서 만족한 User의 속성을 덜어내기 위해 User Vector를 update!!"
+        "text": "6. 추천시스템 구현 Step 2. Calculate Weight Vector & Update User Vector Calculate Weight Vector Updated User Vector ※ Lotion 추천 시 Skin 성분에서 만족한 User의 속성을 덜어내기 위해 User Vector를 update!!",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 31,
-        "text": "6. 추천시스템 구현 Step 2. Calculate Weight Vector & Update User Vector User Vector+softmax로 만들어진 Weight_Vector Weight_Vector+Skin_vector로 새로 업데이트 된  Updated_User_Vector"
+        "text": "6. 추천시스템 구현 Step 2. Calculate Weight Vector & Update User Vector User Vector+softmax로 만들어진 Weight_Vector Weight_Vector+Skin_vector로 새로 업데이트 된  Updated_User_Vector",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 32,
-        "text": "6. 추천시스템 구현 Step 3. Lotion Recommendation based on Updated User Vector Updated User Vector Hybrid Cosine Similarity Euclidean Distance Lotion Ingredients Vector"
+        "text": "6. 추천시스템 구현 Step 3. Lotion Recommendation based on Updated User Vector Updated User Vector Hybrid Cosine Similarity Euclidean Distance Lotion Ingredients Vector",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 33,
-        "text": "6. 추천시스템 구현 Extra. Giving Skin & Lotion best collabo ingredient"
+        "text": "6. 추천시스템 구현 Extra. Giving Skin & Lotion best collabo ingredient",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 34,
-        "text": "6. 추천시스템 구현 Extra. Giving Skin & Lotion best collabo ingredient ※ 유사도 수치 제공 외에도, 성분 시너지 여부를 함께 제공!"
+        "text": "6. 추천시스템 구현 Extra. Giving Skin & Lotion best collabo ingredient ※ 유사도 수치 제공 외에도, 성분 시너지 여부를 함께 제공!",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 35,
-        "text": "7. 시연 영상 Streamlit을 활용한 BEAUTYmin DEMO"
+        "text": "7. 시연 영상 Streamlit을 활용한 BEAUTYmin DEMO",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 36,
-        "text": "8. 결론 & 기대효과 및 한계 결론 & 기대효과 사용자의 현 상태와 화학 성분을 통한 추천으로 초심자에게도 적합한 추천이 가능 화학 성분을 기반의 제품의 효능 추천으로 사용자가 원하는 효과를 얻을 수 있는 제품 추천 가능 특정 제품 선택의 결과가 반영되는 추천이기에 어떠한 속성이 과대, 과소 적합되는 상황 방지 가능 한계 화학 성분의 함량 정보에 대한 공백으로 인해 효능 수치 계산 정확도가 다소 미흡 크롤링한 리뷰키워드 활용 부재 + 인혁님의 하트시그널 출연 제의, 명수님의 화장품 브랜드 가치 1위 로레알 인턴 합격"
+        "text": "8. 결론 & 기대효과 및 한계 결론 & 기대효과 사용자의 현 상태와 화학 성분을 통한 추천으로 초심자에게도 적합한 추천이 가능 화학 성분을 기반의 제품의 효능 추천으로 사용자가 원하는 효과를 얻을 수 있는 제품 추천 가능 특정 제품 선택의 결과가 반영되는 추천이기에 어떠한 속성이 과대, 과소 적합되는 상황 방지 가능 한계 화학 성분의 함량 정보에 대한 공백으로 인해 효능 수치 계산 정확도가 다소 미흡 크롤링한 리뷰키워드 활용 부재 + 인혁님의 하트시그널 출연 제의, 명수님의 화장품 브랜드 가치 1위 로레알 인턴 합격",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     },
     {
         "slide": 37,
-        "text": "성분 기반 올인원 스킨케어 추천시스템 BEAUTYmin THANK YOU"
+        "text": "성분 기반 올인원 스킨케어 추천시스템 BEAUTYmin THANK YOU",
+        "title": "화장품 화학 성분 기반 올인원 스킨케어 추천 시스템",
+        "info": "1415V"
     }
 ]
