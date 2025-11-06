@@ -11,6 +11,8 @@ JQ_SCHEMA = '.[]'
 def metadata_function(record: dict, metadata: dict) -> dict:
     metadata['slide_number'] = record.get("slide")
     metadata['source'] = os.path.basename(metadata.get("source", ""))
+    metadata['title'] = record.get("title", "")
+    metadata['info'] = record.get("info", "") 
     return metadata
 
 
@@ -33,6 +35,16 @@ def build_and_save_index():
             content_key="text",
             metadata_func=metadata_function
         )
+
+        docs = loader.load()
+        
+        for doc in docs:
+            title = doc.metadata.get("title", "")
+            info = doc.metadata.get("info", "")
+            text = " ".join(doc.page_content) if isinstance(doc.page_content, list) else doc.page_content
+            
+            doc.page_content = f"제목: {title}\n정보: {info}\n내용: {text}"
+        
         all_docs.extend(loader.load())
     print(f"총 {len(all_docs)}개 문서 로드 완료")
 
