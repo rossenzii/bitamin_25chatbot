@@ -21,7 +21,9 @@ def build_and_save_index():
     print("JSON 파일 로드 중..")
 
     # 모든 JSON 파일 경로 찾기
-    json_files = glob(os.path.join(DATA_DIR_PATH, "*.json"))
+    json_files = []
+    for path in DATA_DIR_PATH:
+        json_files.extend(glob(os.path.join(path, "*.json")))
     if not json_files:
         print(f"오류: {DATA_DIR_PATH}에 JSON 파일이 없습니다.")
         return
