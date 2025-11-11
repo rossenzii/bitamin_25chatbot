@@ -13,6 +13,7 @@ def metadata_function(record: dict, metadata: dict) -> dict:
     metadata['source'] = os.path.basename(metadata.get("source", ""))
     metadata['title'] = record.get("title", "")
     metadata['info'] = record.get("info", "") 
+    metadata['kategorie'] = record.get("kategorie", "")
     return metadata
 
 
@@ -41,9 +42,10 @@ def build_and_save_index():
         for doc in docs:
             title = doc.metadata.get("title", "")
             info = doc.metadata.get("info", "")
+            kategorie = doc.metadata.get("kategorie", "")
             text = " ".join(doc.page_content) if isinstance(doc.page_content, list) else doc.page_content
             
-            doc.page_content = f"제목: {title}\n정보: {info}\n내용: {text}"
+            doc.page_content = f"제목: {title}\n정보: {info}\n카테고리: {kategorie}\n내용: {text}"
         
         all_docs.extend(loader.load())
     print(f"총 {len(all_docs)}개 문서 로드 완료")
