@@ -13,15 +13,15 @@ class HybridRetriever(BaseRetriever):
     faiss_retriever: Any
     bm25_retriever: Any
 
-    def get_relevant_documents(self, query: str) -> List[Document]:
-        faiss_docs = self.faiss_retriever.get_relevant_documents(query)
-        bm25_docs = self.bm25_retriever.get_relevant_documents(query)
+    def _get_relevant_documents(self, query: str) -> List[Document]:
+        faiss_docs = self.faiss_retriever.invoke(query)
+        bm25_docs = self.bm25_retriever.invoke(query)
         
         all_docs = {d.page_content: d for d in faiss_docs + bm25_docs}
         return list(all_docs.values())
 
-    async def aget_relevant_documents(self, query: str) -> List[Document]:
-        return self.get_relevant_documents(query)
+    async def _aget_relevant_documents(self, query: str) -> List[Document]:
+        return self._get_relevant_documents(query)
 
 
 def create_hybrid_chain(query=None):
