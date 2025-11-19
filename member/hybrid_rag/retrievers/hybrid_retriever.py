@@ -66,5 +66,5 @@ def get_hybrid_retriever(query: str = None):
     
     for r in hybrid_retriever.retrievers:
         if hasattr(r, "search_kwargs"):
-            r.search_kwargs["k"] =50  # 문서 5개로 증가 (MT 설명+사례 모두 포함)
+            r.search_kwargs["k"] = 10  # 문서 10개로 축소 (속도 개선)
     return hybrid_retriever

@@ -10,7 +10,7 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 os.environ["OMP_NUM_THREADS"] = "1"
 
 def main():
-    query = "비타민에서 멤버 모집 절차가 어떻게 돼?"
+    query = "비타민 홍익대학교 학생은 몇명이야?"
     print(f"질문: {query}\n")
     
     try:
