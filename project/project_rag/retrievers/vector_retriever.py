@@ -1,10 +1,10 @@
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
-from config.settings import OPEN_API_KEY, FAISS_INDEX_PATH
+from config.settings import OPENAI_API_KEY, FAISS_INDEX_PATH
 
 def get_vector_retriever():
 
-    embeddings=OpenAIEmbeddings(openai_api_key=OPEN_API_KEY)
+    embeddings=OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 
     vectorstore=FAISS.load_local(
         folder_path=FAISS_INDEX_PATH,

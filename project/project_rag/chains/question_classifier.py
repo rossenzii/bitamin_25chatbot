@@ -2,7 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableBranch
 from langchain_core.output_parsers import StrOutputParser
-from config.settings import OPEN_API_KEY
+from config.settings import OPENAI_API_KEY
 
 # 질문 유형 분류 체인
 def create_question_classifier(llm_model: str = "gpt-4o-mini"):
