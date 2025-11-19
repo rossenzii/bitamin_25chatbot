@@ -9,3 +9,7 @@ member_db/info1516.json
 rag-env/
 __pycache__/
 .DS_Store
+
+rag-env/
+*.pyc
+__pycache__/
