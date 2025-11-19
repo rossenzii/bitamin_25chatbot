@@ -1,0 +1,380 @@
+[
+    {
+        "slide": 1,
+        "text": "종 분류 기반 개체 식별을 통한 동 생 야 물 재 식 별 BITAmin 프로젝트 컴퓨터 비전 김동연 박보희 배한준 이수아 이채연",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 2,
+        "text": "분류와 재식별 AnimalCLEF 대회 소개 시행착오 Pipeline 결과 분석 및 해설 활용방안 차 목",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 3,
+        "text": "수아 수아 한준 한준 동연 동연 채연 채연 보희 보희 팀원 소개 팀원 소개",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 4,
+        "text": "분류 classification 와 재식별 Re identification 분류 classification 와 재식별 Re identification",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 5,
+        "text": "분류 Classification 와 재식별 Re identification 분류와 재식별 BITAMIN 프로젝트 컴퓨터 비전 분류 Classification 정의 미리 정의된 종류 예 고양이 개 등 중 어 떤 그룹에 속하는지 분류 특징 클래스 수 고정 같은 종 내 개체 구분 X 예시 이건 고양이야 재식별 Re identification 정의 이 개체가 전에 본 그 개체와 같은지 확인 특징 개체 수 무한 처음 보는 개체와도 비교 외형 변화 옷 각도 등 있어도 식별 필요 예시 이 고양이는 어제 본 고양이 A야",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 6,
+        "text": "왜 재식별이 더 어려운가 처음 보는 개체 등장 학습에 없던 개체도 식별해야 함 외형 변화 각도 조명 포즈 옷 등이 달라도 같은 개체로 인식해야 함 데이터 부족 개체당 사진이 2장뿐인 경우도 많음 one shot 문제 분류와 재식별 BITAMIN 프로젝트 컴퓨터 비전",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 7,
+        "text": "AnimalCLEF 대회 소개 AnimalCLEF 대회 소개",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 8,
+        "text": "AnimalCLEF 대회 소개 대회 소개 BITAMIN 프로젝트 컴퓨터 비전 AnimalCLEF 대회는 CVPR 2025의 FGVC Fine Grained Visual Categorization 워크숍과도 연계 CVPR은 IEEE가 주최하는 컴퓨터 비전 및 패턴 인식 분야에서 가장 권위 있는 국제 학술 대회",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 9,
+        "text": "AnimalCLEF 대회 소개 대회 소개 BITAMIN 프로젝트 컴퓨터 비전 목표 대상 종 특정 동물 개체 의 이미지를 보고 처음 보는 개체인지 이미 본 적 있는 개체라면 누구인지를 맞히는 것 바다거북 Greece 도롱뇽 Czech Republic 시라소니 Czech Republic 재식별 기반 문제 종 분류가 아닌 개체 단위 식별 훈련에 없는 개체 등장 가능 조명 각도 포즈 변화 극복 필요 도전 과제 평가기준 known 개체의 정확도 BAKS unknown 개체의 정확도 BAUS 두 정확도의 기하 평균을 최종 점수로 사용",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 10,
+        "text": "데이터셋 대회 소개 BITAMIN 프로젝트 컴퓨터 비전 데이터 구조 Database 정답이 있는 DB셋으로 각 개체 ID가 라벨로 주어짐 예 LynxID2025 lynx Query 찾고자 하는 이미지셋으로 각 이미지가 DB에 있는지 new or known 판단해야 함",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 11,
+        "text": "데이터셋 대회 소개 BITAMIN 프로젝트 컴퓨터 비전 동물 이미지 데이터",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 12,
+        "text": "데이터셋 대회 소개 BITAMIN 프로젝트 컴퓨터 비전 metadata csv 이미지 경로 ID 종 날짜 방향 정보 등 포함",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 13,
+        "text": "학습용 데이터셋 선택 대회 소개 BITAMIN 프로젝트 컴퓨터 비전 WildlifeReID 10k 14만 장 이미지 1만 개체 이상 다양한 종 포함 거북 유인원 조류 등 모델 사전학습 Pre training 용으로 활용 가능",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 14,
+        "text": "시행착오 시행착오",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 15,
+        "text": "paper A ConvNet for the 2020s 시행착오 BITAMIN 프로젝트 컴퓨터 비전 ConvNeXt 특징 ResNet 기반 CNN 구조를 유지하면서도 Transformer보다 더 나은 정확도 학습 안정성 향상 LN 적절한 downsampling 설계 연산 효율성 Depthwise conv Inverted Bottleneck으로 FLOPs 대비 성능 향상",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 16,
+        "text": "코드 실행을 통해 파악한 ConvNeXt 문제점 시행착오 BITAMIN 프로젝트 컴퓨터 비전 wildlife dataset으로 처음부터 사전학습 시킨 뒤 가중치 저장 metadata csv의 dataset의 열 정보로 이에 맞는 종에서 소분류 진행 ConvNeXt 문제점 wildlife 데이터셋이 너무 커 사전 학습에 많은 시간 소요됨 CNN 계열은 long range dependency 학습에 Transformer 구조보다 불리함 고해상도 기반 학습에 최적화되어 있음 재식별 Re ID 는 종종 저해상도나 부분 occlusion 상황에서 수행됨",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 17,
+        "text": "Dataset를 통해 본 분류와 재식별 방법의 차이 시행착오 BITAMIN 프로젝트 컴퓨터 비전 클래스 수가 고정되어 있지 않음 이전에 식별한 적 없는 개체에 대한 식별도 필요 특징 벡터를 계산해서 특징 벡터 간 거리 임베딩 거리 로 식별해야 함 시라소리 LynxID2025 도롱뇽 SalamanderID2025 바다거북 SeaTurtledID2022",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 18,
+        "text": "해결 방향성 시행착오 BITAMIN 프로젝트 컴퓨터 비전 사전학습 된 모델 MegaDescriptor 사용해 고품질의 특징 벡터 추출 Swin Transformer 기반 구조로 global과 local 특징 파악에 용이 다양한 해상도의 이미지를 처리하는 데 유리 복잡한 배경이나 다양한 포즈의 동물 이미지를 효과적으로 분석 ArcFace 손실 함수를 사용하여 학습하여 각 클래스 간의 각도 차이를 최대화하여 더 구별력 있는 임베딩을 생성 유사한 개체 간의 구분이 향상됨 29개의 공개 동물 재식별 데이터셋을 활용하여 학습되어 다양한 종에 대한 일반화된 특징을 학습함 따라서 MegaDescriptor는 재식별 모델의 백본으로 선택",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 19,
+        "text": "Rerank Cascade 시행착오 BITAMIN 프로젝트 컴퓨터 비전 파이프라인 2차 예측 각 쿼리 이미지에 대해 가장 유사한 Tok K 후보 이 미지를 골라 그 쿼리와 DB 이미지를 ALIKED local Matcher 로 재비교 1차 예측 MegaDescriptor EVA02 파이프라인에서 이미지의 유사도 추출 기대효과 각 쿼리 이미지에 대해 k개의 후보를 비교해 정확도 향상 k개의 후보에 대해서만 local matcher를 수행해 속도 향상 오히려 정확도가 낮아지는 결과 LoFTR matcher 도입 시도",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 20,
+        "text": "LoFTR matcher 구분 Keypoint 기반 Dense Matching 기반 매칭 방식 중요한 지점에 대해서만 매칭 전체 이미지에 대해서 매칭 예시 ALIKED LoFTR 시행착오 BITAMIN 프로젝트 컴퓨터 비전 Local Matcher ALIKED와 유사한 결과 Top K 후보가 이미 너무 정확해 Rerank 방식의 정확도가 더 낮은 것으로 해석 ALIKED 대신 Dense matching 방식의 local feature matcher인 LoFTR 도입 시도",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 21,
+        "text": "Fusion MLP 시행착오 BITAMIN 프로젝트 컴퓨터 비전 배경 두 피쳐 사이의 비선형적 관계를 학습하는 MLP 모델을 둬 해당 모델이 피쳐를 결합해 최종 유사도 스코어 출력 기존 코드는 MegaDescriptor와 EVA02 모델의 feature를 정적인 가중치로 결합 MLP를 학습시키지 않고 랜덤 초기화 상 태로 사용했을 땐 더 낮은 정확도를 보임 MLP 학습에 큰 리소스가 필요해 학습을 완료하지 못함",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 22,
+        "text": "Pipeline Pipeline",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 23,
+        "text": "Pipeline ALIKED EVA02 유사도 검색 스레시홀드 기반 식별 WildFusion 보정 MegaDescriptor crop TTA 최종 유사도 계산 도롱뇽 이미지 전처리 Pipeline BITAMIN 프로젝트 컴퓨터 비전 이미지 전처리 피처 결합 단순 가중치 기반 결합",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 24,
+        "text": "주요 코드 Pipeline BITAMIN 프로젝트 컴퓨터 비전 main py 이미지 전처리 정의 파일 전체 파이프라인 실행 스크립트 dataset py matcher py fusion py transforms py 각 matcher를 구성하는 로직 정의 데이터셋 로딩 및 전처리 함수 정의 WildFusion 구성 및 calibration 적용 모듈 https github com dongyeon1031 bitamin cv proj",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 25,
+        "text": "도롱뇽 이미지 전처리 Pipeline BITAMIN 프로젝트 컴퓨터 비전 도롱뇽 이미지의 방향을 일관성 있게 맞춤 orientation 값이 right이면 이미지를 90도 회전 orientation 값이 left이면 이미지를 90도 회전 메타데이터의 orientation 값 활용 도롱뇽 이미지 전처리",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 26,
+        "text": "crop TTA Pipeline BITAMIN 프로젝트 컴퓨터 비전 TTA 테스트 단계에서 입력 이미지를 여러 방식으로 변형하여 여러 번 예측을 수행하고 그 결과를 평균 내 성능을 높이는 기법 야간 이미지가 많은 시라소니 분류에 큰 효과를 기대할 수 있음 crop TTA",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 27,
+        "text": "crop TTA Pipeline BITAMIN 프로젝트 컴퓨터 비전 이미지를 5조각으로 나눠 부분별 예측을 한 뒤 평균을 내 최종 예측을 수행하는 방법 crop TTA",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 28,
+        "text": "ALIKED Fusion Pipeline BITAMIN 프로젝트 컴퓨터 비전 ALIKED MegaDescriptor paper 2023년 IEEE에서 소개 paper 2023년 CVPR에서 소개 WildFusion paper 2024년 프리프린트",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 29,
+        "text": "ALIKED Fusion Pipeline BITAMIN 프로젝트 컴퓨터 비전 ALIKED와 MegaDescriptor 모델을 Fusion 후 WildFusion을 통해 보정 calibration 후 최종 결합 여러 백본에서 추출된 특징 벡터를 결합하여 최종 이미지 특징을 구성 각 모델의 강점을 하나의 특징에 융합하는 기능",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 30,
+        "text": "main py Pipeline BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor ALIKED matcher 정의 MegaDescriptor global feature 추 출용 딥러닝 백본 ALIKED local keypoint 기반 매처 두 매처는 각각 이미지 특징을 다른 방 식으로 추출함 나중에 WildFusion 으로 결합 예정",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 31,
+        "text": "matcher py Pipeline BITAMIN 프로젝트 컴퓨터 비전 build megadescriptor MegaDescriptor 백본을 활용하여 전 체 이미지에서 global feature 추출 CosineSimilarity 임베딩 간 유사도 측정 방식 IsotonicCalibration 유사도 점수의 신뢰도 정규화 후속 융합을 위한 calibration",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 32,
+        "text": "matcher py Pipeline BITAMIN 프로젝트 컴퓨터 비전 build aliked ALIKED는 keypoint 기반 local 특징 추출기 LightGlue keypoint들 간의 매 칭 수행 부분적으로 유사한 이미 지도 정밀 비교 가능 SimilarityPipeline으로 감싸서 통합적인 matcher 역할 수행",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 33,
+        "text": "EVA02 유사도 검색 모델 추가 Pipeline BITAMIN 프로젝트 컴퓨터 비전 모델 소개 이미지 간 유사도 측정에 유리 OpenAI의 CLIP 모델을 기반으로 한 ViT 모델 DB의 이미지와 Query 이미지 사이 가장 유사도가 높 은 종을 선택 이후 MegaD ALIKED의 출력 결과와 가중 평균을 내 최종 결정",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 34,
+        "text": "main py EVA02 임베딩 추출 EVA02는 추가적인 global matcher로 사용됨 아직 학습되지 않은 MLP fusion head 는 미사용 상태 database 이미지를 EVA02 임베딩으 로 미리 계산하여 효율성 확보 Pipeline BITAMIN 프로젝트 컴퓨터 비전",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 35,
+        "text": "matcher py Pipeline BITAMIN 프로젝트 컴퓨터 비전 build eva02 EVA02 CLIP L CLIP 기반의 고성능 Vision Transformer MegaDescriptor와 유사하게 global feature 기반 임베딩 향후 FusionMLP와 함께 실험적으로 matcher 융합에 사용됨",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 36,
+        "text": "main py Pipeline BITAMIN 프로젝트 컴퓨터 비전 WildFusion 생성 및 Calibration 수행 두 matcher의 유사도 점수를 정규화하 여 결합하는 WildFusion 객체 생성 calibration을 통해 score 스케일을 정 렬 더 정확한 평균 가능 priority pipeline은 MegaDescriptor 로 설정",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 37,
+        "text": "유사도 추출 및 선택 Pipeline BITAMIN 프로젝트 컴퓨터 비전 각 쿼리별로 가장 유사한 DB 인덱스에 대해서 해당 유사도 점수가 threshold보다 낮으면 new individual 로 분류 쿼리와 DB 간 유사도 행렬 계산 선택 쿼리 이미지와 DB 이미지 간 유사도 행렬을 생성 후 가장 유사도가 높은 가장 큰 score 이미지를 찾음 스레시홀드 기반 식별",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 38,
+        "text": "main py Top 예측 Threshold 기반 new individual 판별 가장 유사한 이미지 top 를 찾아 해당 개체 ID 예측 유사도가 threshold보다 낮으면 new individual 로 분류 Pipeline BITAMIN 프로젝트 컴퓨터 비전 스레시홀드 기반 식별",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 39,
+        "text": "결과 분석 및 해설 결과 분석 및 해설",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 40,
+        "text": "최종 정확도 결과 BITAMIN 프로젝트 컴퓨터 비전 결과 약 의 정확도 230팀 중 44등을 기록 전체 팀 중 상위",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 41,
+        "text": "6등 코드와 비교 결과 BITAMIN 프로젝트 컴퓨터 비전 소제목 6등 모델 파이프라인 정리 대회 종료 이후 코드를 공개한 6등과 파이프라인 비교 진행",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 42,
+        "text": "피드백 결과 BITAMIN 프로젝트 컴퓨터 비전 학습된 MLP 6등 코드는 MLP를 학습시켜 백본 모델의 출력 feature의 비선형적 관계를 반영해 유사도 출력 피드백 반영 후 정확도 분류 모델의 penultimate Layer 사용 penultimate Layer 모델의 출력층 바로 전 단계 레이어 6등 코드는 EVA02가 아닌 ConvNeXt Swim T 등 분류 모 델을 fine turning 해 penultimate 레이어를 사용 이를 통해 백본 모델의 다양성 확보",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 43,
+        "text": "활용방안 활용방안",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 44,
+        "text": "동물 재식별 기술의 식의약 응용 활용방안 BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor ALIKE 등을 식의약 데이터에 적용 시각장애인을 위한 실시간 약품 인식 시스템 식의약 공공데이터 분석 활용 경진대회 아이디어 기획 부문 참여",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 45,
+        "text": "시각장애인을 위한 약품 인식 시스템 활용방안 BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor Local Matching YOLOv8 ALIKE Cosine similarity Predict",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 46,
+        "text": "시각장애인을 위한 약품 인식 시스템 활용방안 BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor Local Matching YOLOv8 ALIKE Cosine similarity Predict 알약 탐지 및 ROI crop",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 47,
+        "text": "시각장애인을 위한 약품 인식 시스템 활용방안 BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor Local Matching YOLOv8 ALIKE Cosine similarity Predict",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 48,
+        "text": "시각장애인을 위한 약품 인식 시스템 활용방안 BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor Local Matching YOLOv8 ALIKE Cosine similarity Predict MegaDescriptor로 강건한 global feature 추출 가능 약 포장지 인식 시 각도 조명 손떨림 등 다양한 상황에 대비",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 49,
+        "text": "시각장애인을 위한 약품 인식 시스템 활용방안 BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor Local Matching YOLOv8 ALIKE Cosine similarity Predict",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 50,
+        "text": "시각장애인을 위한 약품 인식 시스템 활용방안 BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor Local Matching YOLOv8 ALIKE Cosine similarity Predict ALIKE로 fine grained keypoint matching 추출 가능 비슷한 색 모양의 약품 구분에 도움",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 51,
+        "text": "시각장애인을 위한 약품 인식 시스템 활용방안 BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor Local Matching YOLOv8 ALIKE Cosine similarity Predict",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 52,
+        "text": "시각장애인을 위한 약품 인식 시스템 활용방안 BITAMIN 프로젝트 컴퓨터 비전 MegaDescriptor Local Matching YOLOv8 ALIKE Cosine similarity Predict MegaDescriptor embedding ALIKE descriptor 을 vector DB와 비교",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 53,
+        "text": "그 외 재식별 기술의 활용 가능성 활용방안 BITAMIN 프로젝트 컴퓨터 비전 반려동물 찾기 잃어버린 반려동물의 사진만으로 추적 CCTV 영상에서 동일 인물 인식 변화에도 동일 인물로 판별 실종자 및 범죄자 추적 치매 환자 지원 카메라로 사람을 비췄을 때 누구인지 알려줌 고정된 클래스가 아닌 개체 단위 식별 사회적 가치와 실효성 큼",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 54,
+        "text": "사 감 합 니 다",
+        "title": "종 분류 기반 개체 식별을 통한 야생동물 재식별",
+        "info": "1415S",
+        "kategorie": "CV(컴퓨터비전)"
+    }
+]

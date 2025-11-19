@@ -1,0 +1,380 @@
+[
+    {
+        "slide": 1,
+        "text": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립 Presented by: 시계열 1조: 문예림 박보희 양태원 이수민 이수아 이채연",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 2,
+        "text": "CONTENT 프로젝트 배경 TEMPO 설명 데이터 설명 TEMPO Prophet 환차익 전략 수립",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 3,
+        "text": "SECTION 01 프로젝트 배경",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 4,
+        "text": "1.프로젝트 배경 TEMPO 선정 이유",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 5,
+        "text": "1.프로젝트 배경 TEMPO 선정 이유 1. GPT-2 기반 2. STL Decomposition을 활용한 시계열 분해 3. Soft Prompt Pool 도입 4. Zero-shot Forecasting & Multimodal Forecasting",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 6,
+        "text": "SECTION 02 TEMPO 설명",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 7,
+        "text": "2.TEMPO 설명 TEMPO 모델이란? Time sEries proMpt POol 시계열(Time-Series) + 텍스트(Text)를 함께 학습하는 멀티모달(Multi-modal) 예측 모델 기존 시계열 모델보다 장기 예측(Long-term Forecasting)에서 성능이 뛰어남 프롬프트를 입력값으로 받아서, 새로운 학습 없이도 다양한 예측이 가능",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 8,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 9,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 10,
+        "text": "3. 데이터 설명 시계열 데이터 시계열 데이터를 STL의 계절 및 추세 분해 추세(Trend): 시계열 데이터가 장기적으로 증가하거나 감소하는 것 계절성(Seasonality): 주, 월, 분기 단위 등 특정 시간의 주기로 나타나는 패턴 불규칙요소(Random, Residual): 설명될 수 없는 요인 또는 돌발적인 요인에 의해 일어나는 변화",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 11,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 12,
+        "text": "3. 데이터 설명 RevIN(Reversible Instance Normalization) 1.데이터를 ‘일정한 크기‘로 바꾸고(정규화), 모델이 더 쉽게 학습할 수 있게 함. 2.모델의 결과 데이터를 다시 ‘원래 데이터의 크기와 분포’로 되돌림(역정규화) 3.이때 단순히 평균과 표준편차로 돌리는 것이 아닌, 학습된 파라미터(β, γ)를 사용해 더 정확하고 유 연하게 변환.",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 13,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 14,
+        "text": "3. 데이터 설명 Patching Transformer 모델은 긴 문장을 처리할 때 토큰(Token)으로 나눠서 학습하고 TEMPO는 시계열 데이터를 Transformer에서 다루기 쉽게 sliding window 방식을 사용해 patching. PatchTST에서 patching 도입의 장점 1.Point-wise time series 보다 많은 local semantic information 반영 2.Input token 개수의 감소로 인한 Transformer의 연 산량과 메모리 사용량 감소 3.동일한 GPU와 학습 시간 내에서 더 긴 길이의 sequence 활용 가능",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 15,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 16,
+        "text": "3. 데이터 설명 Embedding 패치된 시계열 데이터를 고차원 벡터로 변환 정규화(RevIN), patching 후의 각 요소들 패치 개수 계산 식 언어모델이 이해할 수 있는 벡터로 변환",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 17,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 18,
+        "text": "3. 데이터 설명 Prompt Pool 고유한 key-value 쌍으로 저장된 prompt의 shared pool을 도입 유사한 입력 시계열이 pool에서 동일한 prompt 그룹을 검색하여 관련 과거 경험을 활용 다양한 데이터셋에서 학습된 패턴을 더 잘 인식하고 적용할 수 있게 되므로 모델링 효율성과 예측 성능을 향상시킬 수 있음. score 산출해 top k prompts를 시계열 데 이터와 함께 input embedding으로 구성",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 19,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 20,
+        "text": "3. 데이터 설명 GPT backbone GPT가 문장의 흐름을 예측하는 것처럼, TEMPO는 GPT를 활용해 시계열 흐름을 예측 시계열 데이터에 맞게 조정 프롬프트와 다양한 시계열 요소(Trend, Seasonality, Residual)를 GPT 입력으로 변환 일부 구조를 Freeze하여 GPT의 지식을 유지",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 21,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 22,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 23,
+        "text": "3. 데이터 설명 Contextual Information(텍스트 데이터) TEMPO 모델은 시계열 데이터의 복잡한 패턴을 분석하고 예측 정확도를 높이기 위해 STL 분해와 텍스트 데이터를 함께 사용 (1) STL 분해 Trend: 장기적인 방향성 Seasonal: 주기적인 패턴 Residual: 예측할 수 없는 변동성 (2) Contextual Information 뉴스, 경제 보고서 등의 텍스트 데이터 를 함께 입력 GPT 기반의 텍스트 임베딩 텍스트 벡터는 시계열 데이터와 함께 학습됨.",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 24,
+        "text": "3. 데이터 설명 Contextual Information 생성 Prompt: Suppose you are living in {year}. Please summarize the most important news events from {year}-{month_name} related to {country} and their impact on the exchange rate between {currency1} and {currency2}. Provide a concise summary in 2-3 sentences. OpenAI GPT API를 활용하여 환율 예측에 필요한 정보를 보완 출력 예시: \"February 2023: North Korea's missile tests increased geopolitical risks, leading to a weaker KRW. Additionally, a strong US job market reinforced expectations of Fed tightening, strengthening the USD.\"",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 25,
+        "text": "3. 데이터 설명 Contextual Information + 시계열 데이터 결합 과정 1.STL 분해를 통해 X_T, X_S, X_R로 나눈 후 정규화(RevIN) 수행 2.텍스트 데이터를 변환해 텍스트 임베딩 벡터(Text_embedding) 생성 3.생성된 텍스트 임베딩과 STL 분해된 시계열 데이터를 함께 모델에 입력 4.GPT 기반의 Prompt Pool을 이용하여 모델이 데이터의 의미적 구조를 학습하도록 유도",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 26,
+        "text": "2.TEMPO 설명 TEMPO Overview",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 27,
+        "text": "SECTION 03 데이터 설명",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 28,
+        "text": "3. 데이터 설명 1.환율 데이터 한국은행 경제통계시스템(ECOS)에서 원/미국 달러 환율 다운로드",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 29,
+        "text": "3. 데이터 설명 1.환율 데이터 CSV 파일에서 환율 데이터 불러오기 날짜 형식 변환 (pd.to_datetime) 데이터 정리 및 쉼표 제거 후 float 변환 정렬 및 인덱스 초기화",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 30,
+        "text": "3. 데이터 설명 2.뉴스 데이터 OpenAI API  키 설정 monthly_news: 뉴스 데이터를 저장할 딕셔너리 year_start = 2022, year_end = 2024 : 2022년~2024년 뉴스 수집 한국(KRW) - 미국(USD): 환율 관련 뉴스 추출",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 31,
+        "text": "3. 데이터 설명 2.뉴스 데이터 최대 3번 재시도하여 응답 오류를 방지 수집된 뉴스 데이터 monthly_news 딕셔너리에 저장 수집된 뉴스 데이터를 JSON 파일로 저장",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 32,
+        "text": "3. 데이터 설명 2.뉴스 데이터 GPT-4 API가 월별로 요약한 원달러 환율 관련 뉴스",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 33,
+        "text": "SECTION 04 TEMPO",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 34,
+        "text": "4. TEMPO 주요 코드 [STEP 1] GitHub 저장소 클론 TEMPO GitHub 저장소 클론 필요한 라이브러리 불러오기",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 35,
+        "text": "4. TEMPO 주요 코드 [STEP 2] 수집한 데이터 저장 및 정규화 Min-Max 정규화 수행하여 0~1 범위로 변환 CSV 파일로 저장 [STEP 3] TEMPO 모델로 시계열 예측 수행 torch.no_grad() : PyTorch의 그래디언트 연산 비활성화 (메모리 절약 및 속도 향상) : 모델이 학습이 아닌 예측만 수행하는 단계 model.predict(input_data,pred_length=365) : input_data를 기반으로 향후 365일 환율 예측",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 36,
+        "text": "4. TEMPO 주요 코드 [STEP 3] TEMPO 모델로 시계열 예측 수행 예측값이 0~1 사이를 벗어나지 않도록 강제 조정 시계열 예측 모델이 훈련 중 이상값을 학습했을 경우를 대비 MinMaxScaler를 적용하여 예측된 정규화 데이터(0~1 범위)를 실제 환율 값으로 변환 scaler.inverse_transform(...)을 사용하여 정규화 이전의 원래 값으로 되돌림",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 37,
+        "text": "4. TEMPO 주요 코드 [STEP 3] TEMPO 모델로 시계열 예측 수행 모델이 예측한 값은 완전히 고정된 값이므로 실제 시장의 변동성을 반영하기 위해 노이즈를 추가 : 최근 30일 동안의 환율 평균 값을 구함 : 최근 30일 동안의 환율 표준 편차(변동성)를 구함 : 변동성을 반영한 랜덤 노이즈(정규분포 기반) 추가 : 표준 편차의 10% 수준의 변동을 부여하여 급격한 변동을 방지",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 38,
+        "text": "4. TEMPO 주요 코드 [STEP 3] TEMPO 모델로 시계열 예측 수행 모델이 예측한 값이 현실적인 범위를 벗어나지 않도록 보정 recent_mean * (1 - 0.4) ~ recent_mean * (1 + 0.4) : 최근 평균 환율의 ±40% 범위 내에서 값 유지. : 급격한 환율 급등/급락을 방지하여 보다 현실적인 예측값을 얻음",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 39,
+        "text": "4. TEMPO 결과(2025년 환율 예측) 2025년 환율이 1400원대 후반에서만 변동할 것으로 예측 최근 환율이 급등한 추세를 유지하려는 경향이 강함. 뉴스 데이터가 ‘한국 환율이 지속적으로 약세’를 보일 것 전망 → 경향이 예측 결과에 반영되었을 가능성",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 40,
+        "text": "4. TEMPO 결과(2025년 환율 예측) 저번주부터 실제 환율과 비교 평균 오차: 약 27.66원 단기 외환 트레이딩 측면: 오차(19~35원)로 인해, 몇 원의 변동성도 영향이 큰 실시간 외환 시장에서 활용하기에 부족 장기적인 환율 전망 리포트 측면: 변동성을 과소평가하는 경향이 있어 조정 필요하나, 환율 방향성은 어느 정도 맞출 수 있어 일부 활용 가능 기업 환리스크 관리 측면: 기업이 몇 개월 뒤의 환율을 참고 하는 용도로 활용 가능",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 41,
+        "text": "4. TEMPO TMEPO 논문 저자와의 컨택 Defu Cao(University of Southern California)",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 42,
+        "text": "SECTION 05 PROPHET",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 43,
+        "text": "5. PROPHET 모델 설명 참고 링크 : https://facebook.github.io/prophet/ 시계열 데이터의 예측을 위해 Facebook에서 개발한 오픈소스 라이브러리 자동화된 이상 탐지 및 계절성 분석 지원 특히, 매출, 사용자 수, 웹 트래픽과 같은 비즈니스 예측에 유용",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 44,
+        "text": "5. PROPHET 모델 설명 주요 기능 1. 추세 변동 선형 및 비선형 추세 모델링을 지원하여 장기적인 추세를 모델링할 수 있다. 2. 계절성 연간 계절성과 주간 계절성을 포함하며 데이터의 주기적인 변동을 모델링할 수 있다. 3. 휴일 효과 공휴일 및 특별 이벤트에 대한 효과를 반영할 수 있다. 4. 결측치 처리  자동으로 결측치를 처리하고 불규칙한 시계열 데이터를 다룰 수 있다. 5. 이상치 처리 이상치에 강건한 모델링을 제공한다.",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 45,
+        "text": "5. PROPHET 주요 코드 [STEP 1] 데이터 준비 Prophet에서 요구하는 데이터 형식에 맞춰 datetime을 ds로, value를 y로 설정 [STEP 2]  Prophet 모델 학습 및 예측 Prophet 모델 불러온 후, 시계열 데이터를 학습하고 향후 1년 동안의 값을 예측",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 46,
+        "text": "5. PROPHET 주요 코드 [STEP 3] 예측 결과 시각화 실제값을 검정점, 예측값을 파란선으로 신뢰구간과 함께 시각화 Prophet이 예측한 주요 구성 요소 (트렌드, 주기성, 연간 변동성 등)를 시각화",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 47,
+        "text": "5. PROPHET 주요 코드 [STEP 4] 모델 성능 평가 MEAN ABSOLUTE ERROR (MAE): 16.4096 ROOT MEAN SQUARED ERROR (RMSE): 21.2526",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 48,
+        "text": "5. PROPHET 결과(2025년 환율 예측) 저번주부터 실제 환율과 비교 평균 오차: 약 39.9975원 TEMPO와 비교했을 때 2025년 환율이 더 변동성있게 잘 예측 → 최근 발생한 비상계엄 선포와 대통령 탄핵과 같이 정치적으로 불안정한 상황으로 인한 환율 변동 예측에는 어려움",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 49,
+        "text": "SECTION 06 환차익 전략 수립",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 50,
+        "text": "6. 환차익 전략 수립 외환(Forex, FX) 마진 거래 외환(Forex, FX) 마진 거래는 전 세계 통화(외환)를 사고파는 투자 방식으로, 레버리지를 활용하여 적은 자본으로도 큰 규모의 거래가 가능한 특징 통화쌍(Currency Pair) 거래 모든 거래는 두 개의 통화로 이루어지며, 예를 들어 USD/KRW = 1,300이 면 1달러당 1,300원의 가치가 있다는 의미로 해석됨. 롱(Long) & 숏(Short) 투자 가능 롱(Long, 매수): 통화 가치가 상승할 것으로 예상될 때 매수 숏(Short, 매도): 통화 가치가 하락할 것으로 예상될 때 매도",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 51,
+        "text": "6. 환차익 전략 수립 TEMPO vs PROPHET 두 모델에 대해서 나온 예측값을 바탕으로 외환(Forex, FX) 마진 거래 진행 TEMPO 수익률 0.72% PROPHET 수익률 0.52%",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 52,
+        "text": "6. 환차익 전략 수립 Tempo 모델 기반 예측 트레이딩 (신뢰도 필터 적용) long / short 신뢰도  > 70% stay 신뢰도 < 70%",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 53,
+        "text": "6. 환차익 전략 수립 Tempo 모델 기반 예측 트레이딩 (신뢰도 필터 적용) TEMPO 0.72% TEMPO (신뢰도 필터 적용) 0.85%",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    },
+    {
+        "slide": 54,
+        "text": "감사합니다. Presented by: 시계열 1조: 문예림 박보희 양태원 이수민 이수아 이채연",
+        "title": "TEMPO 모델을 활용한 원달러 환율 변동 예측 및 환차익 전략 수립",
+        "info": "1415V",
+        "kategorie": "시계열"
+    }
+]

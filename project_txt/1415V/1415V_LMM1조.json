@@ -1,0 +1,142 @@
+[
+    {
+        "slide": 1,
+        "text": "Generating... Retrieval might be all you need...? Retrieval-Augmented Diffusion Model 활용한 Text2Image 광고 이미지 생성 LMM(Large Multimodal Model) 조",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 2,
+        "text": "Contents 진행 목차 TEAM LMM 팀원 소개 Motivation 프로젝트 배경 생성모델과 LLM 광고 이미지 생성의 필요성 Pipeline 프로젝트 소개 프로젝트 스터디 모델 파이프라인 Model 사용 모델 소개 모델 수정 RDM 구현 Experiment 실험 및 최적화 Evaluation 최종 평가 Follow-up 한계점 후속 과제",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 3,
+        "text": "Team LMM 팀원 소개 김민열 일단 팀장임 하루에 헬스장 2번 감 우동협 일개미(운영진)임 스티브 잡스임 김홍재 일개 팀원임 이 파원포인트 만들고 있음 이지영 일개 팀원임 왕누님(왕언니)이심 황서현 일개 팀원임 팀의 에이스임",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 4,
+        "text": "Motivation 생성 모델의 발전과 LMM Generation Model 생성 모델 데이터를 학습하여 유사한 분포를 따르는 데이터를 생성 Model : GAN / VAE / Stable Diffusion Task : Text Generation, Text2Image Large Multimodal Model LMM 텍스트/이미지/오디오 등 여러 유형의 데이터를 통합하여 처리할 수 있는 모델 GPT 4V를 시작으로 이미지와 오디오 분석 가능",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 5,
+        "text": "Motivation 광고 이미지 생성의 필요성 Advertisment 광고와 생성 모델로 광고를 생성한다면? 시공간적 제약없이 광고 이미지 생성 광고 비용 절감 촬영한 이미지에 대해 원하는 바리에이션 적용 가능 Usability 광고 생성의 활용성 광고주의 의도를 반영한 프로토타입 생성 프롬프트 입력이나 유사한 이미지를 제공하여 광고의 초안 생성 광고의 개인화 개인화된 추천시스템에 맞추어 이용자의 성향에 적합한 광고를 유도 생성 품질을 개선할 수 있는 방법 모색 조건 출족 조건 이미지를 입력에 추가 품질 개선 RAG를 활용한 최근접 이미지 검색 및 보충 높은 품질과 조건 충족도의 이미지 요구",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 6,
+        "text": "Diffusion Model 디퓨전 모델 소개 Latent Diffusion Model LDM 픽셀 단위가 아닌, 잠재공간에서 Diffusion 과정을 수행하는 모델 주요 구성요소 VAE : 픽셀 단위의 이미지를 저차원의 잠재공간으로 변환 U-NET : 잠재 공간 상에서 Denoising Process 수행 High-Resolution Image Synthesis with Latent Diffusion Models (2021) Kandinsky Model 칸딘스키 모델 CLIP + LDM CLIP : 입력한 텍스트를 U-NET이 이해하도록 임베딩 이미지와 텍스트 조합하여 입력으로 제공 가능",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 7,
+        "text": "Retrieval-Augmented Diffusion Model RAG를 적용한 RDM Retrieval-Augmented Generation RAG LMM의 출력에서 응답을 생성하기 전에 외부의 신뢰할 수 있는 지식 베이스를 참조하는 프로세스 이점 : 사용자가 요구하는 도메인이나 실시간 정보 제공 가능 Retrieval-Augmented Diffusion Model RDM CLIP 잠재공간에 대해 검색을 수행하여 생성의 품질을 높이는 디퓨전 모델 쿼리와 유사한 Top-K의 이미지를 추출하여 LDM 모델의 U-NET에 반영",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 8,
+        "text": "Study 생성 모델 스터디 필요한 개념 학습 for RDM(Retrieval-Augemented Diffusion Model) VAE 잠재공간과 근사 분포 q(x)를 이용한 생성 오토인코더 VAE를 발전시킨 VQ-VAE = RDM의 인코더/디코더 CLIP 대조 학습을 통해 대량의 이미지-텍스트 관계 모델링 CLIP = RDM의 조건부 공간 U-NET 잔차 연결을 추가하여 고차원 데이터를 보충한 오토인코더 U-NET = RDM에서 Denoising Process 학습 Diffusion 노이즈를 더하고 복원하면서 유사한 데이터 생성 Diffusion = RDM의 Diffusion Process RAG 외부 DB에 검색을 수행하여 출력 품질을 높이는 방법 RAG의 DB = 생성 시 활용하는 이웃 Top-k 보관",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 9,
+        "text": "Pipeline 파이프라인 Model Retrieval-Augmented Diffusion Model x VQ-VAE ENCODER Diffusion Process U-NET Denoising process VQ-VAE DECODER x~ Cross-Attention Pre- trained OUTPUT Vector DB Retrieval Nearest K CLIP TEXT INPUT Our Task",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 10,
+        "text": "Model 사용 모델 Model Library 모델 라이브러리 https://github.com/huggingface/diffusers/pipelines/kandinsky 모델 : huggingface의 KandinskyPriorPipeline 수정 파일을 불러와 목적에 맞게 수정 수정 방법 DB에서 검색한 데이터를 입력으로 받을 수 있도록 구조 변경 검색된 데이터를 조건부 데이터에 삽입하여 모델의 생성 과정에 반영",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 11,
+        "text": "Model 모델 수정 Model Modification 이미지 벡터DB 구축 FAISS DB 구축 고화질 이미지 수집 : Unplash 배경화면 공유 사이트 총 1300장 수집 데이터 구성 Animal 500장 Background 300장 Animal with human 500장",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 12,
+        "text": "Model 모델 수정 Model Modification 가장 유사한 Top-K 이미지 검색 입력 쿼리를 통해 DB 이미지 검색 입력 쿼리와 이미지간 L2 거리를 통해 유사한 이미지 검색 입력 쿼리와 이미지간 코사인 유사도를 통해 유사한 이미지 검색 L2 거리란 벡터 간 직선 거리 거리가 가까울수록 유사한 이미지 코사인 유사도 벡터 간 방향 유사도 벡터 간의 방향이 비슷할수록 유사한 이미지",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 13,
+        "text": "Experiment 실험 설계 Model Modification 입력 세팅 Kandinsky를 통한 광고 이미지 생성 INPUT 네이비 패브릭과 베이지 가죽 디테일이 어우러진 스타일리 시한 반려견 목걸이입니다. 골드 톤 버클과 어울리는 태그가 특징입니다. 목걸이를 착용한 반려견이 쿠션에 앉아 주인을 사랑스러운 눈빛으로 바라보고 있는 모습입니다. 노란색 후드티를 입은 귀여운 강아지가 스타일리시한 소파에 앉아 따뜻하고 아늑한 거실을 둘러보고 있습니다. 부드러운 조명이 공간을 가득 채우고 푹신한 쿠션에 부드러운 그림자를 드리웁니다. 편안함과 따뜻함이 느껴지는 차분하고 매력적인 분위기입니다.",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 14,
+        "text": "Experiment 실험 1 _ DB 활용 Model Modification DB 사용 효과 DB에 따른 Kandinsky 광고 이미지 생성 결과 1 : 입력 텍스트 + 입력 이미지만으로 생성 결과 2 : 입력 텍스트 + 입력 이미지 + 텍스트 이웃 이미지 입력 프롬프트를 검색어로 활용 입력 프롬프트를 통한 DB 검색 DB 데이터 중 3개의 이웃 이미지 검색 각 이미지에 가중치 부여하여 생성에 반영 가중치는 입력 프롬프트와 DB 속 이미지 간의 거리로 산출 생성 품질 개선 KEYBERT를 통한 쿼리 내 키워드 추출 쿼리문 수정",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 15,
+        "text": "Experiment 실험 2 _ 서브쿼리 추가 Model Modification 서브 쿼리 사용 GPT 4o에 템플릿을 입력하여 쿼리문 가공 Example : 애견 카페를 만들고 싶어. 아이가 강아지와 함께 노는 모습 이 나오고 부모님은 멀리서 커피를 마시고 있는 모습이면 좋겠어. Task 1 : 쿼리문으로부터 생성 이미지에 반영되어야할 시각 요소 추출 애견카페 아이가 강아지와 노는 모습 커피 마시는 부모님 각 요소별로 검색 수행 검색 이미지 Task 2 : 각 시각 요소별로 중요도 산출(0~1) 애견카페 : 0.35 아이가 강아지와 노는 모습 : 0.4 커피 마시는 부모님 : 0.25 입력 이미지 Task 3 : 쿼리문 요약 텍스트 생성 중요도에 비례하게 검색하는 사진 수 증가 아이와 강아지가 함께 놀고 부모님은 커피를 마시고 있는 애견카페 목줄 광고에 서브쿼리 적용 최종 쿼리로 사용 입력 텍스트 쿼리만족도 향상",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 16,
+        "text": "Experiment 실험 3 _ 쿼리 난이도 조절 Model Modification 새로운 쿼리 GPT 4o에 템플릿을 입력하여 쿼리문 가공 노란색 후드티를 입은 귀여운 강아지가 스타일리시한 소파에 앉아 따뜻하고 아늑한 거실을 둘러보고 있습니다. 부드러운 조명이 공간을 가득 채우고 푹신한 쿠션에 부드러운 그림자를 드리웁니다. 편안함과 따뜻함이 느껴지는 차분하고 매력적인 분위기입니다. 분위기 반영 형체가 바뀌기 쉬운 소재인 옷 서브 쿼리 충족 여부 A cute dog wearing a yellow hoodie(0.4) : O A stylish sofa(0.2) : O A warm and cozy living room(0.2) : X Soft lighting casting gentle shadows(0.1) : X Plush cushions(0.1) : X 새로운 쿼리+이미지에 서브쿼리 적용 분위기 반영 아쉽...",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 17,
+        "text": "Rimberio Meal Delivery Experiment Model Modification DB 검색 시 데이터 필터링 추가 쿼리가 복잡해질수록 서브 쿼리와 검색 사진 증가 임계치를 기준으로 이미지 간 코사인 유사도를 계산하고 평가 A cute dog wearing a yellow hoodie(0.4) : O A stylish sofa(0.2) : O A warm and cozy living room(0.2) : O Soft lighting casting gentle shadows(0.1) : O Plush cushions(0.1) : O 서브 쿼리 충족 여부 서브쿼리별로 배타적인 사진이 추출되어 복잡한 쿼리문 처리 실험 4 _ 데이터 필터링 코사인 유사도 계산을 통해 중복 이미지 제거 새로운 쿼리+이미지에 서브쿼리 적용 Query \bsimilar A cute dog wearing a yellow hoodie A stylish sofa A warm and cozy living room",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 18,
+        "text": "최종 평가 Evaluation 결과 평가 이미지 생성의 조력자 역할 복잡한 쿼리의 처리 RESULT First Question Retrival might be all you need...? 프로젝트의 목적 높은 품질의 이미지 획득 높은 조건(query) 충족도 달성 Retrival might be what you need. 부자연스러운 이미지 개선 쿼리를 분해하여 각각 처리 부족한 이미지 추가 보충",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 19,
+        "text": "후속과제 Task에 따라 입력 이미지가 변환된 상태로 출력 입력 이미지가 실제 제품이라면 제품의 왜곡 발생 입력 이미지 반영의 어려움 DB에 보관된 데이터가 많을수록 쿼리 만족도 상승 이미지 DB의 다양성 부족 광고주의 의도를 반영한 생성 모델 구축 광고 소비자의 성향을 반영한 모델을 지향한다면 광고의 개인화, 절반의 성공 Limitations 한계점 Follow-up tasks 입력 이미지의 가중치 조절 DB 규모 확장 소비자 맞춤형 광고 생성 Task에 맞게 입력 이미지의 가중치를 유동적으로 조정하는 방법 모색 보다 다양한 이미지를 대상으로 벡터DB를 구축 사용자의 성향을 조건부나 쿼리로 받아 결과물에 관여",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    },
+    {
+        "slide": 20,
+        "text": "감사합니다! Thank You! Snoop Bull Dog 번외로 만들어본 거대한 체인을 두른 힙합 불독",
+        "title": "Retrieval Might Be All You Need",
+        "info": "1415V",
+        "kategorie": "LMM(대형 멀티모달 모델)"
+    }
+]

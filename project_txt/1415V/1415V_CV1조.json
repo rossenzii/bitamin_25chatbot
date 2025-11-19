@@ -1,0 +1,135 @@
+[
+    {
+        "slide": 1,
+        "text": "딥러닝 기반 SuperResolution 모델을 활용한 Facial Image 업스케일링 Computer Vision 1조 임은석 차승현 장민지 김지호",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 2,
+        "text": "주제소개 및 추진 배경 Super Resolution에서의 CNN 아키텍처 - SRCNN을 중심으로 Super Resolution에서의 Transformer 아키텍처 - Swin2SR을 중심으로 Super Resolution에서의 GAN 아키텍처 - ESRGAN, GFPGAN, HiFaceGAN을 중심으로 데이터 수집, 증강 & 전처리 Super Resolution 평가 지표 Super Resolution 성능 평가 및 비교 마무리",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 3,
+        "text": "주제 소개 및 추진 배경 1919.03.01",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 4,
+        "text": "주제 소개 및 추진 배경",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 5,
+        "text": "주제 소개 및 추진 배경 Super Resolution? Low-resolution image High-resolution image",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 6,
+        "text": "SR에서의 CNN 아키택처 - SRCNN을 중심으로 SRCNN 간단한 CNN 구조를 SR 분야에 최초로 적용한 딥러닝 모델 ill-posed problem HR을 target으로 설정 모델 구조 LR-HR 쌍데이터 생성 Patch Extraction and Representation Non-linear Mapping Reconstruction Y 채널에 대해서만 소해상도 작업을 진행",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 7,
+        "text": "SR에서의 Transformer 아키텍처 - Swin2SR을 중심으로 CNN Based Image Restoration의 문제점? (1) images와 convolutional kernels 간의 interaction이 content-independent (2) convolution long-range dependency 효과적 모델링의 불가",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 8,
+        "text": "SR에서의 Transformer 아키텍처 - Swin2SR을 중심으로",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 9,
+        "text": "SR에서의 GAN 아키텍처 - ESRGAN을 중심으로 ESRGAN 기존 SRResNet 구조는 그대로 가져가면서 Block만 교체 BN layer가 빠지고 Residual conntection, Dense connection 함께 사용 모델 구조 Residual-in-Residual Dense Block Relativistic GAN Perceptual Loss",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 10,
+        "text": "SR에서의 GAN 아키텍처 - GFPGAN을 중심으로 GFPGAN (Generative Facial Prior GAN) 저화질 얼굴 이미지를 자연스럽게 복원하기 위해 얼굴의 고유 특징(prior)을 활용 기존 GAN 역변환 방식의 문제들 해결하고자 단일 순전파 사용 모델 구조 열화 제거 모물(Degradation Removal Module) 사전 학습된 얼굴 생성 네트위크(Pretrained Gan as Prior) CS-SFT (Channel Split SFT)",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 11,
+        "text": "SR에서의 GAN 아키택처 - HiFaceGAN을 중심으로 HiFaceGAN 모델의 목표 화질 저화 유형과 얼굴의 구조적 정보 없이 얼굴 이미지를 복원하는 것 CSR 구조 Suppression 모듈 + Replenishment 모듈 하위 단계에서는 얼굴의 큰 구조를 복원, 상위 단계로 갈수록 세부적 특징 복원",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 12,
+        "text": "데이터 수집, 증강 & 전처리 데이터 수집 CelebA; flickr-faces: 고해상도 이미지 100,000장 선별 데이터 증강 & 전처리 회전, 픽셀 조정, 명도 및 밝기 변경 등 mod-crop: 이미지의 비율을 유지하면서 특정 크기로 이미지를 자르도록 크기 조정 Gaussian Blur, Downsampling, Upsampling",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 13,
+        "text": "Super Resolution 평가 지표 1) PSNR 원본 이미지와 복원된 이미지 간의 픽셀 값 차이를 측정하는 지표. 단위: dB(데시벨), 값이 클수록 원본과 가까운 이미지. 여기서 Max_I는 이미지의 최대 픽셀 값, MSE는 Mean Square Error를 의미하며, 인간의 시각적 품질과 완전히 일치하지 않는다는 단점이 존재함. 2) SSIM 이미지의 구조, 밝기, 대비를 고려하여 유사성을 평가하는 지표로, -1~1의 범위를 가짐. (1에 가까울수록 원본과 유사함을 의미) PSNR보다 인간의 시각과 더 잘 부합하지만, 국소적 차이를 무시할 수 있음. 3) LPIPS 딥러닝 모델(VGG, AlexNet 등)을 사용하여 시각적 유사성을 축정함. 0~1의 범위를 가짐. (0에 가까울수록 원본과 유사함) 인간의 시각적 인식과 가장 잘 맞는 평가 방식이지만 계산 비용이 큼.",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 14,
+        "text": "성능 비교 원본 이미지 저화질 변환 SRCNN Swin2SR ESRGAN GFPGAN HiFaceGAN 원본 이미지 저화질 변환 SRCNN Swin2SR ESRGAN GFPGAN HiFaceGAN",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 15,
+        "text": "성능 비교 저화질 변환 SRCNN Swin2SR ESRGAN GFPGAN HiFaceGAN 저화질 변환 SRCNN Swin2SR ESRGAN GFPGAN HiFaceGAN",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 16,
+        "text": "성능 비교 저화질 변환 SRCNN Swin2SR ESRGAN GFPGAN HiFaceGAN 저화질 변환 SRCNN Swin2SR ESRGAN GFPGAN HiFaceGAN",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 17,
+        "text": "HiFaceGAN 모델이 PSNR과 SSIM에서 최고 성능을 보임 화질 및 구조적 유사성 우수 ESRGAN 모델이 LPIPS에서 최저값을 달성함 인간이 인식하는 품질 가장 종음",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 18,
+        "text": "",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    },
+    {
+        "slide": 19,
+        "text": "감사합니다",
+        "title": "딥러닝 기반 SuperResolution 모델을 활용한 facial image 업스케일링",
+        "info": "1415V",
+        "kategorie": "CV(컴퓨터비전)"
+    }
+]
