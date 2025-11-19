@@ -4,7 +4,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_community.document_loaders import JSONLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from config.settings import DATA_DIR_PATH, FAISS_INDEX_PATH, OPEN_API_KEY
+from config.settings import DATA_DIR_PATH, FAISS_INDEX_PATH, OPENAI_API_KEY
 
 # JSON 구조 정의
 JQ_SCHEMA = '.[]'
@@ -58,7 +58,7 @@ def build_and_save_index():
 
     # embedding 및 FAISS 생성
     print("FAISS 인덱스 생성 및 저장 중..")
-    embeddings = OpenAIEmbeddings(openai_api_key=OPEN_API_KEY)
+    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     vectorstore = FAISS.from_documents(documents=splits, embedding=embeddings)
 
     # 저장

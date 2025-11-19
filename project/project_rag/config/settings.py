@@ -9,5 +9,5 @@ DATA_DIR_PATH = [
     os.path.join(BASE_DIR, "..", "..", "..", "project_txt", "1415S")
 ]
 FAISS_INDEX_PATH = os.path.join(BASE_DIR, "..", "rag_faiss_index")
-OPEN_API_KEY = os.getenv("OPEN_API_KEY")
+OPENAI_API_KEY = os.getenv("OPEN_API_KEY")
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
