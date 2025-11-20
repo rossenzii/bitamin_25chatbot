@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI
 from langchain.schema import BaseRetriever, Document
 from typing import List, Any
-from config.settings import OPEN_API_KEY
+from config.settings import OPENAI_API_KEY
 from retrievers.vector_retriever import get_vector_retriever
 from retrievers.bm25_retriever import get_bm25_retriever
 from chains.question_classifier import create_question_classifier, create_type_chains

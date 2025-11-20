@@ -24,7 +24,7 @@ def create_question_classifier(llm_model: str = "gpt-4o-mini"):
         """),
         ("human", "{question}")
     ])
-    llm = ChatOpenAI(model=llm_model, temperature=0, openai_api_key=OPEN_API_KEY)
+    llm = ChatOpenAI(model=llm_model, temperature=0, openai_api_key=OPENAI_API_KEY)
     classifier_chain = prompt | llm | StrOutputParser()
     return classifier_chain
 
@@ -33,7 +33,7 @@ def create_type_chains():
     from prompts.question_prompts import (
         TYPE_1_PROMPT, TYPE_2_PROMPT, TYPE_3_PROMPT, TYPE_4_PROMPT, DEFAULT_PROMPT
     )
-    llm_model = ChatOpenAI(model="gpt-4o-mini", temperature=0, openai_api_key=OPEN_API_KEY)
+    llm_model = ChatOpenAI(model="gpt-4o-mini", temperature=0, openai_api_key=OPENAI_API_KEY)
 
     type_1_chain = TYPE_1_PROMPT | llm_model
     type_2_chain = TYPE_2_PROMPT | llm_model
