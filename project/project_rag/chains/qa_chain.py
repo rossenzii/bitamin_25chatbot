@@ -34,8 +34,18 @@ def create_hybrid_chain():
 
     # 전체 체인
     preprocess = RunnableLambda(lambda x: {
+        "question": x["question"],
         "type": classifier_chain.invoke({"question": x["question"]}),
-        "context": hybrid_retriever.invoke(x["question"])
+        "context": "\n\n".join(
+            [
+                f"[DOC {i}]\n"
+                f"title: {doc.metadata.get('title', '')}\n"
+                f"info: {doc.metadata.get('info', '')}\n"
+                f"kategorie: {doc.metadata.get('kategorie', '')}\n"
+                f"text: {doc.page_content}"
+                for i, doc in enumerate(hybrid_retriever.invoke(x["question"]))
+            ]
+        )
     })
 
     full_chain = preprocess | type_branch | StrOutputParser()
