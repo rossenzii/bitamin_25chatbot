@@ -14,7 +14,11 @@ def get_vector_retriever():
     
     retriever = vectorstore.as_retriever(
         search_type="similarity",
-        search_kwargs={'k': 6}
+        search_kwargs={
+            'k': 10,
+            'fetch_k': 20,
+            'lambda_mult': 0.5
+            }
     )
     
     print("검색기 생성 완료")

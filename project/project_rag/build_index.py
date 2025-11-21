@@ -49,7 +49,7 @@ def build_and_save_index():
             
             doc.page_content = f"제목: {title}\n정보: {info}\n카테고리: {kategorie}\n내용: {text}"
         
-        all_docs.extend(loader.load())
+            all_docs.append(doc)
     print(f"총 {len(all_docs)}개 문서 로드 완료")
 
     # 분할
