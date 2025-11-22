@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI
 from langchain.schema import BaseRetriever, Document
 from typing import List, Any
-from config.settings import OPEN_API_KEY
+from config.settings import OPENAI_API_KEY
 from retrievers.vector_retriever import get_vector_retriever
 from retrievers.bm25_retriever import get_bm25_retriever
 from chains.question_classifier import create_question_classifier, create_type_chains
@@ -34,8 +34,23 @@ def create_hybrid_chain():
 
     # 전체 체인
     preprocess = RunnableLambda(lambda x: {
+<<<<<<< HEAD
         "type": classifier_chain.invoke({"question": x["question"]}),
         "context": hybrid_retriever.invoke(x["question"])
+=======
+        "question": x["question"],
+        "type": classifier_chain.invoke({"question": x["question"]}),
+        "context": "\n\n".join(
+            [
+                f"[DOC {i}]\n"
+                f"title: {doc.metadata.get('title', '')}\n"
+                f"info: {doc.metadata.get('info', '')}\n"
+                f"kategorie: {doc.metadata.get('kategorie', '')}\n"
+                f"text: {doc.page_content}"
+                for i, doc in enumerate(hybrid_retriever.invoke(x["question"]))
+            ]
+        )
+>>>>>>> hr
     })
 
     full_chain = preprocess | type_branch | StrOutputParser()
