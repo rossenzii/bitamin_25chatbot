@@ -13,3 +13,6 @@ __pycache__/
 rag-env/
 *.pyc
 __pycache__/
+
+.venv/
+.venv-1/
