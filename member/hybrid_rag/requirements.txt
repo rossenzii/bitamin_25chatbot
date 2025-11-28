@@ -1,0 +1,29 @@
+# Member Hybrid RAG 챗봇 필수 패키지
+
+# LangChain 핵심 패키지
+langchain>=0.1.0
+langchain-openai>=0.1.0
+langchain-community>=0.0.20
+langchain-huggingface>=0.0.1
+langchain-core>=0.1.0
+
+# LangChain Classic (langchain 1.0 호환성)
+langchain-classic>=0.0.1
+
+# Transformers 및 HuggingFace
+transformers>=4.30.0
+torch>=2.0.0
+sentencepiece>=0.1.99
+
+# FAISS 벡터 스토어
+faiss-cpu>=1.7.4
+
+# 환경 변수 관리
+python-dotenv>=1.0.0
+
+# 수치 연산
+numpy>=1.24.0
+
+# 기타 유틸리티
+tqdm>=4.65.0
+
