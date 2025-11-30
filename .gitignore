@@ -1,4 +1,3 @@
-
 ## DB
 member_db/*.xlsx
 member_db/info1516.json
@@ -6,13 +5,41 @@ member_db/info1516.json
 ## env
 .env
 
+## 가상환경
 rag-env/
-__pycache__/
-.DS_Store
-
-rag-env/
-*.pyc
-__pycache__/
-
 .venv/
 .venv-1/
+
+## Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+## FAISS 인덱스 파일 (대용량)
+**/rag_faiss_index/
+**/faiss_index/
+*.faiss
+*.pkl
+index.faiss
+index.pkl
+
+## 대용량 데이터 파일
+*.pdf
+project_db/
+project_txt/
+tami/data_sources/
+
+## IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+## 로그 및 임시 파일
+*.log
+*.tmp
+*.cache
