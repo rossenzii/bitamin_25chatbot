@@ -1,0 +1,15 @@
+langchain==0.0.284
+langchain-community==0.0.8
+langchain-openai==0.0.3
+langchain-experimental
+
+openai>=1.6.1,<2.0.0
+
+faiss-cpu==1.7.4
+transformers==4.31.0
+torch>=2.0.0
+sentencepiece
+
+python-dotenv
+numpy
+tqdm

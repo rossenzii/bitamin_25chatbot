@@ -5,13 +5,16 @@ from typing import List, Dict, Any
 from datetime import datetime
 
 from langchain.schema import Document
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain_community.vectorstores import FAISS
-from langchain_experimental.text_splitter import SemanticChunker
 from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
-from langchain.retrievers import EnsembleRetriever
+from langchain_community.vectorstores import FAISS
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.retrievers import BM25Retriever
+from langchain.retrievers import EnsembleRetriever
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain.prompts import PromptTemplate
+
+# QA Chain import
+from chains.qa_chain import create_hybrid_qa_chain
 
 # ========================================
 # Main 함수 QA 테스트

@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 import os
 import json
 import re
@@ -9,13 +8,37 @@ from datetime import datetime
 from langchain.schema import Document
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
-from langchain_experimental.text_splitter import SemanticChunker
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.retrievers import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever
 
->>>>>>> hr
+
+
+def extract_keywords(text: str) -> List[str]:
+    """텍스트에서 주요 키워드 추출"""
+    if not text or text == "null" or not isinstance(text, str):
+        return []
+    
+    # 줄바꿈을 공백으로
+    text = text.replace('\n', ' ')
+    
+    # 일반적인 단어들 (제외할 불용어)
+    stopwords = {'을', '를', '이', '가', '은', '는', '의', '에', '와', '과', '도', '로', '으로', 
+                 '및', '등', '수', '것', '때', '등을', '있는', '하는', '통해', '위한', '대한'}
+    
+    # 단어 추출 (2글자 이상)
+    words = re.findall(r'[가-힣a-zA-Z]{2,}', text)
+    
+    # 불용어 제거 & 소문자 변환
+    keywords = [w.lower() for w in words if w not in stopwords]
+    
+    # 중복 제거 & 상위 10개
+    keywords = list(dict.fromkeys(keywords))[:10]
+    
+    return keywords
+
 #단일 문서 document전환 함수
 def create_document(item: Dict, doc_type: str, platform: str) -> Document:
     """JSON 항목을 LangChain Document로 변환"""
@@ -75,18 +98,6 @@ def create_document(item: Dict, doc_type: str, platform: str) -> Document:
     
     return Document(page_content=page_content, metadata=metadata)
 
-# 테스트
-test_item = {
-    "제목": "테스트 대회",
-    "배경": "AI 개발",
-    "설명": "머신러닝 모델 개발",
-    "Url": "https://test.com"
-}
-test_doc = create_document(test_item, "competition", "test")
-print("생성된 Document:")
-print(f"내용: {test_doc.page_content[:100]}...")
-print(f"메타데이터: {test_doc.metadata}")
-
 #모든 문서 documents 전환
 def create_all_documents(data_sources: List[Dict]) -> List[Document]:
     """모든 데이터 소스를 Document로 변환"""
@@ -116,74 +127,87 @@ def create_all_documents(data_sources: List[Dict]) -> List[Document]:
     
     return all_documents
 
-# 실행
-print("=" * 70)
-print("Document 생성 시작")
-print("=" * 70)
-
-documents = create_all_documents(data_sources)
-
-print("\n" + "=" * 70)
-print(f" 총 {len(documents)}개 Document 생성 완료!")
-print("=" * 70)
-
-# 샘플 확인
-if documents:
-    print("\n 샘플 Document:")
-    print(f"내용: {documents[0].page_content[:200]}...")
-    print(f"메타데이터: {documents[0].metadata}")
-
-# ========================================
-# 원본 데이터 중복 제거
-# ========================================
-print("=" * 70)
-print("중복 데이터 제거")
-print("=" * 70)
-
-# 1. 중복 확인
-print(f"\n 원본 문서: {len(documents)}개")
-
-# 제목 기준 중복 확인
-seen_titles = {}
-duplicates = []
-
-for i, doc in enumerate(documents):
-    title = doc.metadata.get('title', f'Unknown_{i}')
+# 모듈 레벨 실행 코드는 if __name__ == "__main__" 블록으로 감싸기
+# 다른 파일에서 import할 때는 실행되지 않도록 함
+if __name__ == "__main__":
+    # data_sources는 load_data.py에서 가져와야 함
+    try:
+        from data.load_data import data_sources
+    except ImportError:
+        print("⚠ data_sources를 찾을 수 없습니다. load_data.py를 먼저 실행하세요.")
+        data_sources = []
     
-    if title in seen_titles:
-        duplicates.append((i, title, seen_titles[title]))
+    # 실행
+    print("=" * 70)
+    print("Document 생성 시작")
+    print("=" * 70)
+    
+    if data_sources:
+        documents = create_all_documents(data_sources)
     else:
-        seen_titles[title] = i
+        documents = []
 
-print(f" 중복 발견: {len(duplicates)}개")
-
-if duplicates:
-    print(f"\n 중복 예시 (처음 5개):")
-    for i, (idx, title, orig_idx) in enumerate(duplicates[:5], 1):
-        print(f"  {i}. '{title[:50]}'")
-        print(f"     원본 인덱스: {orig_idx}, 중복 인덱스: {idx}")
-
-# 2. 중복 제거 (제목 기준)
-unique_docs = []
-seen_titles = set()
-
-for doc in documents:
-    title = doc.metadata.get('title', '')
-    
-    if title not in seen_titles:
-        unique_docs.append(doc)
-        seen_titles.add(title)
-
-print(f"\n 중복 제거 완료!")
-print(f"   원본: {len(documents)}개")
-print(f"   제거 후: {len(unique_docs)}개")
-print(f"   제거됨: {len(documents) - len(unique_docs)}개")
-
-# 3. 중복 제거된 데이터 사용
-documents = unique_docs
-chunked_docs = documents  # Chunking 안 함
-
-print("=" * 70)
+        print("\n" + "=" * 70)
+        print(f" 총 {len(documents)}개 Document 생성 완료!")
+        print("=" * 70)
+        
+        # 샘플 확인
+        if documents:
+            print("\n 샘플 Document:")
+            print(f"내용: {documents[0].page_content[:200]}...")
+            print(f"메타데이터: {documents[0].metadata}")
+        
+        # ========================================
+        # 원본 데이터 중복 제거
+        # ========================================
+        print("=" * 70)
+        print("중복 데이터 제거")
+        print("=" * 70)
+        
+        # 1. 중복 확인
+        print(f"\n 원본 문서: {len(documents)}개")
+        
+        # 제목 기준 중복 확인
+        seen_titles = {}
+        duplicates = []
+        
+        for i, doc in enumerate(documents):
+            title = doc.metadata.get('title', f'Unknown_{i}')
+            
+            if title in seen_titles:
+                duplicates.append((i, title, seen_titles[title]))
+            else:
+                seen_titles[title] = i
+        
+        print(f" 중복 발견: {len(duplicates)}개")
+        
+        if duplicates:
+            print(f"\n 중복 예시 (처음 5개):")
+            for i, (idx, title, orig_idx) in enumerate(duplicates[:5], 1):
+                print(f"  {i}. '{title[:50]}'")
+                print(f"     원본 인덱스: {orig_idx}, 중복 인덱스: {idx}")
+        
+        # 2. 중복 제거 (제목 기준)
+        unique_docs = []
+        seen_titles = set()
+        
+        for doc in documents:
+            title = doc.metadata.get('title', '')
+            
+            if title not in seen_titles:
+                unique_docs.append(doc)
+                seen_titles.add(title)
+        
+        print(f"\n 중복 제거 완료!")
+        print(f"   원본: {len(documents)}개")
+        print(f"   제거 후: {len(unique_docs)}개")
+        print(f"   제거됨: {len(documents) - len(unique_docs)}개")
+        
+        # 3. 중복 제거된 데이터 사용
+        documents = unique_docs
+        chunked_docs = documents  # Chunking 안 함
+        
+        print("=" * 70)
 
 # ========================================
 # linkareer 대외활동/공모전 자동 구분
@@ -231,42 +255,20 @@ def classify_linkareer_type(item):
         # 동점이면 기본값
         return 'competition'
 
-# 테스트
-test_items = [
-    {"title": "2024 AI 아이디어 공모전", "content": "상금 1000만원"},
-    {"title": "카카오 서포터즈 모집", "content": "홍보 대외활동"},
-]
-
-for item in test_items:
-    result = classify_linkareer_type(item)
-    print(f"'{item['title']}' → {result}")
-
-def extract_keywords(text: str) -> List[str]:
-    """텍스트에서 주요 키워드 추출"""
-    if not text or text == "null" or not isinstance(text, str):
-        return []
-    
-    # 줄바꿈을 공백으로
-    text = text.replace('\n', ' ')
-    
-    # 일반적인 단어들 (제외할 불용어)
-    stopwords = {'을', '를', '이', '가', '은', '는', '의', '에', '와', '과', '도', '로', '으로', 
-                 '및', '등', '수', '것', '때', '등을', '있는', '하는', '통해', '위한', '대한'}
-    
-    # 단어 추출 (2글자 이상)
-    words = re.findall(r'[가-힣a-zA-Z]{2,}', text)
-    
-    # 불용어 제거 & 소문자 변환
-    keywords = [w.lower() for w in words if w not in stopwords]
-    
-    # 중복 제거 & 상위 10개
-    keywords = list(dict.fromkeys(keywords))[:10]
-    
-    return keywords
-
-# 테스트
-test_text = "ChatGPT\nAI\n머신러닝 딥러닝을 활용한 데이터 분석"
-print("테스트 결과:", extract_keywords(test_text))
+        # 테스트
+        test_items = [
+            {"title": "2024 AI 아이디어 공모전", "content": "상금 1000만원"},
+            {"title": "카카오 서포터즈 모집", "content": "홍보 대외활동"},
+        ]
+        
+        for item in test_items:
+            result = classify_linkareer_type(item)
+            print(f"'{item['title']}' → {result}")
+        
+        
+        # 테스트
+        test_text = "ChatGPT\nAI\n머신러닝 딥러닝을 활용한 데이터 분석"
+        print("테스트 결과:", extract_keywords(test_text))
 
 # JSON 로드 함수
 def load_json_data(file_path: str):
@@ -284,69 +286,69 @@ def load_json_data(file_path: str):
         print(f"    오류: {e}")
         return None
     
-    # ========================================
-# 플랫폼별 문서 개수 집계
-# ========================================
-from collections import Counter
-
-print("\n" + "=" * 70)
-print("플랫폼별 Document 개수")
-print("=" * 70)
-
-platform_counts = Counter(doc.metadata.get('platform', 'unknown') for doc in documents)
-
-for platform, count in platform_counts.items():
-    print(f"  {platform:15s} : {count}개")
-
-print("=" * 70)
-print(f"총 Document 수 : {sum(platform_counts.values())}개")
-# ========================================
-# 문서 길이 분석
-# ========================================
-import numpy as np
-
-# 모든 문서 길이 계산
-lengths = [len(doc.page_content) for doc in documents]
-
-print(" 문서 길이 통계:")
-print(f"   총 문서: {len(lengths)}개")
-print(f"   평균: {np.mean(lengths):.0f}자")
-print(f"   최소: {np.min(lengths)}자")
-print(f"   최대: {np.max(lengths)}자")
-print(f"   중간값: {np.median(lengths):.0f}자")
-print(f"   표준편차: {np.std(lengths):.0f}자")
-
-print("\n 길이별 분포:")
-ranges = [
-    (0, 300, "매우 짧음"),
-    (300, 500, "짧음"),
-    (500, 1000, "중간"),
-    (1000, 2000, "김"),
-    (2000, float('inf'), "매우 김")
-]
-
-for min_len, max_len, label in ranges:
-    count = sum(1 for l in lengths if min_len <= l < max_len)
-    percentage = count / len(lengths) * 100
-    print(f"   {label:10s} ({min_len:4d}~{max_len:5f}자): {count:5d}개 ({percentage:5.1f}%)")
-
-# 샘플 문서 확인
-print("\n 샘플 문서 (처음 3개):")
-for i, doc in enumerate(documents[:3], 1):
-    print(f"\n{i}. {doc.metadata.get('title', 'Unknown')[:50]}")
-    print(f"   길이: {len(doc.page_content)}자")
-    print(f"   내용: {doc.page_content[:150]}...")
-
-# ========================================
-# 최종 정리(Chunking 생략)
-# ========================================
-
-chunked_docs = documents
-
-print(f"  Chunking 생략 (문서가 충분히 짧음)")
-print(f"   총 문서: {len(chunked_docs)}개")
-print(f"   평균 길이: 150자")
-print(f"   93.4%가 300자 미만")
+        # ========================================
+        # 플랫폼별 문서 개수 집계
+        # ========================================
+        from collections import Counter
+        
+        print("\n" + "=" * 70)
+        print("플랫폼별 Document 개수")
+        print("=" * 70)
+        
+        platform_counts = Counter(doc.metadata.get('platform', 'unknown') for doc in documents)
+        
+        for platform, count in platform_counts.items():
+            print(f"  {platform:15s} : {count}개")
+        
+        print("=" * 70)
+        print(f"총 Document 수 : {sum(platform_counts.values())}개")
+        # ========================================
+        # 문서 길이 분석
+        # ========================================
+        import numpy as np
+        
+        # 모든 문서 길이 계산
+        lengths = [len(doc.page_content) for doc in documents]
+        
+        print(" 문서 길이 통계:")
+        print(f"   총 문서: {len(lengths)}개")
+        print(f"   평균: {np.mean(lengths):.0f}자")
+        print(f"   최소: {np.min(lengths)}자")
+        print(f"   최대: {np.max(lengths)}자")
+        print(f"   중간값: {np.median(lengths):.0f}자")
+        print(f"   표준편차: {np.std(lengths):.0f}자")
+        
+        print("\n 길이별 분포:")
+        ranges = [
+            (0, 300, "매우 짧음"),
+            (300, 500, "짧음"),
+            (500, 1000, "중간"),
+            (1000, 2000, "김"),
+            (2000, float('inf'), "매우 김")
+        ]
+        
+        for min_len, max_len, label in ranges:
+            count = sum(1 for l in lengths if min_len <= l < max_len)
+            percentage = count / len(lengths) * 100
+            print(f"   {label:10s} ({min_len:4d}~{max_len:5f}자): {count:5d}개 ({percentage:5.1f}%)")
+        
+        # 샘플 문서 확인
+        print("\n 샘플 문서 (처음 3개):")
+        for i, doc in enumerate(documents[:3], 1):
+            print(f"\n{i}. {doc.metadata.get('title', 'Unknown')[:50]}")
+            print(f"   길이: {len(doc.page_content)}자")
+            print(f"   내용: {doc.page_content[:150]}...")
+        
+        # ========================================
+        # 최종 정리(Chunking 생략)
+        # ========================================
+        
+        chunked_docs = documents
+        
+        print(f"  Chunking 생략 (문서가 충분히 짧음)")
+        print(f"   총 문서: {len(chunked_docs)}개")
+        print(f"   평균 길이: 150자")
+        print(f"   93.4%가 300자 미만")
 
 
 

@@ -7,7 +7,7 @@ from datetime import datetime
 from langchain.schema import Document
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
-from langchain_experimental.text_splitter import SemanticChunker
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.retrievers import EnsembleRetriever
@@ -23,7 +23,11 @@ print("=" * 70)
 import os
 import re
 from langchain_openai import ChatOpenAI
-from langchain.schema import HumanMessage
+
+# 필요한 의존성 import
+from config.settings import OPENAI_API_KEY
+from retrievers.hybrid_retrievers import get_hybrid_retriever
+from prompts.question_prompt import question_prompt
 
 def fix_urls_in_answer_v2(answer: str, docs: list) -> str:
     """
@@ -119,9 +123,8 @@ def create_hybrid_qa_chain(query: str = None):
             self.retriever = retriever
             self.prompt = prompt
         
-        def invoke(self, inputs):
-            query = inputs['query']
-            
+        def retrieve_context(self, query: str) -> str:
+            """문서 검색 및 컨텍스트 생성"""
             # 1. 문서 검색
             docs = self.retriever.get_relevant_documents(query)
             
@@ -155,21 +158,31 @@ def create_hybrid_qa_chain(query: str = None):
                 context_parts.append(context)
             
             context = "\n".join(context_parts)
+            return context
+        
+        def invoke(self, query_dict):
+            query = query_dict["query"]
             
-            # 3. 프롬프트 생성
+            # 컨텍스트 검색
+            context = self.retrieve_context(query)
+            
+            # 프롬프트 생성
             formatted_prompt = self.prompt.format(
-                context=context,
-                question=query
+                question=query,              # ← 프롬프트에서 요구하는 이름
+                context=self.retrieve_context(query)
             )
             
-            # 4. LLM 호출
+            # 🔥 ChatModel에 문자열만 전달
             print("\nLLM 답변 생성 중...")
-            response = self.llm.invoke([HumanMessage(content=formatted_prompt)])
+            response = self.llm.invoke(formatted_prompt)
             raw_answer = response.content
             
             print("LLM 답변 생성 완료")
             
-            # 5. URL 후처리
+            # 문서 다시 가져오기 (URL 후처리를 위해)
+            docs = self.retriever.get_relevant_documents(query)
+            
+            # URL 후처리
             print("\nURL 검증 및 교체 중...")
             fixed_answer = fix_urls_in_answer_v2(raw_answer, docs)
             print("URL 교체 완료")
