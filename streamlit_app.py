@@ -10,7 +10,17 @@ sys.path.insert(0, str(BASE_DIR))
 
 # 환경 변수 로드
 from dotenv import load_dotenv
+import os
+
+# Streamlit Cloud secrets 또는 .env 파일에서 환경 변수 로드
 load_dotenv()
+
+# Streamlit secrets에서 OPENAI_API_KEY 가져오기 (우선순위)
+if hasattr(st, 'secrets') and 'OPENAI_API_KEY' in st.secrets:
+    os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
+elif 'OPENAI_API_KEY' not in os.environ:
+    st.error("OPENAI_API_KEY가 설정되지 않았습니다. Streamlit Cloud의 Settings → Secrets에서 설정해주세요.")
+    st.stop()
 
 # 페이지 설정
 st.set_page_config(
@@ -207,7 +217,7 @@ if "qa_chains" not in st.session_state:
 # 카테고리별 초기 메시지
 initial_messages = {
     "멤버": "안녕하세요! 비타민 챗봇 타미입니다. 비타민 멤버에 대해 무엇이든지 물어보세요!",
-    "활동": "안녕하세요! 비타민 챗봇 타미입니다. 대외 활동, 공모전, 강의에 대해 무엇이든지 물어보세요!",
+    "대외활동": "안녕하세요! 비타민 챗봇 타미입니다. 대외 활동, 공모전, 강의에 대해 무엇이든지 물어보세요!",
     "프로젝트": "안녕하세요! 비타민 챗봇 타미입니다. 비타민 프로젝트에 대해 무엇이든지 물어보세요!"
 }
 
