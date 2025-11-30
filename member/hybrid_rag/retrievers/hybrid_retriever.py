@@ -1,5 +1,6 @@
 from langchain_openai import OpenAIEmbeddings
-from langchain.retrievers import EnsembleRetriever
+from langchain_core.documents import Document
+from typing import List
 from retrievers.vector_retriever import get_vector_retriever
 from retrievers.bm25_retriever import get_bm25_retriever
 import numpy as np
@@ -37,7 +38,47 @@ def analyze_query(query: str) -> str:
     return topic
 
 
-# === 2. 하이브리드 검색기 (벡터 중심 가중치 조정) ===
+# === 2. HybridRetriever 클래스 ===
+class HybridRetriever:
+    def __init__(self, bm25_retriever, vector_retriever, weights=(0.5, 0.5)):
+        self.bm25_retriever = bm25_retriever
+        self.vector_retriever = vector_retriever
+        self.weights = weights
+
+    def get_relevant_documents(self, query: str):
+        # 최신 LangChain retriever 규격 (invoke 사용)
+        bm25_docs = self.bm25_retriever.invoke(query)
+        vector_docs = self.vector_retriever.invoke(query)
+        
+        # 두 결과를 병합
+        merged_docs = self._merge_scores(bm25_docs, vector_docs)
+        
+        return merged_docs
+
+    def _merge_scores(self, bm25_docs, vector_docs):
+        # 딱 너가 쓰던 방식 그대로 유지하면 됨
+        seen = {}
+        w_bm25, w_vector = self.weights
+        
+        for doc in bm25_docs:
+            seen[doc.page_content] = seen.get(doc.page_content, 0) + w_bm25 * getattr(doc, 'score', 1)
+        
+        for doc in vector_docs:
+            seen[doc.page_content] = seen.get(doc.page_content, 0) + w_vector * getattr(doc, 'score', 1)
+        
+        # Document로 다시 묶어서 반환
+        merged_list = [
+            Document(page_content=content, metadata={"score": score})
+            for content, score in seen.items()
+        ]
+        
+        # 점수 기준 정렬
+        merged_list.sort(key=lambda x: x.metadata["score"], reverse=True)
+        
+        return merged_list
+
+
+# === 3. 하이브리드 검색기 생성 함수 ===
 def get_hybrid_retriever(query: str = None):
     """질문 의도에 맞춰 가중치를 동적으로 조정하는 Hybrid Retriever"""
     vector_retriever, vectorstore = get_vector_retriever()
@@ -59,12 +100,10 @@ def get_hybrid_retriever(query: str = None):
         else:
             weights = [0.5, 0.5]
 
-    hybrid_retriever = EnsembleRetriever( # 2 검색기를 하나로 합침
-        retrievers=[bm25_retriever, vector_retriever],
-        weights=weights
+    hybrid_retriever = HybridRetriever(
+        bm25_retriever=bm25_retriever,
+        vector_retriever=vector_retriever,
+        weights=tuple(weights)
     )
     
-    for r in hybrid_retriever.retrievers:
-        if hasattr(r, "search_kwargs"):
-            r.search_kwargs["k"] = 10  # 문서 10개로 축소 (속도 개선)
     return hybrid_retriever

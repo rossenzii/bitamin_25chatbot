@@ -1,4 +1,4 @@
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 
 question_prompt = PromptTemplate.from_template("""다음 문서들을 읽고 질문에 정확히 답변하세요.
 

@@ -1,5 +1,5 @@
 import os, json
-from langchain.schema import Document
+from langchain_core.documents import Document
 
 # === 3. 비타민 정보 ===
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
