@@ -18,7 +18,13 @@ __pycache__/
 .Python
 
 ## FAISS 인덱스 파일 (대용량)
-**/rag_faiss_index/
+# Streamlit Cloud 배포를 위해 필요한 인덱스는 Git에 포함
+# 아래 폴더들은 제외하지 않음:
+# - contest_jw/rag_faiss_index/
+# - member/hybrid_rag/rag_faiss_index/
+# - project/project_rag/rag_faiss_index/
+
+# 기타 인덱스 파일은 무시
 **/faiss_index/
 *.faiss
 *.pkl
