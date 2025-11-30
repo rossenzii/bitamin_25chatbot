@@ -379,7 +379,19 @@ if send_button and user_input:
                 st.stop()
             
             if category not in st.session_state.qa_chains:
-                st.session_state.qa_chains[category] = create_hybrid_chain()
+                try:
+                    st.session_state.qa_chains[category] = create_hybrid_chain()
+                except FileNotFoundError as e:
+                    error_msg = f"프로젝트 FAISS 인덱스를 찾을 수 없습니다.\n\n{str(e)}\n\n프로젝트 카테고리는 현재 사용할 수 없습니다."
+                    current_messages.append({
+                        "role": "assistant",
+                        "content": error_msg,
+                        "timestamp": datetime.now().strftime("%I:%M %p")
+                    })
+                    st.session_state.messages[category] = current_messages
+                    st.rerun()
+                    st.stop()
+            
             qa_chain = st.session_state.qa_chains[category]
             result = qa_chain.invoke({"question": user_input})
             answer = result if isinstance(result, str) else str(result)

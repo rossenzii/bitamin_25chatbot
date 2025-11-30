@@ -17,14 +17,32 @@ except ImportError:
     from config.settings import OPENAI_API_KEY, FAISS_INDEX_PATH
 
 def get_vector_retriever():
+    from pathlib import Path
+    
+    # 인덱스 파일 존재 확인
+    index_path = Path(FAISS_INDEX_PATH)
+    faiss_file = index_path / "index.faiss"
+    
+    if not faiss_file.exists():
+        raise FileNotFoundError(
+            f"FAISS 인덱스를 찾을 수 없습니다: {FAISS_INDEX_PATH}\n"
+            f"먼저 'python project/project_rag/build_index.py'를 실행하여 인덱스를 생성하세요."
+        )
 
     embeddings=OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 
-    vectorstore=FAISS.load_local(
-        folder_path=FAISS_INDEX_PATH,
-        embeddings=embeddings,
-        allow_dangerous_deserialization=True
-    )
+    try:
+        vectorstore=FAISS.load_local(
+            folder_path=FAISS_INDEX_PATH,
+            embeddings=embeddings,
+            allow_dangerous_deserialization=True
+        )
+    except Exception as e:
+        # allow_dangerous_deserialization가 지원되지 않는 경우
+        vectorstore=FAISS.load_local(
+            folder_path=FAISS_INDEX_PATH,
+            embeddings=embeddings
+        )
     
     retriever = vectorstore.as_retriever(
         search_type="similarity",
