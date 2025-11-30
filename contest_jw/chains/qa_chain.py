@@ -4,13 +4,10 @@ import re
 from typing import List, Dict, Any
 from datetime import datetime
 
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
-from langchain.retrievers import EnsembleRetriever
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.retrievers import BM25Retriever
 
 # ========================================
@@ -22,12 +19,25 @@ print("=" * 70)
 
 import os
 import re
+import sys
+from pathlib import Path
+
+# 프로젝트 루트 경로 추가
+BASE_DIR = Path(__file__).parent.parent.parent.resolve()
+sys.path.insert(0, str(BASE_DIR))
+
 from langchain_openai import ChatOpenAI
 
-# 필요한 의존성 import
-from config.settings import OPENAI_API_KEY
-from retrievers.hybrid_retrievers import get_hybrid_retriever
-from prompts.question_prompt import question_prompt
+# 상대 import를 절대 import로 변경
+try:
+    from contest_jw.config.settings import OPENAI_API_KEY
+    from contest_jw.retrievers.hybrid_retrievers import get_hybrid_retriever
+    from contest_jw.prompts.question_prompt import question_prompt
+except ImportError:
+    # 상대 import fallback (로컬 실행 시)
+    from config.settings import OPENAI_API_KEY
+    from retrievers.hybrid_retrievers import get_hybrid_retriever
+    from prompts.question_prompt import question_prompt
 
 def fix_urls_in_answer_v2(answer: str, docs: list) -> str:
     """

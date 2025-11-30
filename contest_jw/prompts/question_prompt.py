@@ -5,7 +5,7 @@ print("=" * 70)
 print("프롬프트 설정")
 print("=" * 70)
 
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 from datetime import datetime
 
 # 현재 날짜

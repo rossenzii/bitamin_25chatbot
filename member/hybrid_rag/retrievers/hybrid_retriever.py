@@ -1,9 +1,24 @@
+import sys
+import os
+from pathlib import Path
+
+# 프로젝트 루트 경로 추가
+BASE_DIR = Path(__file__).parent.parent.parent.parent.resolve()
+sys.path.insert(0, str(BASE_DIR))
+
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.documents import Document
 from typing import List
-from retrievers.vector_retriever import get_vector_retriever
-from retrievers.bm25_retriever import get_bm25_retriever
 import numpy as np
+
+# 상대 import를 절대 import로 변경
+try:
+    from member.hybrid_rag.retrievers.vector_retriever import get_vector_retriever
+    from member.hybrid_rag.retrievers.bm25_retriever import get_bm25_retriever
+except ImportError:
+    # 상대 import fallback (로컬 실행 시)
+    from retrievers.vector_retriever import get_vector_retriever
+    from retrievers.bm25_retriever import get_bm25_retriever
 # hybrid_retriever: 문서 검색기
 
 # === 1. 의미 기반 주제 분류 (Embedding Similarity) ===
