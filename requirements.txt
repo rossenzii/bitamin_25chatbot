@@ -11,6 +11,7 @@ faiss-cpu>=1.9.0
 transformers>=4.39.0
 torch>=2.0.0
 sentencepiece
+rank-bm25
 
 python-dotenv
 numpy
