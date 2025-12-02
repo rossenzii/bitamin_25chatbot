@@ -55,10 +55,6 @@ def create_hybrid_chain():
     bm25_retriever = get_bm25_retriever()
     hybrid_retriever = HybridRetriever(faiss_retriever=faiss_retriever, bm25_retriever=bm25_retriever)
 
-<<<<<<< HEAD
-    condense_chain = create_condense_question_chain() # 질문 재구성 체인
-=======
->>>>>>> main
     classifier_chain = create_question_classifier()   # 질문 유형 분류기
     type_branch = create_type_chains()                # 유형별 답변 체인
 
@@ -74,24 +70,11 @@ def create_hybrid_chain():
         ])
     
     main_chain = (
-<<<<<<< HEAD
-        RunnablePassthrough.assign(
-            standalone_question=condense_chain 
-        )
-        | RunnablePassthrough.assign(
-            context=lambda x: retrieve_and_format(x["standalone_question"]),
-            type=lambda x: classifier_chain.invoke({"question": x["standalone_question"]})
-        )
-        | RunnablePassthrough.assign(
-            question=lambda x: x["standalone_question"]
-        )
-=======
         RunnableLambda(lambda x: {
             "question": x["question"],
             "type": classifier_chain.invoke({"question": x["question"]}),
             "context": retrieve_and_format(x["question"])
         })
->>>>>>> main
         | type_branch 
         | StrOutputParser()
     )
