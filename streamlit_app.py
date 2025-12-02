@@ -16,36 +16,24 @@ from dotenv import load_dotenv
 import os
 
 # Streamlit Cloud secrets 또는 .env 파일에서 환경 변수 로드
-load_dotenv()
-# Streamlit Cloud 환경 설정
-# Streamlit secrets 또는 환경 변수에서 API 키 로드
 try:
-    # Streamlit Cloud에서 secrets 사용
-    if hasattr(st, 'secrets') and 'OPENAI_API_KEY' in st.secrets:
-        os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
-        if 'HUGGINGFACEHUB_API_TOKEN' in st.secrets:
-            os.environ['HUGGINGFACEHUB_API_TOKEN'] = st.secrets['HUGGINGFACEHUB_API_TOKEN']
-except Exception:
+    load_dotenv()
+except (PermissionError, FileNotFoundError) as e:
+    # .env 파일이 없거나 권한이 없는 경우 무시 (Streamlit secrets 사용)
     pass
 
-# 환경 변수가 없으면 .env에서 로드 시도
-if not os.environ.get('OPENAI_API_KEY'):
-    env_path = BASE_DIR / '.env'
-    if env_path.exists():
-        try:
-            with open(env_path, 'r') as f:
-                for line in f:
-                    line = line.strip()
-                    if line and not line.startswith('#') and '=' in line:
-                        key, value = line.split('=', 1)
-                        key = key.strip()
-                        value = value.strip().strip('"').strip("'")
-                        if key == 'OPENAI_API_KEY':
-                            os.environ['OPENAI_API_KEY'] = value
-                        elif key == 'HUGGINGFACEHUB_API_TOKEN':
-                            os.environ['HUGGINGFACEHUB_API_TOKEN'] = value
-        except Exception:
-            pass
+# Streamlit secrets에서 OPENAI_API_KEY 가져오기 (우선순위)
+try:
+    if 'OPENAI_API_KEY' in st.secrets:
+        os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
+except Exception:
+    # secrets.toml 파일이 없거나 접근할 수 없는 경우 무시 (.env 파일 사용)
+    pass
+
+# 환경 변수 확인
+if 'OPENAI_API_KEY' not in os.environ:
+    st.error("OPENAI_API_KEY가 설정되지 않았습니다. .env 파일이나 Streamlit secrets를 확인해주세요.")
+    st.stop()
 
 # 페이지 설정
 st.set_page_config(
