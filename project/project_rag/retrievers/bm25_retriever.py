@@ -9,12 +9,22 @@ sys.path.insert(0, str(BASE_DIR))
 from langchain_community.retrievers import BM25Retriever
 from langchain_community.document_loaders import JSONLoader
 
-# 상대 import를 절대 import로 변경
+# 환경 변수 우선 사용 (배포 환경 대응)
+DATA_DIR_PATH = [
+    os.path.join(os.path.dirname(__file__), "..", "..", "..", "project_txt", "1415V"),
+    os.path.join(os.path.dirname(__file__), "..", "..", "..", "project_txt", "1415S")
+]
+
+# config import 시도 (선택사항)
 try:
-    from project.project_rag.config.settings import DATA_DIR_PATH
+    from project.project_rag.config.settings import DATA_DIR_PATH as CONFIG_PATH
+    DATA_DIR_PATH = CONFIG_PATH
 except ImportError:
-    # 상대 import fallback (로컬 실행 시)
-    from config.settings import DATA_DIR_PATH
+    try:
+        from config.settings import DATA_DIR_PATH as CONFIG_PATH
+        DATA_DIR_PATH = CONFIG_PATH
+    except ImportError:
+        pass
 
 def get_bm25_retriever():
 

@@ -10,16 +10,28 @@ from langchain_openai import ChatOpenAI
 from langchain_core.documents import Document
 from typing import List, Dict, Any
 
-# 상대 import를 절대 import로 변경
+# 환경 변수 우선 사용 (배포 환경 대응)
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
+# config import 시도 (선택사항)
+if not OPENAI_API_KEY:
+    try:
+        from member.hybrid_rag.config.settings import OPENAI_API_KEY as CONFIG_KEY
+        OPENAI_API_KEY = CONFIG_KEY
+    except ImportError:
+        try:
+            from config.settings import OPENAI_API_KEY as CONFIG_KEY
+            OPENAI_API_KEY = CONFIG_KEY
+        except ImportError:
+            pass
+
+# 모듈 import
 try:
     from member.hybrid_rag.retrievers.hybrid_retriever import get_hybrid_retriever
     from member.hybrid_rag.prompts.q_prompts import question_prompt
-    from member.hybrid_rag.config.settings import OPENAI_API_KEY
 except ImportError:
-    # 상대 import fallback (로컬 실행 시)
     from retrievers.hybrid_retriever import get_hybrid_retriever
     from prompts.q_prompts import question_prompt
-    from config.settings import OPENAI_API_KEY
 
 ### hybrid_qa_chain: OpenAI API를 사용하는 버전 (더 나은 한국어 답변)
 

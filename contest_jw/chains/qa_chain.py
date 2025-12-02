@@ -28,14 +28,26 @@ sys.path.insert(0, str(BASE_DIR))
 
 from langchain_openai import ChatOpenAI
 
-# 상대 import를 절대 import로 변경
+# 환경 변수 우선 사용 (배포 환경 대응)
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
+# config import 시도 (선택사항)
+if not OPENAI_API_KEY:
+    try:
+        from contest_jw.config.settings import OPENAI_API_KEY as CONFIG_KEY
+        OPENAI_API_KEY = CONFIG_KEY
+    except ImportError:
+        try:
+            from config.settings import OPENAI_API_KEY as CONFIG_KEY
+            OPENAI_API_KEY = CONFIG_KEY
+        except ImportError:
+            pass
+
+# 모듈 import
 try:
-    from contest_jw.config.settings import OPENAI_API_KEY
     from contest_jw.retrievers.hybrid_retrievers import get_hybrid_retriever
     from contest_jw.prompts.question_prompt import question_prompt
 except ImportError:
-    # 상대 import fallback (로컬 실행 시)
-    from config.settings import OPENAI_API_KEY
     from retrievers.hybrid_retrievers import get_hybrid_retriever
     from prompts.question_prompt import question_prompt
 

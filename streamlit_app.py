@@ -11,9 +11,39 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 BASE_DIR = Path(__file__).parent.resolve()
 sys.path.insert(0, str(BASE_DIR))
 
-# 환경 변수 로드
+# 환경 변수 로드 (로컬 환경)
 from dotenv import load_dotenv
 load_dotenv()
+
+# Streamlit Cloud 환경 설정
+# Streamlit secrets 또는 환경 변수에서 API 키 로드
+try:
+    # Streamlit Cloud에서 secrets 사용
+    if hasattr(st, 'secrets') and 'OPENAI_API_KEY' in st.secrets:
+        os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
+        if 'HUGGINGFACEHUB_API_TOKEN' in st.secrets:
+            os.environ['HUGGINGFACEHUB_API_TOKEN'] = st.secrets['HUGGINGFACEHUB_API_TOKEN']
+except Exception:
+    pass
+
+# 환경 변수가 없으면 .env에서 로드 시도
+if not os.environ.get('OPENAI_API_KEY'):
+    env_path = BASE_DIR / '.env'
+    if env_path.exists():
+        try:
+            with open(env_path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#') and '=' in line:
+                        key, value = line.split('=', 1)
+                        key = key.strip()
+                        value = value.strip().strip('"').strip("'")
+                        if key == 'OPENAI_API_KEY':
+                            os.environ['OPENAI_API_KEY'] = value
+                        elif key == 'HUGGINGFACEHUB_API_TOKEN':
+                            os.environ['HUGGINGFACEHUB_API_TOKEN'] = value
+        except Exception:
+            pass
 
 # 페이지 설정
 st.set_page_config(
