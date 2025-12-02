@@ -1,3 +1,11 @@
+import sys
+import os
+from pathlib import Path
+
+# 프로젝트 루트 경로 추가
+BASE_DIR = Path(__file__).parent.parent.parent.parent.resolve()
+sys.path.insert(0, str(BASE_DIR))
+
 from langchain_openai import ChatOpenAI
 from langchain.schema import BaseRetriever, Document
 from typing import List, Any
@@ -8,6 +16,19 @@ from chains.question_classifier import create_question_classifier, create_type_c
 from chains.condense_chain import create_condense_question_chain  # <--- 추가
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
+
+# 상대 import를 절대 import로 변경
+try:
+    from project.project_rag.config.settings import OPENAI_API_KEY
+    from project.project_rag.retrievers.vector_retriever import get_vector_retriever
+    from project.project_rag.retrievers.bm25_retriever import get_bm25_retriever
+    from project.project_rag.chains.question_classifier import create_question_classifier, create_type_chains
+except ImportError:
+    # 상대 import fallback (로컬 실행 시)
+    from config.settings import OPENAI_API_KEY
+    from retrievers.vector_retriever import get_vector_retriever
+    from retrievers.bm25_retriever import get_bm25_retriever
+    from chains.question_classifier import create_question_classifier, create_type_chains
 
 class HybridRetriever(BaseRetriever):
     faiss_retriever: Any

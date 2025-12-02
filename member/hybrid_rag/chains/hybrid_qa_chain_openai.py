@@ -1,9 +1,25 @@
+import sys
+import os
+from pathlib import Path
+
+# 프로젝트 루트 경로 추가
+BASE_DIR = Path(__file__).parent.parent.parent.parent.resolve()
+sys.path.insert(0, str(BASE_DIR))
+
 from langchain_openai import ChatOpenAI
 from langchain_core.documents import Document
 from typing import List, Dict, Any
-from retrievers.hybrid_retriever import get_hybrid_retriever
-from prompts.q_prompts import question_prompt
-from config.settings import OPENAI_API_KEY
+
+# 상대 import를 절대 import로 변경
+try:
+    from member.hybrid_rag.retrievers.hybrid_retriever import get_hybrid_retriever
+    from member.hybrid_rag.prompts.q_prompts import question_prompt
+    from member.hybrid_rag.config.settings import OPENAI_API_KEY
+except ImportError:
+    # 상대 import fallback (로컬 실행 시)
+    from retrievers.hybrid_retriever import get_hybrid_retriever
+    from prompts.q_prompts import question_prompt
+    from config.settings import OPENAI_API_KEY
 
 ### hybrid_qa_chain: OpenAI API를 사용하는 버전 (더 나은 한국어 답변)
 

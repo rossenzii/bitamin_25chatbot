@@ -4,13 +4,13 @@ import re
 from typing import List, Dict, Any
 from datetime import datetime
 
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
-from langchain.retrievers import EnsembleRetriever
+# from langchain.chains import RetrievalQA  # 사용하지 않음
+# from langchain.prompts import PromptTemplate  # 사용하지 않음
+# from langchain.retrievers import EnsembleRetriever  # 사용하지 않음
 from langchain_community.retrievers import BM25Retriever
 
 # ========================================
@@ -82,7 +82,7 @@ print("전체 데이터 로드")
 print("=" * 70)
 
 import json
-from langchain.schema import Document
+            from langchain_core.documents import Document
 
 all_documents = []
 

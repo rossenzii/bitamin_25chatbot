@@ -1,13 +1,23 @@
 import os
+import sys
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 
-from langchain.schema import Document
+# 프로젝트 루트 경로 추가
+BASE_DIR = Path(__file__).parent.parent.parent.resolve()
+sys.path.insert(0, str(BASE_DIR))
+
+from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.retrievers import BM25Retriever
 
-from config.settings import FAISS_INDEX_PATH, OPENAI_API_KEY
+# 상대 import를 절대 import로 변경
+try:
+    from contest_jw.config.settings import FAISS_INDEX_PATH, OPENAI_API_KEY
+except ImportError:
+    # 상대 import fallback (로컬 실행 시)
+    from config.settings import FAISS_INDEX_PATH, OPENAI_API_KEY
 
 # ========================================
 # Lazy 로딩용 전역 변수
@@ -151,7 +161,7 @@ class HybridRetriever:
         )
 
         # 2) BM25 검색
-        bm25_docs = self.bm25.get_relevant_documents(query)[: self.k]
+        bm25_docs = self.bm25.invoke(query)[: self.k]
 
         # 3) 가중치 기반으로 섞기 (FAISS vs BM25 비율)
         w_vec, w_bm = self.weights

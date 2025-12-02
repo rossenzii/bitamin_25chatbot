@@ -1,8 +1,22 @@
+import sys
+import os
+from pathlib import Path
+
+# 프로젝트 루트 경로 추가
+BASE_DIR = Path(__file__).parent.parent.parent.parent.resolve()
+sys.path.insert(0, str(BASE_DIR))
+
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableBranch
 from langchain_core.output_parsers import StrOutputParser
-from config.settings import OPENAI_API_KEY
+
+# 상대 import를 절대 import로 변경
+try:
+    from project.project_rag.config.settings import OPENAI_API_KEY
+except ImportError:
+    # 상대 import fallback (로컬 실행 시)
+    from config.settings import OPENAI_API_KEY
 
 # 질문 유형 분류 체인
 def create_question_classifier(llm_model: str = "gpt-4o-mini"):
@@ -30,9 +44,16 @@ def create_question_classifier(llm_model: str = "gpt-4o-mini"):
 
 # 질문 유형별 체인 정의
 def create_type_chains():
-    from prompts.question_prompts import (
-        TYPE_1_PROMPT, TYPE_2_PROMPT, TYPE_3_PROMPT, TYPE_4_PROMPT, DEFAULT_PROMPT
-    )
+    # 상대 import를 절대 import로 변경
+    try:
+        from project.project_rag.prompts.question_prompts import (
+            TYPE_1_PROMPT, TYPE_2_PROMPT, TYPE_3_PROMPT, TYPE_4_PROMPT, DEFAULT_PROMPT
+        )
+    except ImportError:
+        # 상대 import fallback (로컬 실행 시)
+        from prompts.question_prompts import (
+            TYPE_1_PROMPT, TYPE_2_PROMPT, TYPE_3_PROMPT, TYPE_4_PROMPT, DEFAULT_PROMPT
+        )
     llm_model = ChatOpenAI(model="gpt-4o-mini", temperature=0, openai_api_key=OPENAI_API_KEY)
 
 

@@ -116,7 +116,7 @@ for source in data_sources:
             else:
                 doc_type = data_type
             
-            from langchain.schema import Document
+            from langchain_core.documents import Document
             doc = Document(
                 page_content=f"제목: {title}\n\n{content}",
                 metadata={
