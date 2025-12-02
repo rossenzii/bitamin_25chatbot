@@ -9,12 +9,23 @@ sys.path.insert(0, str(BASE_DIR))
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
-# 상대 import를 절대 import로 변경
-try:
-    from project.project_rag.config.settings import OPENAI_API_KEY, FAISS_INDEX_PATH
-except ImportError:
-    # 상대 import fallback (로컬 실행 시)
-    from config.settings import OPENAI_API_KEY, FAISS_INDEX_PATH
+# 환경 변수 우선 사용 (배포 환경 대응)
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+FAISS_INDEX_PATH = os.path.join(os.path.dirname(__file__), "..", "rag_faiss_index")
+
+# config import 시도 (선택사항)
+if not OPENAI_API_KEY:
+    try:
+        from project.project_rag.config.settings import OPENAI_API_KEY as CONFIG_KEY, FAISS_INDEX_PATH as CONFIG_PATH
+        OPENAI_API_KEY = CONFIG_KEY
+        FAISS_INDEX_PATH = CONFIG_PATH
+    except ImportError:
+        try:
+            from config.settings import OPENAI_API_KEY as CONFIG_KEY, FAISS_INDEX_PATH as CONFIG_PATH
+            OPENAI_API_KEY = CONFIG_KEY
+            FAISS_INDEX_PATH = CONFIG_PATH
+        except ImportError:
+            pass
 
 def get_vector_retriever():
     from pathlib import Path

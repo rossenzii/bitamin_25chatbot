@@ -12,12 +12,23 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.retrievers import BM25Retriever
 
-# 상대 import를 절대 import로 변경
-try:
-    from contest_jw.config.settings import FAISS_INDEX_PATH, OPENAI_API_KEY
-except ImportError:
-    # 상대 import fallback (로컬 실행 시)
-    from config.settings import FAISS_INDEX_PATH, OPENAI_API_KEY
+# 환경 변수 우선 사용 (배포 환경 대응)
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+FAISS_INDEX_PATH = os.path.join(os.path.dirname(__file__), "..", "rag_faiss_index")
+
+# config import 시도 (선택사항)
+if not OPENAI_API_KEY:
+    try:
+        from contest_jw.config.settings import FAISS_INDEX_PATH as CONFIG_FAISS, OPENAI_API_KEY as CONFIG_KEY
+        OPENAI_API_KEY = CONFIG_KEY
+        FAISS_INDEX_PATH = CONFIG_FAISS
+    except ImportError:
+        try:
+            from config.settings import FAISS_INDEX_PATH as CONFIG_FAISS, OPENAI_API_KEY as CONFIG_KEY
+            OPENAI_API_KEY = CONFIG_KEY
+            FAISS_INDEX_PATH = CONFIG_FAISS
+        except ImportError:
+            pass
 
 # ========================================
 # Lazy 로딩용 전역 변수

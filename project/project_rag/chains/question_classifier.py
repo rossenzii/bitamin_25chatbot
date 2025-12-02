@@ -10,13 +10,22 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableBranch
 from langchain_core.output_parsers import StrOutputParser
+import os
 
-# 상대 import를 절대 import로 변경
-try:
-    from project.project_rag.config.settings import OPENAI_API_KEY
-except ImportError:
-    # 상대 import fallback (로컬 실행 시)
-    from config.settings import OPENAI_API_KEY
+# 환경 변수 우선
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
+# config import 시도 (선택사항)
+if not OPENAI_API_KEY:
+    try:
+        from project.project_rag.config.settings import OPENAI_API_KEY as CONFIG_API_KEY
+        OPENAI_API_KEY = CONFIG_API_KEY
+    except ImportError:
+        try:
+            from config.settings import OPENAI_API_KEY as CONFIG_API_KEY
+            OPENAI_API_KEY = CONFIG_API_KEY
+        except ImportError:
+            pass
 
 # 질문 유형 분류 체인
 def create_question_classifier(llm_model: str = "gpt-4o-mini"):

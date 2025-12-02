@@ -4,23 +4,48 @@ import os
 from datetime import datetime
 from pathlib import Path
 
+# OpenMP 충돌 방지 (반드시 다른 import 전에 설정)
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+
 # 프로젝트 루트 경로 추가
 BASE_DIR = Path(__file__).parent.resolve()
 sys.path.insert(0, str(BASE_DIR))
 
-# 환경 변수 로드
+# 환경 변수 로드 (로컬 환경)
 from dotenv import load_dotenv
 import os
 
 # Streamlit Cloud secrets 또는 .env 파일에서 환경 변수 로드
 load_dotenv()
+# Streamlit Cloud 환경 설정
+# Streamlit secrets 또는 환경 변수에서 API 키 로드
+try:
+    # Streamlit Cloud에서 secrets 사용
+    if hasattr(st, 'secrets') and 'OPENAI_API_KEY' in st.secrets:
+        os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
+        if 'HUGGINGFACEHUB_API_TOKEN' in st.secrets:
+            os.environ['HUGGINGFACEHUB_API_TOKEN'] = st.secrets['HUGGINGFACEHUB_API_TOKEN']
+except Exception:
+    pass
 
-# Streamlit secrets에서 OPENAI_API_KEY 가져오기 (우선순위)
-if hasattr(st, 'secrets') and 'OPENAI_API_KEY' in st.secrets:
-    os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
-elif 'OPENAI_API_KEY' not in os.environ:
-    st.error("OPENAI_API_KEY가 설정되지 않았습니다. Streamlit Cloud의 Settings → Secrets에서 설정해주세요.")
-    st.stop()
+# 환경 변수가 없으면 .env에서 로드 시도
+if not os.environ.get('OPENAI_API_KEY'):
+    env_path = BASE_DIR / '.env'
+    if env_path.exists():
+        try:
+            with open(env_path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#') and '=' in line:
+                        key, value = line.split('=', 1)
+                        key = key.strip()
+                        value = value.strip().strip('"').strip("'")
+                        if key == 'OPENAI_API_KEY':
+                            os.environ['OPENAI_API_KEY'] = value
+                        elif key == 'HUGGINGFACEHUB_API_TOKEN':
+                            os.environ['HUGGINGFACEHUB_API_TOKEN'] = value
+        except Exception:
+            pass
 
 # 페이지 설정
 st.set_page_config(
@@ -338,11 +363,17 @@ if send_button and user_input:
                 st.rerun()
                 st.stop()
             
-            if category not in st.session_state.qa_chains:
-                st.session_state.qa_chains[category] = create_hybrid_qa_chain(query=user_input)
-            qa_chain = st.session_state.qa_chains[category]
-            result = qa_chain.invoke({"query": user_input})
-            answer = result.get("result", "답변을 생성하지 못했습니다.")
+            with st.spinner("답변을 생성하고 있습니다..."):
+                if category not in st.session_state.qa_chains:
+                    print(f"[DEBUG] {category} 체인 생성 중...")
+                    st.session_state.qa_chains[category] = create_hybrid_qa_chain(query=user_input)
+                    print(f"[DEBUG] {category} 체인 생성 완료")
+                
+                qa_chain = st.session_state.qa_chains[category]
+                print(f"[DEBUG] 질문 처리 시작: {user_input[:50]}...")
+                result = qa_chain.invoke({"query": user_input})
+                print(f"[DEBUG] 질문 처리 완료")
+                answer = result.get("result", "답변을 생성하지 못했습니다.")
             
         elif category == "활동":
             try:
@@ -358,11 +389,17 @@ if send_button and user_input:
                 st.rerun()
                 st.stop()
             
-            if category not in st.session_state.qa_chains:
-                st.session_state.qa_chains[category] = create_hybrid_qa_chain(query=user_input)
-            qa_chain = st.session_state.qa_chains[category]
-            result = qa_chain.invoke({"query": user_input})
-            answer = result.get("result", "답변을 생성하지 못했습니다.")
+            with st.spinner("🤔 답변을 생성하고 있습니다..."):
+                if category not in st.session_state.qa_chains:
+                    print(f"[DEBUG] {category} 체인 생성 중...")
+                    st.session_state.qa_chains[category] = create_hybrid_qa_chain(query=user_input)
+                    print(f"[DEBUG] {category} 체인 생성 완료")
+                
+                qa_chain = st.session_state.qa_chains[category]
+                print(f"[DEBUG] 질문 처리 시작: {user_input[:50]}...")
+                result = qa_chain.invoke({"query": user_input})
+                print(f"[DEBUG] 질문 처리 완료")
+                answer = result.get("result", "답변을 생성하지 못했습니다.")
             
         elif category == "프로젝트":
             try:
@@ -377,24 +414,18 @@ if send_button and user_input:
                 st.session_state.messages[category] = current_messages
                 st.rerun()
                 st.stop()
-            
-            if category not in st.session_state.qa_chains:
-                try:
+        
+            with st.spinner("답변을 생성하고 있습니다..."):
+                if category not in st.session_state.qa_chains:
+                    print(f"[DEBUG] {category} 체인 생성 중...")
                     st.session_state.qa_chains[category] = create_hybrid_chain()
-                except FileNotFoundError as e:
-                    error_msg = f"프로젝트 FAISS 인덱스를 찾을 수 없습니다.\n\n{str(e)}\n\n프로젝트 카테고리는 현재 사용할 수 없습니다."
-                    current_messages.append({
-                        "role": "assistant",
-                        "content": error_msg,
-                        "timestamp": datetime.now().strftime("%I:%M %p")
-                    })
-                    st.session_state.messages[category] = current_messages
-                    st.rerun()
-                    st.stop()
-            
-            qa_chain = st.session_state.qa_chains[category]
-            result = qa_chain.invoke({"question": user_input})
-            answer = result if isinstance(result, str) else str(result)
+                    print(f"[DEBUG] {category} 체인 생성 완료")
+                
+                qa_chain = st.session_state.qa_chains[category]
+                print(f"[DEBUG] 질문 처리 시작: {user_input[:50]}...")
+                result = qa_chain.invoke({"question": user_input})
+                print(f"[DEBUG] 질문 처리 완료")
+                answer = result if isinstance(result, str) else str(result)
         
         # 어시스턴트 답변 추가
         current_messages.append({
@@ -406,7 +437,10 @@ if send_button and user_input:
         
     except Exception as e:
         import traceback
-        error_msg = f"오류가 발생했습니다: {str(e)}\n\n상세 정보:\n{traceback.format_exc()}"
+        error_traceback = traceback.format_exc()
+        print(f"[ERROR] 질문 처리 중 오류 발생:")
+        print(error_traceback)
+        error_msg = f"오류가 발생했습니다: {str(e)}\n\n상세 정보:\n{error_traceback}"
         current_messages.append({
             "role": "assistant",
             "content": error_msg,

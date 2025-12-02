@@ -3,7 +3,7 @@
 from langchain.retrievers import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever
 from typing import List
-from langchain.schema import Document
+from langchain_core.documents import Document
 
 
 class HybridRetriever:

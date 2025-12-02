@@ -2,7 +2,7 @@
 
 import re
 from typing import List, Dict
-from langchain.schema import Document
+from langchain_core.documents import Document
 from .data_loader import load_json_data
 
 
