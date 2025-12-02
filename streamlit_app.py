@@ -13,13 +13,23 @@ from dotenv import load_dotenv
 import os
 
 # Streamlit Cloud secrets 또는 .env 파일에서 환경 변수 로드
-load_dotenv()
+try:
+    load_dotenv()
+except (PermissionError, FileNotFoundError) as e:
+    # .env 파일이 없거나 권한이 없는 경우 무시 (Streamlit secrets 사용)
+    pass
 
 # Streamlit secrets에서 OPENAI_API_KEY 가져오기 (우선순위)
-if hasattr(st, 'secrets') and 'OPENAI_API_KEY' in st.secrets:
-    os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
-elif 'OPENAI_API_KEY' not in os.environ:
-    st.error("OPENAI_API_KEY가 설정되지 않았습니다. Streamlit Cloud의 Settings → Secrets에서 설정해주세요.")
+try:
+    if 'OPENAI_API_KEY' in st.secrets:
+        os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
+except Exception:
+    # secrets.toml 파일이 없거나 접근할 수 없는 경우 무시 (.env 파일 사용)
+    pass
+
+# 환경 변수 확인
+if 'OPENAI_API_KEY' not in os.environ:
+    st.error("OPENAI_API_KEY가 설정되지 않았습니다. .env 파일이나 Streamlit secrets를 확인해주세요.")
     st.stop()
 
 # 페이지 설정

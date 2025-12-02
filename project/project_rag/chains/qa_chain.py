@@ -7,7 +7,8 @@ BASE_DIR = Path(__file__).parent.parent.parent.parent.resolve()
 sys.path.insert(0, str(BASE_DIR))
 
 from langchain_openai import ChatOpenAI
-from langchain.schema import BaseRetriever, Document
+from langchain_core.retrievers import BaseRetriever
+from langchain_core.documents import Document
 from typing import List, Any
 from config.settings import OPENAI_API_KEY
 from retrievers.vector_retriever import get_vector_retriever

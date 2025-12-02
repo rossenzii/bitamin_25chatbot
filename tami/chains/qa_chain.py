@@ -3,7 +3,7 @@
 import os
 import re
 from langchain_openai import ChatOpenAI
-from langchain.schema import HumanMessage
+from langchain_core.messages import HumanMessage
 
 
 def fix_urls_in_answer_v2(answer: str, docs: list) -> str:
