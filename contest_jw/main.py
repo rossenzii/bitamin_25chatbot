@@ -4,7 +4,7 @@ import re
 from typing import List, Dict, Any
 from datetime import datetime
 
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain.chains import RetrievalQA
 from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter

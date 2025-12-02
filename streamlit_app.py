@@ -4,6 +4,9 @@ import os
 from datetime import datetime
 from pathlib import Path
 
+# OpenMP 충돌 방지 (반드시 다른 import 전에 설정)
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+
 # 프로젝트 루트 경로 추가
 BASE_DIR = Path(__file__).parent.resolve()
 sys.path.insert(0, str(BASE_DIR))
@@ -328,11 +331,17 @@ if send_button and user_input:
                 st.rerun()
                 st.stop()
             
-            if category not in st.session_state.qa_chains:
-                st.session_state.qa_chains[category] = create_hybrid_qa_chain(query=user_input)
-            qa_chain = st.session_state.qa_chains[category]
-            result = qa_chain.invoke({"query": user_input})
-            answer = result.get("result", "답변을 생성하지 못했습니다.")
+            with st.spinner("답변을 생성하고 있습니다..."):
+                if category not in st.session_state.qa_chains:
+                    print(f"[DEBUG] {category} 체인 생성 중...")
+                    st.session_state.qa_chains[category] = create_hybrid_qa_chain(query=user_input)
+                    print(f"[DEBUG] {category} 체인 생성 완료")
+                
+                qa_chain = st.session_state.qa_chains[category]
+                print(f"[DEBUG] 질문 처리 시작: {user_input[:50]}...")
+                result = qa_chain.invoke({"query": user_input})
+                print(f"[DEBUG] 질문 처리 완료")
+                answer = result.get("result", "답변을 생성하지 못했습니다.")
             
         elif category == "활동":
             try:
@@ -348,11 +357,17 @@ if send_button and user_input:
                 st.rerun()
                 st.stop()
             
-            if category not in st.session_state.qa_chains:
-                st.session_state.qa_chains[category] = create_hybrid_qa_chain(query=user_input)
-            qa_chain = st.session_state.qa_chains[category]
-            result = qa_chain.invoke({"query": user_input})
-            answer = result.get("result", "답변을 생성하지 못했습니다.")
+            with st.spinner("🤔 답변을 생성하고 있습니다..."):
+                if category not in st.session_state.qa_chains:
+                    print(f"[DEBUG] {category} 체인 생성 중...")
+                    st.session_state.qa_chains[category] = create_hybrid_qa_chain(query=user_input)
+                    print(f"[DEBUG] {category} 체인 생성 완료")
+                
+                qa_chain = st.session_state.qa_chains[category]
+                print(f"[DEBUG] 질문 처리 시작: {user_input[:50]}...")
+                result = qa_chain.invoke({"query": user_input})
+                print(f"[DEBUG] 질문 처리 완료")
+                answer = result.get("result", "답변을 생성하지 못했습니다.")
             
         elif category == "프로젝트":
             try:
@@ -368,11 +383,17 @@ if send_button and user_input:
                 st.rerun()
                 st.stop()
             
-            if category not in st.session_state.qa_chains:
-                st.session_state.qa_chains[category] = create_hybrid_chain()
-            qa_chain = st.session_state.qa_chains[category]
-            result = qa_chain.invoke({"question": user_input})
-            answer = result if isinstance(result, str) else str(result)
+            with st.spinner("답변을 생성하고 있습니다..."):
+                if category not in st.session_state.qa_chains:
+                    print(f"[DEBUG] {category} 체인 생성 중...")
+                    st.session_state.qa_chains[category] = create_hybrid_chain()
+                    print(f"[DEBUG] {category} 체인 생성 완료")
+                
+                qa_chain = st.session_state.qa_chains[category]
+                print(f"[DEBUG] 질문 처리 시작: {user_input[:50]}...")
+                result = qa_chain.invoke({"question": user_input})
+                print(f"[DEBUG] 질문 처리 완료")
+                answer = result if isinstance(result, str) else str(result)
         
         # 어시스턴트 답변 추가
         current_messages.append({
@@ -384,7 +405,10 @@ if send_button and user_input:
         
     except Exception as e:
         import traceback
-        error_msg = f"오류가 발생했습니다: {str(e)}\n\n상세 정보:\n{traceback.format_exc()}"
+        error_traceback = traceback.format_exc()
+        print(f"[ERROR] 질문 처리 중 오류 발생:")
+        print(error_traceback)
+        error_msg = f"오류가 발생했습니다: {str(e)}\n\n상세 정보:\n{error_traceback}"
         current_messages.append({
             "role": "assistant",
             "content": error_msg,

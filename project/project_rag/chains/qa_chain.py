@@ -7,28 +7,32 @@ BASE_DIR = Path(__file__).parent.parent.parent.parent.resolve()
 sys.path.insert(0, str(BASE_DIR))
 
 from langchain_openai import ChatOpenAI
-from langchain.schema import BaseRetriever, Document
+from langchain_core.retrievers import BaseRetriever
+from langchain_core.documents import Document
 from typing import List, Any
-from config.settings import OPENAI_API_KEY
-from retrievers.vector_retriever import get_vector_retriever
-from retrievers.bm25_retriever import get_bm25_retriever
-from chains.question_classifier import create_question_classifier, create_type_chains
-from chains.condense_chain import create_condense_question_chain  # <--- 추가
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
-# 상대 import를 절대 import로 변경
+# 절대 import와 상대 import 모두 시도
 try:
     from project.project_rag.config.settings import OPENAI_API_KEY
     from project.project_rag.retrievers.vector_retriever import get_vector_retriever
     from project.project_rag.retrievers.bm25_retriever import get_bm25_retriever
     from project.project_rag.chains.question_classifier import create_question_classifier, create_type_chains
 except ImportError:
-    # 상대 import fallback (로컬 실행 시)
-    from config.settings import OPENAI_API_KEY
-    from retrievers.vector_retriever import get_vector_retriever
-    from retrievers.bm25_retriever import get_bm25_retriever
-    from chains.question_classifier import create_question_classifier, create_type_chains
+    try:
+        # 상대 import fallback (로컬 실행 시)
+        from config.settings import OPENAI_API_KEY
+        from retrievers.vector_retriever import get_vector_retriever
+        from retrievers.bm25_retriever import get_bm25_retriever
+        from chains.question_classifier import create_question_classifier, create_type_chains
+    except ImportError:
+        # 환경 변수 사용
+        import os
+        OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+        from project.project_rag.retrievers.vector_retriever import get_vector_retriever
+        from project.project_rag.retrievers.bm25_retriever import get_bm25_retriever
+        from project.project_rag.chains.question_classifier import create_question_classifier, create_type_chains
 
 class HybridRetriever(BaseRetriever):
     faiss_retriever: Any
@@ -51,7 +55,6 @@ def create_hybrid_chain():
     bm25_retriever = get_bm25_retriever()
     hybrid_retriever = HybridRetriever(faiss_retriever=faiss_retriever, bm25_retriever=bm25_retriever)
 
-    condense_chain = create_condense_question_chain() # 질문 재구성 체인
     classifier_chain = create_question_classifier()   # 질문 유형 분류기
     type_branch = create_type_chains()                # 유형별 답변 체인
 
@@ -67,16 +70,11 @@ def create_hybrid_chain():
         ])
     
     main_chain = (
-        RunnablePassthrough.assign(
-            standalone_question=condense_chain 
-        )
-        | RunnablePassthrough.assign(
-            context=lambda x: retrieve_and_format(x["standalone_question"]),
-            type=lambda x: classifier_chain.invoke({"question": x["standalone_question"]})
-        )
-        | RunnablePassthrough.assign(
-            question=lambda x: x["standalone_question"]
-        )
+        RunnableLambda(lambda x: {
+            "question": x["question"],
+            "type": classifier_chain.invoke({"question": x["question"]}),
+            "context": retrieve_and_format(x["question"])
+        })
         | type_branch 
         | StrOutputParser()
     )
